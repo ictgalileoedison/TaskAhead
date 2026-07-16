@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TaskAhead 🌸 | Student Garden OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<base target="_blank">
+</head>
+<body>
+    <style>
+        /* ============================================================
+   TOKENS — two full visual identities sharing one variable API
+   LIGHT  = "Blossom"          → sugary, sparkly, girly-kawaii
+   DARK   = "Fairybloom Night" → enchanted paradise fairy glow
+   ============================================================ */
+:root{
+  --cream:#FFF3F8; --paper:#FFFFFF; --paper-alt:#FFF9FC;
+  --pink:#FF5FA0; --pink-soft:#FFE1EF; --pink-mid:#FFB6D8;
+  --sky:#3FC1FF; --sky-soft:#E2F6FF; --sky-mid:#AEE2FF;
+  --mint:#3FD693; --mint-soft:#E1FBF0; --mint-mid:#BEEFC7;
+  --lilac:#A374FF; --lilac-soft:#F0E6FF; --lilac-mid:#D6C6FF;
+  --butter:#FFD866; --butter-mid:#FFE49E;
+  --ink:#7A3358; --ink-soft:#B98CA8; --ink-faint:#E6C7D8;
+  --line:#FFD3E8;
+  --shadow:0 6px 18px rgba(255,95,160,.14);
+  --shadow-lift:0 14px 30px rgba(255,95,160,.22);
+  --r-lg:26px; --r-md:18px; --r-sm:12px;
+  --font-display:'Fredoka',sans-serif;
+  --font-body:'Quicksand',sans-serif;
+  --deco-corner:"🎀";
+  --glow:none;
+}
+[data-theme="dark"]{
+  --cream:#140F2E; --paper:#1F1840; --paper-alt:#261C4E;
+  --pink:#FF7ED4; --pink-soft:#3A2456; --pink-mid:#7A4B8F;
+  --sky:#5FE3E0; --sky-soft:#1D3A4A; --sky-mid:#3A6E7A;
+  --mint:#7CF2B0; --mint-soft:#1B3B34; --mint-mid:#3D7A5F;
+  --lilac:#B99BFF; --lilac-soft:#2A2154; --lilac-mid:#5B3F9E;
+  --butter:#FFE18A; --butter-mid:#8A6F2E;
+  --ink:#F3ECFF; --ink-soft:#B7A6E6; --ink-faint:#4C3E7A;
+  --line:#3F3170;
+  --shadow:0 8px 24px rgba(0,0,0,.4);
+  --shadow-lift:0 0 0 1px rgba(255,126,212,.15), 0 16px 36px rgba(0,0,0,.5);
+  --deco-corner:"✨";
+  --glow:0 0 18px rgba(122,222,255,.35);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{
+  font-family:var(--font-body);
+  background:var(--cream);
+  color:var(--ink);
+  min-height:100vh;
+  display:flex;
+  transition:background .4s ease, color .4s ease;
+  overflow-x:hidden;
+}
+::selection{background:var(--pink-mid); color:var(--ink);}
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; letter-spacing:.2px;}
+button{font-family:var(--font-body); cursor:pointer;}
+input,select,textarea{font-family:var(--font-body);}
+a{text-decoration:none; color:inherit;}
+
+/* ---- background texture: sparkly dots (light) / starfield (dark) ---- */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:radial-gradient(var(--line) 1.5px, transparent 1.5px);
+  background-size:26px 26px; opacity:.5;
+}
+[data-theme="dark"] body::before{
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 65% 15%, #fff, transparent),
+    radial-gradient(1px 1px at 80% 60%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 40% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 85%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 10% 65%, #fff, transparent);
+  background-size:auto; opacity:.35;
+}
+#fireflies{position:fixed; inset:0; pointer-events:none; z-index:0; display:none;}
+[data-theme="dark"] #fireflies{display:block;}
+.firefly{
+  position:absolute; width:5px; height:5px; border-radius:50%;
+  background:var(--mint); box-shadow:0 0 8px 3px var(--mint);
+  animation:driftFly linear infinite;
+  opacity:.75;
+}
+@keyframes driftFly{
+  0%{transform:translate(0,0);}
+  25%{transform:translate(18px,-24px);}
+  50%{transform:translate(-10px,-46px);}
+  75%{transform:translate(14px,-68px);}
+  100%{transform:translate(0,-90px); opacity:0;}
+}
+
+/* ============ MOBILE TOP BAR ============ */
+.mobile-topbar{
+  display:none; position:sticky; top:0; z-index:20; width:100%;
+  background:var(--paper); border-bottom:2px dashed var(--line);
+  padding:12px 16px; align-items:center; justify-content:space-between;
+  box-shadow:var(--shadow);
+}
+.mobile-topbar .mt-logo{display:flex; align-items:center; gap:8px; font-family:var(--font-display); font-weight:600; color:var(--ink); font-size:16px;}
+.mobile-topbar .mt-logo span{color:var(--pink);}
+.hamburger-btn, .mt-login-btn{
+  width:40px; height:40px; border-radius:50%; border:2px solid var(--line); background:var(--paper-alt);
+  color:var(--ink); font-size:16px; display:flex; align-items:center; justify-content:center;
+}
+.sidebar-overlay{
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:15;
+}
+.sidebar-overlay.show{display:block;}
+
+/* ============ SIDEBAR ============ */
+.sidebar{
+  width:270px; min-width:270px; height:100vh; position:sticky; top:0;
+  background:var(--paper); border-right:2px dashed var(--line);
+  display:flex; flex-direction:column; padding:22px 16px;
+  z-index:25; overflow-y:auto;
+}
+.logo-container{display:flex; align-items:center; gap:12px; padding:6px 6px 22px 6px;}
+.logo-icon-box{
+  width:46px; height:46px; border-radius:16px;
+  background:linear-gradient(145deg,var(--pink-mid),var(--pink));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:19px; box-shadow:var(--shadow); flex-shrink:0;
+  transform:rotate(-6deg);
+}
+[data-theme="dark"] .logo-icon-box{box-shadow:var(--glow);}
+.logo-text h2{font-size:19px; color:var(--ink); line-height:1.1;}
+.logo-text h2 span{color:var(--pink);}
+.logo-text p{font-size:11px; color:var(--ink-soft); font-weight:600; letter-spacing:.5px; text-transform:uppercase;}
+
+.nav-group{margin-bottom:14px;}
+.nav-group-title{
+  display:block; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.8px;
+  color:var(--ink-faint); padding:4px 12px 8px;
+}
+.nav-links{list-style:none; display:flex; flex-direction:column; gap:4px;}
+.nav-btn{
+  display:flex; align-items:center; gap:12px; width:100%;
+  padding:11px 14px; border:none; background:transparent; color:var(--ink-soft);
+  border-radius:var(--r-sm); font-weight:600; font-size:14.5px;
+  transition:background .2s, color .2s, transform .15s;
+}
+.nav-btn i{width:18px; text-align:center; color:var(--ink-faint); transition:color .2s;}
+.nav-btn:hover{background:var(--pink-soft); color:var(--ink); transform:translateX(2px);}
+.nav-btn:hover i{color:var(--pink);}
+.nav-btn.active{background:var(--pink); color:#fff; box-shadow:var(--shadow);}
+[data-theme="dark"] .nav-btn.active{box-shadow:var(--glow);}
+.nav-btn.active i{color:#fff;}
+
+.dropdown-wrapper{display:flex; flex-direction:column;}
+.dropdown-toggle-btn{
+  display:flex; align-items:center; justify-content:space-between; width:100%;
+  padding:11px 14px; border:none; background:transparent; color:var(--ink-soft);
+  border-radius:var(--r-sm); font-weight:600; font-size:14.5px;
+}
+.dropdown-toggle-btn:hover{background:var(--pink-soft); color:var(--ink);}
+.dropdown-toggle-btn span{display:flex; align-items:center; gap:12px;}
+.arrow{transition:transform .25s; font-size:11px;}
+.dropdown-toggle-btn.open .arrow{transform:rotate(180deg);}
+.dropdown-container{list-style:none; max-height:0; overflow:hidden; transition:max-height .3s ease; padding-left:6px;}
+.dropdown-container.open{max-height:900px; padding-top:6px; padding-bottom:6px;}
+.nested-dropdown{margin-bottom:8px;}
+.term-title{display:block; font-size:11px; font-weight:700; color:var(--lilac); text-transform:uppercase; letter-spacing:.6px; padding:6px 10px 4px;}
+.subject-list{list-style:none; display:flex; flex-direction:column; gap:2px;}
+.subject-list li{font-size:13px; padding:6px 10px; border-radius:10px; color:var(--ink-soft); border-left:2px dotted var(--line); margin-left:6px;}
+.subject-list li:hover{background:var(--lilac-soft); color:var(--ink);}
+.subject-list li:focus{outline:2px solid var(--lilac); background:var(--lilac-soft);}
+
+.sidebar-footer{padding-top:14px; margin-top:auto; border-top:2px dashed var(--line); text-align:center; font-size:11.5px; color:var(--ink-faint);}
+
+/* ============ BUTTONS ============ */
+.btn{border:none; border-radius:999px; font-weight:700; padding:10px 20px; font-size:14px; display:inline-flex; align-items:center; gap:8px; transition:transform .15s, box-shadow .15s, filter .15s;}
+.btn:hover{transform:translateY(-2px); filter:brightness(1.05);}
+.btn:active{transform:translateY(0);}
+.btn-primary{background:linear-gradient(135deg,var(--pink),var(--pink-mid)); color:#fff; box-shadow:0 6px 14px rgba(255,95,160,.35);}
+.btn-pink{background:linear-gradient(135deg,var(--lilac),var(--lilac-mid)); color:#fff; box-shadow:0 6px 14px rgba(163,116,255,.32);}
+[data-theme="dark"] .btn-primary,[data-theme="dark"] .btn-pink{box-shadow:var(--glow);}
+.btn-outline{background:var(--paper); color:var(--ink); border:2px solid var(--line);}
+.btn-outline:hover{border-color:var(--pink-mid);}
+.circle-btn{width:42px; height:42px; padding:0; justify-content:center; border-radius:50%;}
+.form-submit-circle{align-self:center;}
+
+/* ============ MAIN ============ */
+.main-content{flex:1; padding:34px 40px 70px; position:relative; z-index:1; max-width:1180px; width:100%;}
+.content-section{display:none; animation:fadeUp .35s ease;}
+.content-section.active-view{display:block;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+.main-content h2{font-size:24px; margin-bottom:22px; display:flex; align-items:center; gap:10px; color:var(--ink);}
+.main-content h2 i{color:var(--pink); font-size:20px;}
+.section-sub{color:var(--ink-soft); font-size:13.5px; margin:-14px 0 22px; font-weight:600;}
+
+/* ============ HERO ============ */
+.welcome-hero{
+  background:linear-gradient(135deg,var(--sky-soft),var(--lilac-soft));
+  border:2px dashed var(--line); border-radius:var(--r-lg);
+  padding:38px 40px; display:flex; justify-content:space-between; align-items:center;
+  gap:30px; position:relative; overflow:hidden; box-shadow:var(--shadow);
+}
+[data-theme="dark"] .welcome-hero{border-style:solid; box-shadow:var(--shadow-lift);}
+.welcome-hero::after{content:"✿"; position:absolute; top:-10px; right:-10px; font-size:120px; color:var(--pink-mid); opacity:.18; transform:rotate(12deg);}
+[data-theme="dark"] .welcome-hero::after{content:"🧚"; opacity:.15;}
+.hero-sparkle{position:absolute; font-size:18px; opacity:.6; animation:twinkle 2.4s ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:.25; transform:scale(.9);} 50%{opacity:.8; transform:scale(1.1);}}
+.system-tag{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.6px; background:var(--mint-soft); color:var(--mint); padding:5px 12px; border-radius:999px; margin-bottom:10px;}
+.system-tag::before{content:"●"; font-size:8px;}
+.hero-left h1{font-size:32px; margin-bottom:10px; color:var(--ink);}
+.hero-quote{font-size:14.5px; color:var(--ink-soft); max-width:420px; line-height:1.6; font-weight:600; margin-bottom:18px;}
+.hero-actions{display:flex; gap:10px;}
+.hero-right{position:relative; z-index:1;}
+.plant-box{background:var(--paper); border-radius:var(--r-md); padding:22px 26px; text-align:center; box-shadow:var(--shadow-lift); min-width:220px; border:2px solid var(--paper);}
+[data-theme="dark"] .plant-box{border-color:var(--line);}
+.plant-visual{font-size:56px; line-height:1; margin-bottom:6px; transition:transform .3s;}
+.plant-stats h4{font-size:14px; margin-bottom:2px;}
+.plant-stats p{font-size:12.5px; color:var(--ink-soft); margin-bottom:14px;}
+.text-pink{color:var(--pink);}
+.glow-button-blue{width:100%; justify-content:center; background:linear-gradient(135deg,var(--sky),var(--sky-mid)); box-shadow:0 6px 14px rgba(63,193,255,.35);}
+[data-theme="dark"] .glow-button-blue{box-shadow:var(--glow);}
+
+/* ---- Dashboard "at a glance" ---- */
+.glance-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:22px;}
+@media(max-width:900px){.glance-grid{grid-template-columns:1fr;}}
+.glance-card{display:flex; gap:14px; align-items:flex-start; padding:20px;}
+.glance-icon{width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; color:#fff;}
+.glance-icon.gi-class{background:var(--sky);}
+.glance-icon.gi-task{background:var(--pink);}
+.glance-icon.gi-timer{background:var(--lilac);}
+.glance-card h4{font-size:13px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px;}
+.glance-card p{font-size:14.5px; font-weight:700; color:var(--ink);}
+.glance-card .glance-link{display:inline-block; margin-top:8px; font-size:12.5px; color:var(--pink); font-weight:700;}
+
+/* ============ CARDS ============ */
+.card{background:var(--paper); border-radius:var(--r-md); padding:24px; box-shadow:var(--shadow); border:2px solid var(--line); position:relative;}
+[data-theme="dark"] .card{box-shadow:var(--shadow-lift);}
+.card::before{
+  content:var(--deco-corner); position:absolute; top:-16px; left:22px; font-size:22px;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.15));
+}
+.card h3{font-size:17px; margin-bottom:16px; color:var(--ink);}
+.dashboard-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:6px;}
+@media(max-width:900px){.dashboard-grid{grid-template-columns:1fr;}}
+
+/* task quick-add bar */
+.quick-add-bar{margin-bottom:24px;}
+.task-form{display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
+.task-form input, .task-form select{
+  padding:11px 14px; border-radius:var(--r-sm); border:2px solid var(--line);
+  background:var(--paper-alt); color:var(--ink); font-size:14px; font-weight:600; flex:1; min-width:160px;
+}
+.task-form input:focus, .task-form select:focus{outline:none; border-color:var(--pink-mid);}
+
+/* timer */
+.timer-page-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:22px;}
+@media(max-width:900px){.timer-page-grid{grid-template-columns:1fr;}}
+.timer-card{text-align:center;}
+.timer-display{font-family:var(--font-display); font-size:52px; color:var(--lilac); margin:6px 0 16px;}
+.timer-display span{padding:0 4px;}
+.timer-controls{display:flex; justify-content:center; gap:12px; margin-bottom:16px;}
+.timer-note-area textarea{width:100%; min-height:70px; resize:vertical; border-radius:var(--r-sm); border:2px dashed var(--line); background:var(--paper-alt); padding:12px; font-size:13px; color:var(--ink);}
+.tip-card p{font-size:13.5px; color:var(--ink-soft); line-height:1.7;}
+.tip-card ul{margin:10px 0 0 18px; font-size:13.5px; color:var(--ink-soft); line-height:1.9;}
+
+/* tasks table */
+.table-card{overflow-x:auto;}
+.task-table{width:100%; border-collapse:collapse; font-size:14px;}
+.task-table th{text-align:left; padding:10px 12px; color:var(--ink-soft); font-size:12px; text-transform:uppercase; letter-spacing:.4px; border-bottom:2px dashed var(--line);}
+.task-table td{padding:12px; border-bottom:1px solid var(--line);}
+.task-table tr:last-child td{border-bottom:none;}
+.status-pill{padding:4px 12px; border-radius:999px; font-size:11.5px; font-weight:700;}
+.status-pending{background:var(--butter); color:#7A5900;}
+[data-theme="dark"] .status-pending{color:#1D1706;}
+.status-done{background:var(--mint-soft); color:var(--mint);}
+.task-done-row td{opacity:.5; text-decoration:line-through;}
+.icon-btn{background:none; border:none; color:var(--ink-soft); font-size:15px; padding:6px; border-radius:8px;}
+.icon-btn:hover{background:var(--pink-soft); color:var(--pink);}
+.empty-state-notice{display:none; text-align:center; padding:40px 10px; color:var(--ink-soft);}
+.empty-state-notice.show{display:block;}
+.empty-icon{font-size:34px; color:var(--pink-mid); margin-bottom:10px; display:block;}
+
+/* schedule */
+.schedule-matrix-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px;}
+.schedule-day-card{padding:0; overflow:hidden;}
+.schedule-day-card::before{display:none;}
+.day-header{padding:14px 18px; font-family:var(--font-display); font-weight:600; color:#fff; font-size:15px;}
+.day-header.mon{background:var(--pink);}
+.day-header.tue{background:var(--sky);}
+.day-header.wed{background:var(--mint);}
+.day-header.thu{background:var(--lilac);}
+.day-header.fri{background:var(--butter-mid); color:var(--ink);}
+[data-theme="dark"] .day-header.fri{color:#221806;}
+.schedule-blocks{list-style:none; padding:14px 16px;}
+.schedule-blocks li{padding:9px 0; border-bottom:1px dashed var(--line); font-size:13px;}
+.schedule-blocks li:last-child{border-bottom:none;}
+.schedule-blocks .time{display:block; font-size:11px; color:var(--ink-soft); font-weight:700; margin-bottom:2px;}
+.noon-break{color:var(--ink-faint); font-style:italic; font-size:12px !important;}
+
+/* notes */
+.section-header-flex{display:flex; align-items:center; justify-content:space-between; margin-bottom:22px;}
+.section-header-flex h2{margin-bottom:0;}
+.sticky-notes-board{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:20px; min-height:120px;}
+.sticky-note{border-radius:6px; padding:16px 16px 40px; font-size:13.5px; position:relative; box-shadow:0 8px 16px rgba(0,0,0,.12); font-weight:600; color:#5B4636;}
+.sticky-note textarea{width:100%; height:80px; background:transparent; border:none; resize:none; font-family:var(--font-body); font-weight:600; font-size:13.5px; color:inherit;}
+.sticky-note textarea:focus{outline:none;}
+.sticky-note .note-del{position:absolute; bottom:10px; right:10px; background:none; border:none; color:inherit; opacity:.6; font-size:13px;}
+.sticky-note .note-del:hover{opacity:1;}
+.notes-empty{color:var(--ink-soft); font-size:13.5px; grid-column:1/-1; text-align:center; padding:20px;}
+
+/* ============ ARCADE FIXES ============ */
+.arcade-card-container{background:var(--paper); border:2px solid var(--line); border-radius:var(--r-lg); padding:22px; box-shadow:var(--shadow);}
+.arcade-tabs{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
+.tab-btn{padding:9px 16px; border-radius:999px; border:2px solid var(--line); background:var(--paper-alt); color:var(--ink-soft); font-weight:700; font-size:12.5px; white-space:nowrap;}
+.tab-btn.active{background:var(--pink); border-color:var(--pink); color:#fff;}
+[data-theme="dark"] .tab-btn.active{box-shadow:var(--glow);}
+.game-viewport-box{background:var(--cream); border-radius:var(--r-md); padding:22px; min-height:340px; position:relative;}
+
+/* FIXED: Game panels need proper display handling */
+.relax-game-panel{display:none; width:100%;}
+.relax-game-panel.active-panel{display:block;}
+
+/* FIXED: Canvas sizing - CSS handles display, JS handles internal resolution */
+#zenCanvas, #rippleCanvas, #catcherCanvas{
+  width:100%;
+  height:280px;
+  border-radius:var(--r-sm);
+  display:block;
+  cursor:crosshair;
+  background:var(--sky-soft);
+}
+#zenCanvas{background:#EFE0C2;}
+[data-theme="dark"] #zenCanvas{background:#2A2245;}
+
+/* Bubble popper */
+.bubble-grid{display:grid; grid-template-columns:repeat(10,1fr); gap:8px; margin-bottom:16px;}
+.bubble{aspect-ratio:1; border-radius:50%; border:none; cursor:pointer; transition:transform .12s;}
+.bubble:hover{transform:scale(1.1);}
+.bubble.popped{visibility:hidden;}
+
+.reset-overlay-btn{margin-top:12px;}
+.tap-hint-overlay{text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:10px;}
+.game-score-row{display:flex; align-items:center; justify-content:space-between; margin-top:12px; font-size:13px; font-weight:700; color:var(--ink-soft);}
+.game-score-row span{color:var(--pink);}
+
+/* Memory blossom */
+.blossom-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:420px; margin:0 auto;}
+.blossom-card{
+  aspect-ratio:1; border-radius:14px; border:2px solid var(--line); background:var(--paper);
+  display:flex; align-items:center; justify-content:center; font-size:26px;
+  cursor:pointer; transition:transform .25s, background .25s; user-select:none;
+}
+.blossom-card:hover{transform:scale(1.05);}
+.blossom-card.flipped, .blossom-card.matched{background:var(--pink-soft); transform:scale(1.03);}
+.blossom-card.matched{opacity:.55; cursor:default;}
+.blossom-status{text-align:center; font-size:13px; color:var(--ink-soft); font-weight:700; margin-top:14px;}
+
+/* profile */
+.profile-card-layout{display:flex; align-items:center; gap:26px; flex-wrap:wrap;}
+.profile-large-avatar{width:96px; height:96px; border-radius:50%; background:var(--pink-soft); border:3px solid var(--paper); box-shadow:var(--shadow);}
+.profile-details-block h3{font-size:20px; outline:none; border-bottom:2px dashed transparent; padding-bottom:2px;}
+.profile-details-block h3:focus{border-color:var(--pink-mid);}
+.profile-track{font-size:13.5px; color:var(--ink-soft); margin:6px 0 12px;}
+.profile-metrics-pills{display:flex; gap:10px; flex-wrap:wrap;}
+.badge{padding:6px 14px; border-radius:999px; font-size:12px; font-weight:700;}
+.badge-purple{background:var(--lilac-soft); color:var(--lilac);}
+.badge-blue{background:var(--sky-soft); color:var(--sky);}
+
+/* settings */
+.settings-card{display:flex; flex-direction:column; gap:20px;}
+.setting-row{display:flex; align-items:center; justify-content:space-between; gap:20px; padding-bottom:18px; border-bottom:1px dashed var(--line);}
+.setting-row:last-child{border-bottom:none; padding-bottom:0;}
+.setting-row h4{font-size:14.5px; margin-bottom:3px;}
+.setting-row p{font-size:12.5px; color:var(--ink-soft);}
+.switch{position:relative; width:46px; height:26px; flex-shrink:0;}
+.switch input{opacity:0; width:0; height:0;}
+.slider{position:absolute; inset:0; background:var(--line); border-radius:999px; transition:.3s; cursor:pointer;}
+.slider::before{content:""; position:absolute; width:20px; height:20px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.3s;}
+.switch input:checked + .slider{background:var(--pink);}
+.switch input:checked + .slider::before{transform:translateX(20px);}
+.theme-toggle{display:flex; align-items:center; gap:10px; color:var(--ink-soft);}
+
+/* about */
+.about-card-frame p{font-size:14.5px; line-height:1.7; color:var(--ink-soft); margin:14px 0;}
+.about-card-frame blockquote{background:var(--lilac-soft); border-left:4px solid var(--lilac); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:14px 18px; font-size:13.5px; color:var(--ink); margin:16px 0;}
+.framework-credits{font-size:12px; color:var(--ink-faint); margin-top:10px;}
+
+/* toast */
+.toast{position:fixed; bottom:26px; right:26px; background:var(--ink); color:var(--cream); padding:12px 20px; border-radius:999px; font-size:13.5px; font-weight:700; box-shadow:var(--shadow-lift); z-index:100; opacity:0; transform:translateY(10px); transition:.3s; pointer-events:none;}
+.toast.show{opacity:1; transform:translateY(0);}
+
+/* ============ BOTTOM TAB BAR ============ */
+.bottom-tabbar{
+  display:none; position:fixed; bottom:0; left:0; right:0; z-index:20;
+  background:var(--paper); border-top:2px dashed var(--line);
+  padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+  justify-content:space-around; box-shadow:0 -6px 18px rgba(0,0,0,.08);
+}
+.bt-btn{
+  display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:none;
+  color:var(--ink-soft); font-size:10.5px; font-weight:700; padding:4px 8px; border-radius:10px;
+}
+.bt-btn i{font-size:17px;}
+.bt-btn.active{color:var(--pink);}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:880px){
+  body { flex-direction: column !important; }
+  .mobile-topbar { display: flex !important; padding: 8px 12px; width: 100%; box-sizing: border-box; }
+  .mobile-topbar .mt-logo { font-size: 14px; }
+  .sidebar { position: fixed !important; top: 0; left: 0; height: 100vh; width: 78%; max-width: 300px; transform: translateX(-100%); transition: transform .3s ease; box-shadow: var(--shadow-lift); z-index: 25; }
+  .sidebar.open { transform: translateX(0) !important; }
+  .main-content { padding: 12px 12px 90px !important; max-width: 100% !important; width: 100% !important; box-sizing: border-box; display: block !important; }
+  .bottom-tabbar { display: flex !important; }
+  .welcome-hero { flex-direction: column !important; text-align: center; padding: 14px 12px !important; gap: 10px !important; width: 100% !important; box-sizing: border-box; }
+  .welcome-hero h1 { font-size: 18px !important; }
+  .welcome-hero .hero-quote { font-size: 12px !important; margin-bottom: 6px !important; }
+  .welcome-hero .plant-box { padding: 10px 14px !important; min-width: 100% !important; }
+  .welcome-hero .plant-visual { font-size: 32px !important; }
+  .glance-grid, .dashboard-grid, .timer-page-grid { grid-template-columns: 1fr !important; width: 100% !important; }
+  .blossom-grid { grid-template-columns: repeat(4, 1fr) !important; }
+}
+
+/* manual "Mobile Optimized Layout" preview toggle */
+body.force-mobile { flex-direction: column !important; }
+body.force-mobile .mobile-topbar { display: flex !important; padding: 8px 12px; width: 100%; box-sizing: border-box; }
+body.force-mobile .mobile-topbar .mt-logo { font-size: 14px; }
+body.force-mobile .sidebar { position: fixed !important; top: 0; left: 0; height: 100vh; width: 78%; max-width: 300px; transform: translateX(-100%); transition: transform .3s ease; box-shadow: var(--shadow-lift); z-index: 25; }
+body.force-mobile .sidebar.open { transform: translateX(0) !important; }
+body.force-mobile .main-content { padding: 12px 12px 90px !important; max-width: 100% !important; width: 100% !important; box-sizing: border-box; display: block !important; }
+body.force-mobile .bottom-tabbar { display: flex !important; }
+body.force-mobile .welcome-hero { flex-direction: column !important; text-align: center; padding: 14px 12px !important; gap: 10px !important; width: 100% !important; box-sizing: border-box; }
+body.force-mobile .welcome-hero h1 { font-size: 18px !important; }
+body.force-mobile .welcome-hero .hero-quote { font-size: 12px !important; margin-bottom: 6px !important; }
+body.force-mobile .welcome-hero .plant-box { padding: 10px 14px !important; min-width: 100% !important; }
+body.force-mobile .welcome-hero .plant-visual { font-size: 32px !important; }
+body.force-mobile .glance-grid { grid-template-columns: 1fr !important; width: 100% !important; }
+body.force-mobile .dashboard-grid { grid-template-columns: 1fr !important; width: 100% !important; }
+body.force-mobile .timer-page-grid { grid-template-columns: 1fr !important; width: 100% !important; }
+    </style>
+
+<div id="fireflies"></div>
+
+<!-- ============ MOBILE TOP BAR ============ -->
+<div class="mobile-topbar">
+  <button class="hamburger-btn" id="hamburgerBtn" title="Open menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="mt-logo"><i class="fa-solid fa-seedling" style="color:var(--pink)"></i> Task<span>Ahead</span></div>
+  <button class="mt-login-btn nav-btn" data-target="auth-section" title="Login / Register"><i class="fa-solid fa-right-to-bracket"></i></button>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="logo-container">
+    <div class="logo-icon-box"><i class="fa-solid fa-seedling"></i></div>
+    <div class="logo-text">
+      <h2>Task<span>Ahead</span></h2>
+      <p>ANHS ICT Track</p>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Overview</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Academics</span>
+    <ul class="nav-links">
+      <li class="dropdown-wrapper">
+        <button class="dropdown-toggle-btn" id="academicsDropdownBtn">
+          <span><i class="fa-solid fa-graduation-cap"></i> Subjects &amp; Terms</span>
+          <i class="fa-solid fa-chevron-down arrow"></i>
+        </button>
+        <ul class="dropdown-container" id="academicsMenu">
+          <li class="nested-dropdown">
+            <span class="term-title">Term 1</span>
+            <ul class="subject-list">
+              <li contenteditable="true">Introduction to Philosophy</li>
+              <li contenteditable="true">Contemporary Philippine Arts</li>
+              <li contenteditable="true">Practical Research 2</li>
+              <li contenteditable="true">ICT Programming</li>
+              <li contenteditable="true">Physical Science</li>
+              <li contenteditable="true">Homeroom Guidance</li>
+            </ul>
+          </li>
+          <li class="nested-dropdown"><span class="term-title">Term 2</span>
+            <ul class="subject-list">
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+            </ul>
+          </li>
+          <li class="nested-dropdown"><span class="term-title">Term 3</span>
+            <ul class="subject-list">
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#" class="nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i> Class Schedule</a></li>
+      <li><a href="#" class="nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Focus &amp; Wellness</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn" data-target="timer-section"><i class="fa-solid fa-stopwatch"></i> Focus Timer</a></li>
+      <li><a href="#" class="nav-btn" data-target="notes-section"><i class="fa-solid fa-note-sticky"></i> Workspace Notes</a></li>
+      <li><a href="#" class="nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i> Relax Arcade</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Account</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn" data-target="profile-section"><i class="fa-solid fa-user-gear"></i> Student Profile</a></li>
+      <li><a href="#" class="nav-btn" data-target="settings"><i class="fa-solid fa-sliders"></i> Configuration</a></li>
+      <li><a href="#" class="nav-btn" data-target="about"><i class="fa-solid fa-circle-info"></i> About Devs</a></li>
+      <li><a href="#" class="nav-btn" data-target="auth-section"><i class="fa-solid fa-right-to-bracket"></i> Login / Register</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">Made with 💖 by ANHS ICT students</div>
+</nav>
+
+<main class="main-content">
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="content-section active-view">
+    <div class="welcome-hero">
+      <span class="hero-sparkle" style="top:16px; left:46%;">✨</span>
+      <span class="hero-sparkle" style="top:60%; left:8%; animation-delay:.8s;">✨</span>
+      <div class="hero-left">
+        <span class="system-tag">Garden status: growing</span>
+        <h1>Hi there, future dev! 🌸</h1>
+        <p class="hero-quote" id="motivational-quote">"Water your tasks a little each day and watch your whole term bloom."</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary circle-btn nav-btn" data-target="tasks" title="Add a task"><i class="fa-solid fa-plus"></i></button>
+          <button class="btn btn-pink circle-btn nav-btn" data-target="relax" title="Arcade Breaks"><i class="fa-solid fa-gamepad"></i></button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="plant-box">
+          <div class="plant-visual" id="plant-sprite">🌱</div>
+          <div class="plant-stats">
+            <h4>Growth Tier: <span id="rank-name" class="text-pink">Seedling</span></h4>
+            <p>Level Score: <span id="rank-points">0</span> XP</p>
+          </div>
+          <button class="btn glow-button-blue" id="manual-plant-grow-btn"><i class="fa-solid fa-droplet"></i> Water your plant</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="glance-grid">
+      <div class="card glance-card">
+        <div class="glance-icon gi-class"><i class="fa-solid fa-calendar-day"></i></div>
+        <div>
+          <h4>Next up today</h4>
+          <p id="glance-class">Loading…</p>
+          <a href="#" class="glance-link nav-btn" data-target="schedule-section">View schedule →</a>
+        </div>
+      </div>
+      <div class="card glance-card">
+        <div class="glance-icon gi-task"><i class="fa-solid fa-list-check"></i></div>
+        <div>
+          <h4>Closest deadline</h4>
+          <p id="glance-task">No tasks yet</p>
+          <a href="#" class="glance-link nav-btn" data-target="tasks">Manage tasks →</a>
+        </div>
+      </div>
+      <div class="card glance-card">
+        <div class="glance-icon gi-timer"><i class="fa-solid fa-stopwatch"></i></div>
+        <div>
+          <h4>Need to focus?</h4>
+          <p>Start a session</p>
+          <a href="#" class="glance-link nav-btn" data-target="timer-section">Open timer →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TASKS & DEADLINES -->
+  <section id="tasks" class="content-section">
+    <h2><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</h2>
+    <p class="section-sub">Plant a new requirement, then track it through to done.</p>
+
+    <div class="card quick-add-bar glow-box-blue">
+      <h3>🌷 Quick Add Task</h3>
+      <form id="db-task-form" class="task-form">
+        <input type="text" id="db-task-name" placeholder="Requirement name (e.g. Code Database Schema)" required>
+        <input type="text" id="db-task-subject" placeholder="Select or type subject..." list="subject-options" required style="font-family: var(--font-body); font-weight: 500;">
+        <datalist id="subject-options">
+          <option value="Introduction to Philosophy">
+          <option value="Contemporary Philippine Arts">
+          <option value="Practical Research 2">
+          <option value="ICT Programming">
+          <option value="Physical Science">
+          <option value="Homeroom Guidance">
+        </datalist>
+        <input type="date" id="db-task-date" required>
+        <button type="submit" class="btn btn-primary circle-btn form-submit-circle" title="Deploy task"><i class="fa-solid fa-check"></i></button>
+      </form>
+    </div>
+
+    <div class="card table-card glow-box-pink">
+      <table class="task-table">
+        <thead><tr><th>Task</th><th>Subject</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="db-task-table-body"></tbody>
+      </table>
+      <div class="empty-state-notice show" id="tasks-empty-notice">
+        <i class="fa-solid fa-seedling empty-icon"></i>
+        <p>No tasks planted yet. Add one above!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule-section" class="content-section">
+    <h2><i class="fa-solid fa-calendar-days"></i> Weekly Class Schedule</h2>
+    <div class="schedule-matrix-grid">
+      <div class="card schedule-day-card">
+        <div class="day-header mon">Monday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header tue">Tuesday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header wed">Wednesday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header thu">Thursday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Physical Science</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">ICT Programming</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header fri">Friday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOCUS TIMER -->
+  <section id="timer-section" class="content-section">
+    <h2><i class="fa-solid fa-stopwatch"></i> Focus Timer</h2>
+    <div class="timer-page-grid">
+      <div class="card timer-card glow-box-purple">
+        <h3>🍓 Focus Session</h3>
+        <div class="timer-display">
+          <span id="timer-minutes">25</span>:<span id="timer-seconds">00</span>
+        </div>
+        <div class="timer-controls">
+          <button class="btn btn-pink circle-btn" id="start-timer-btn" title="Toggle Timer"><i class="fa-solid fa-play"></i></button>
+          <button class="btn btn-outline circle-btn" id="reset-timer-btn" title="Reset"><i class="fa-solid fa-rotate-left"></i></button>
+        </div>
+        <div class="timer-note-area">
+          <textarea placeholder="Jot a quick note for this session..." class="editable-timer-note"></textarea>
+        </div>
+      </div>
+      <div class="card tip-card glow-box-blue">
+        <h3>🌼 Focus Tips</h3>
+        <p>Use the timer to boost your productivity. Complete sessions to earn plant XP!</p>
+        <ul>
+          <li>25 min focus → 5 min break</li>
+          <li>Silence notifications first</li>
+          <li>Finish a session to earn plant XP</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="notes-section" class="content-section">
+    <div class="section-header-flex">
+      <h2><i class="fa-solid fa-note-sticky"></i> Sticky Reminders</h2>
+      <button class="btn btn-primary circle-btn" id="add-note-btn" title="Add Sticky Note"><i class="fa-solid fa-plus"></i></button>
+    </div>
+    <div class="sticky-notes-board" id="sticky-board">
+      <p class="notes-empty" id="notes-empty">No notes yet — click + to stick one on the board 📌</p>
+    </div>
+  </section>
+
+  <!-- RELAX (5 games) -->
+  <section id="relax" class="content-section">
+    <h2><i class="fa-solid fa-gamepad"></i> Relax Arcade</h2>
+    <div class="arcade-card-container">
+      <div class="arcade-tabs">
+        <button class="tab-btn active" onclick="switchRelaxGame(0)">🫧 Bubble Popper</button>
+        <button class="tab-btn" onclick="switchRelaxGame(1)">🌾 Zen Garden</button>
+        <button class="tab-btn" onclick="switchRelaxGame(2)">💧 Musical Ripples</button>
+        <button class="tab-btn" onclick="switchRelaxGame(3)">⭐ Star Catcher</button>
+        <button class="tab-btn" onclick="switchRelaxGame(4)">🌸 Memory Blossom</button>
+      </div>
+      <div class="game-viewport-box">
+        <div class="relax-game-panel active-panel" id="r-game-0">
+          <div class="bubble-grid" id="bubbleGrid"></div>
+          <button class="btn btn-outline" onclick="resetBubbles()"><i class="fa-solid fa-rotate-left"></i> Refresh Sheet</button>
+        </div>
+        <div class="relax-game-panel" id="r-game-1">
+          <canvas id="zenCanvas" width="800" height="280"></canvas>
+          <button class="btn btn-outline reset-overlay-btn" onclick="clearSand()"><i class="fa-solid fa-rotate-left"></i> Smooth Sand</button>
+        </div>
+        <div class="relax-game-panel" id="r-game-2">
+          <canvas id="rippleCanvas" width="800" height="280"></canvas>
+          <p class="tap-hint-overlay">Tap anywhere inside to play a gentle note</p>
+        </div>
+        <div class="relax-game-panel" id="r-game-3">
+          <canvas id="catcherCanvas" width="800" height="280"></canvas>
+          <div class="game-score-row">
+            <span>Catch the falling stars ✨</span>
+            <span>Score: <span id="catcher-score">0</span></span>
+          </div>
+        </div>
+        <div class="relax-game-panel" id="r-game-4">
+          <div class="blossom-grid" id="blossomGrid"></div>
+          <p class="blossom-status" id="blossomStatus">Find every matching pair 🌸</p>
+          <div style="text-align:center; margin-top:12px;">
+            <button class="btn btn-outline" onclick="setupBlossom()"><i class="fa-solid fa-rotate-left"></i> Reshuffle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile-section" class="content-section">
+    <h2><i class="fa-solid fa-user-gear"></i> Student Profile</h2>
+    <div class="card profile-card-layout glow-box-blue" style="flex-direction: column; align-items: flex-start; gap: 20px;">
+
+      <div style="display: flex; align-items: center; gap: 26px; flex-wrap: wrap; width: 100%;">
+        <!-- Interactive Avatar Selector -->
+        <div class="profile-avatar-block" id="profile-avatar-block" style="position: relative; cursor: pointer;" title="Click to change avatar!">
+          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=taskahead" alt="Avatar" class="profile-large-avatar" id="profile-avatar-img">
+          <div style="position: absolute; bottom: 0; right: 0; background: var(--pink); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 2px solid var(--paper);">
+            <i class="fa-solid fa-rotate"></i>
+          </div>
+        </div>
+
+        <div class="profile-details-block" style="flex: 1; min-width: 200px;">
+          <h3 contenteditable="true" id="profile-display-name" style="display: inline-block; border-bottom: 2px dashed var(--line); padding-right: 8px;">ICT_Student_User</h3>
+
+          <!-- Dropdown Focus Selector -->
+          <p class="profile-track" style="margin-top: 8px;">
+            Track focus: 
+            <select id="profile-sub-track" style="padding: 4px 8px; border-radius: 8px; border: 2px solid var(--line); background: var(--paper-alt); color: var(--ink); font-weight: 700; font-family: var(--font-body);">
+              <option value="General ICT">Grade 12 General ICT Specialist</option>
+              <option value="Software Programming">Grade 12 Software Programming</option>
+              <option value="Animation & Graphics">Grade 12 Animation & Graphics</option>
+              <option value="Network Systems">Grade 12 Network Systems</option>
+            </select>
+          </p>
+
+          <div class="profile-metrics-pills" style="margin-top: 10px;">
+            <span class="badge badge-purple">Level rank: <span id="profile-rank-tier">Seedling</span></span>
+            <span class="badge badge-blue" id="track-badge">General ICT Specialist</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Bio Area -->
+      <div style="width: 100%; border-top: 2px dashed var(--line); padding-top: 16px;">
+        <h4 style="font-family: var(--font-display); font-size: 15px; margin-bottom: 6px;">🌸 Dev Bio / Motto</h4>
+        <textarea id="profile-bio" placeholder="Write something interesting about your coding journey or drop your favorite school motto here..." style="width: 100%; min-height: 60px; padding: 10px; border-radius: var(--r-sm); border: 2px dashed var(--line); background: var(--paper-alt); color: var(--ink); font-size: 13.5px; resize: vertical; font-family: var(--font-body);"></textarea>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="settings" class="content-section">
+    <h2><i class="fa-solid fa-sliders"></i> Configuration</h2>
+    <div class="card settings-card glow-box-purple">
+      <div class="setting-row">
+        <div><h4>Theme Luminescence Switch</h4><p>Blossom daytime pastel mode, or Fairybloom Night's enchanted paradise glow</p></div>
+        <div class="theme-toggle">
+          <i class="fa-solid fa-sun"></i>
+          <label class="switch"><input type="checkbox" id="mode-checkbox" onchange="toggleTheme()"><span class="slider"></span></label>
+          <i class="fa-solid fa-moon"></i>
+        </div>
+      </div>
+      <div class="setting-row">
+        <div><h4>Mobile Optimized Layout</h4><p>Preview the compact phone-friendly interface on any screen size</p></div>
+        <label class="switch"><input type="checkbox" id="mobile-mode-checkbox" onchange="toggleMobileMode()"><span class="slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div><h4>Hardware Acceleration Toggle</h4><p>Optimize frame rendering for background task cycles</p></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div><h4>Automated Backup Sync</h4><p>Periodically send app state to your backup repository</p></div>
+        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTH SECTION -->
+  <section id="auth-section" class="content-section">
+    <h2><i class="fa-solid fa-user-shield"></i> Secure Data Storage Handshake</h2>
+
+    <div class="dashboard-grid">
+
+      <!-- LOGIN FORM -->
+      <div class="card glow-box-blue">
+        <h3>🔐 Sign In</h3>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
+          Enter your credentials to access your garden 🌸
+        </p>
+
+        <form id="db-login-form" class="task-form" style="flex-direction:column; gap:12px;">
+          <input type="text" id="login-uid" name="username" placeholder="👤 Username" required style="width:100%;">
+          <input type="password" id="login-pwd" name="password" placeholder="🔑 Password" required style="width:100%;">
+          <button type="submit" class="btn btn-primary form-submit-circle" style="width:100%; justify-content:center; padding:12px;">
+            <i class="fa-solid fa-unlock-keyhole"></i> Sign In
+          </button>
+        </form>
+
+        <div id="login-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="card glow-box-pink">
+        <h3>🌼 Register</h3>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
+          Create your garden account and start growing! 🌱
+        </p>
+
+        <form id="db-register-form" class="task-form" style="flex-direction:column; gap:12px;">
+          <input type="text" id="reg-uid" name="username" placeholder="👤 Choose a username" required style="width:100%;">
+          <input type="email" id="reg-email" name="email" placeholder="📧 School Email Address" required style="width:100%;">
+          <input type="password" id="reg-pwd" name="password" placeholder="🔑 Password (min 6 characters)" required style="width:100%;">
+          <button type="submit" class="btn btn-pink form-submit-circle" style="width:100%; justify-content:center; padding:12px;">
+            <i class="fa-solid fa-id-card"></i> Create Account
+          </button>
+        </form>
+
+        <div id="register-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
+      </div>
+
+    </div>
+
+    <div id="auth-status" style="margin-top:20px; text-align:center; font-size:14px; color:var(--ink-soft);">
+      <i class="fa-solid fa-info-circle"></i> 
+      <span id="auth-status-text">Not logged in</span>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="content-section">
+    <h2><i class="fa-solid fa-circle-info"></i> About TaskAhead</h2>
+    <div class="card about-card-frame glow-box-pink">
+      <h3>TaskAhead Platform Framework</h3>
+      <p><strong>TaskAhead</strong> is a specialized, production-ready schoolwork workflow management application. Designed around the intensive track challenges of modern Senior High School environments, it pairs academic tracking with a cozy, garden-fairy interface that adapts across devices.</p>
+      <blockquote>
+        <strong>Credit Notice &amp; Research Attribution (ctto):</strong><br>
+        This application was researched, conceptualized, and built by <strong>Anonang National High School Students</strong> as a primary practical development solution for their formal research track study. Engineered to boost focus for ICT student tracking, its versatile design extends complete functional utility to multiple general tracks and student cohorts across institutions.
+      </blockquote>
+      <div class="framework-credits">© S.Y. 2026–2027 ANHS Academic Research Operations</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- BOTTOM TAB BAR -->
+<div class="bottom-tabbar">
+  <button class="bt-btn nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i>Home</button>
+  <button class="bt-btn nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i>Tasks</button>
+  <button class="bt-btn nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i>Class</button>
+  <button class="bt-btn nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i>Relax</button>
+  <button class="bt-btn" id="bottomMenuBtn"><i class="fa-solid fa-bars"></i>Menu</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- FIXED: Removed 'js/' prefix since files are in root folder -->
+<script src="js/database.js" defer></script>
+<script src="js/models.js" defer></script>
+<script src="js/repository.js" defer></script>
+<script src="js/script.js" defer></script>
+
+<script>
+    // ============================================
+// DATABASE INITIALIZATION
+// ============================================
+
+let currentUserId = 'default-user';
+
+async function initApp() {
+  try {
+    await db.init();
+    console.log('✅ Database ready!');
+    await loadAllData();
+    refreshAllUI();
+    showToast('🌸 Data loaded from database!');
+  } catch (error) {
+    console.error('❌ Failed to initialize:', error);
+    showToast('Error loading data. Please refresh.');
+  }
+}
+
+async function loadAllData() {
+  try {
+    window.tasks = await TaskRepository.getAll(currentUserId);
+    const gameData = await GamificationRepository.get(currentUserId);
+    window.xp = gameData.xp;
+    const profile = await ProfileRepository.get(currentUserId);
+    window.profile = profile;
+    console.log('✅ All data loaded');
+  } catch (error) {
+    console.error('❌ Error loading data:', error);
+  }
+}
+
+function refreshAllUI() {
+  refreshPlant();
+  renderTasks();
+  refreshGlance();
+  updateProfileUI();
+}
+
+// Start app when page loads
+document.addEventListener('DOMContentLoaded', initApp);
+
+/* ============ TOAST ============ */
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  if(!t) return;
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ============ MOBILE DRAWER ============ */
+const sidebar=document.getElementById('sidebar');
+const overlay=document.getElementById('sidebarOverlay');
+function openDrawer(){ sidebar.classList.add('open'); overlay.classList.add('show'); }
+function closeDrawer(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const bottomMenuBtn = document.getElementById('bottomMenuBtn');
+  if(hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+  if(bottomMenuBtn) bottomMenuBtn.addEventListener('click', openDrawer);
+  if(overlay) overlay.addEventListener('click', closeDrawer);
+});
+
+/* ============ NAV ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.nav-btn').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.preventDefault();
+      const target=btn.dataset.target;
+      if(!target) return;
+      document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll(`.nav-btn[data-target="${target}"]`).forEach(b=>b.classList.add('active'));
+      document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active-view'));
+      const sec=document.getElementById(target);
+      if(sec) sec.classList.add('active-view');
+      closeDrawer();
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+});
+
+/* Academics dropdown */
+document.addEventListener('DOMContentLoaded', () => {
+  const acadBtn=document.getElementById('academicsDropdownBtn');
+  const acadMenu=document.getElementById('academicsMenu');
+  if(acadBtn){
+    acadBtn.addEventListener('click', ()=>{
+      acadBtn.classList.toggle('open');
+      acadMenu.classList.toggle('open');
+    });
+  }
+});
+
+/* ============ THEME ============ */
+function toggleTheme(){
+  const dark = document.getElementById('mode-checkbox').checked;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  if(dark) spawnFireflies(); else clearFireflies();
+}
+function spawnFireflies(){
+  const box=document.getElementById('fireflies');
+  if(!box || box.childElementCount>0) return;
+  for(let i=0;i<14;i++){
+    const f=document.createElement('div');
+    f.className='firefly';
+    f.style.left=Math.random()*100+'vw';
+    f.style.top=(50+Math.random()*45)+'vh';
+    f.style.animationDuration=(6+Math.random()*6)+'s';
+    f.style.animationDelay=(Math.random()*5)+'s';
+    box.appendChild(f);
+  }
+}
+function clearFireflies(){ 
+  const box = document.getElementById('fireflies');
+  if(box) box.innerHTML=''; 
+}
+
+/* ============ MOBILE LAYOUT PREVIEW TOGGLE ============ */
+function toggleMobileMode(){
+  const on=document.getElementById('mobile-mode-checkbox').checked;
+  document.body.classList.toggle('force-mobile', on);
+  showToast(on ? 'Mobile-optimized layout enabled 📱' : 'Mobile-optimized layout disabled');
+}
+
+// ============ PLANT GROWTH WITH DATABASE ============
+async function refreshPlant() {
+  try {
+    const gameData = await GamificationRepository.get(currentUserId);
+    window.xp = gameData.xp;
+    const tier = gameData.plantTier;
+
+    const rankName = document.getElementById('rank-name');
+    const profileRank = document.getElementById('profile-rank-tier');
+    const rankPoints = document.getElementById('rank-points');
+    const sprite = document.getElementById('plant-sprite');
+
+    if(rankName) rankName.textContent = tier;
+    if(profileRank) profileRank.textContent = tier;
+    if(rankPoints) rankPoints.textContent = window.xp;
+
+    const emojiMap = {
+      'Seedling': '🌱',
+      'Sprout': '🌿',
+      'Sapling': '🪴',
+      'Blooming': '🌸',
+      'Full Bloom': '🌳'
+    };
+    if(sprite) {
+      sprite.textContent = emojiMap[tier] || '🌱';
+      sprite.style.transform = 'scale(1.25)';
+      setTimeout(() => sprite.style.transform = 'scale(1)', 180);
+    }
+  } catch (error) {
+    console.error('❌ Error refreshing plant:', error);
+  }
+}
+
+// Manual grow button
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('manual-plant-grow-btn');
+  if(btn){
+    btn.addEventListener('click', async () => {
+      try {
+        await GamificationRepository.addXP(currentUserId, 5);
+        await refreshPlant();
+        showToast('+5 XP · your plant feels loved 🌱');
+      } catch (error) {
+        console.error('❌ Error watering plant:', error);
+        showToast('Error watering plant');
+      }
+    });
+  }
+});
+
+// ============ TASKS WITH DATABASE ============
+async function renderTasks() {
+  const taskBody = document.getElementById('db-task-table-body');
+  const emptyNotice = document.getElementById('tasks-empty-notice');
+
+  if(!taskBody) return;
+
+  try {
+    window.tasks = await TaskRepository.getAll(currentUserId);
+    taskBody.innerHTML = '';
+
+    if (window.tasks.length === 0) {
+      if(emptyNotice) emptyNotice.classList.add('show');
+    } else {
+      if(emptyNotice) emptyNotice.classList.remove('show');
+
+      window.tasks.forEach(task => {
+        const tr = document.createElement('tr');
+        if (task.status === 'done') tr.classList.add('task-done-row');
+
+        tr.innerHTML = `
+          <td>${task.name}</td>
+          <td>${task.subject}</td>
+          <td>${task.dueDate}</td>
+          <td>
+            <span class="status-pill ${task.status === 'done' ? 'status-done' : 'status-pending'}">
+              ${task.status === 'done' ? 'Done' : 'Pending'}
+            </span>
+          </td>
+          <td>
+            <button class="icon-btn toggle-btn" data-id="${task.id}">
+              <i class="fa-solid ${task.status === 'done' ? 'fa-rotate-left' : 'fa-check'}"></i>
+            </button>
+            <button class="icon-btn del-btn" data-id="${task.id}">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        `;
+
+        tr.querySelector('.toggle-btn').addEventListener('click', async () => {
+          try {
+            const updated = await TaskRepository.toggleStatus(task.id);
+            if (updated.status === 'done') {
+              await GamificationRepository.addXP(currentUserId, 10);
+              await refreshPlant();
+              showToast('Task complete! +10 XP 🌼');
+            }
+            await renderTasks();
+            refreshGlance();
+          } catch (error) {
+            console.error('❌ Error toggling task:', error);
+            showToast('Error updating task');
+          }
+        });
+
+        tr.querySelector('.del-btn').addEventListener('click', async () => {
+          if (confirm('Delete this task?')) {
+            try {
+              await TaskRepository.delete(task.id);
+              await renderTasks();
+              refreshGlance();
+              showToast('Task deleted');
+            } catch (error) {
+              console.error('❌ Error deleting task:', error);
+              showToast('Error deleting task');
+            }
+          }
+        });
+
+        taskBody.appendChild(tr);
+      });
+    }
+  } catch (error) {
+    console.error('❌ Error rendering tasks:', error);
+    showToast('Error loading tasks');
+  }
+}
+
+// ============ TASK FORM ============
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('db-task-form');
+  if(form){
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('db-task-name').value.trim();
+      const subject = document.getElementById('db-task-subject').value;
+      const dueDate = document.getElementById('db-task-date').value;
+
+      if (!name || !dueDate) {
+        showToast('Please fill in all fields');
+        return;
+      }
+
+      try {
+        await TaskRepository.create({
+          name: name,
+          subject: subject,
+          dueDate: dueDate,
+          userId: currentUserId
+        });
+
+        await renderTasks();
+        refreshGlance();
+        showToast('Task planted in your queue 🌷');
+        e.target.reset();
+      } catch (error) {
+        console.error('❌ Error creating task:', error);
+        showToast('Error creating task');
+      }
+    });
+  }
+});
+
+/* ============ DASHBOARD GLANCE ============ */
+const weekSchedule = {
+  1:[{time:'07:30 - 09:30',subj:'Introduction to Philosophy'},{time:'09:45 - 11:45',subj:'Practical Research 2'},{time:'12:30 - 02:30',subj:'ICT Programming'},{time:'02:30 - 04:30',subj:'Physical Science'}],
+  2:[{time:'07:30 - 09:30',subj:'Introduction to Philosophy'},{time:'09:45 - 11:45',subj:'Contemporary Philippine Arts'},{time:'12:30 - 02:30',subj:'Contemporary Philippine Arts'},{time:'02:30 - 04:30',subj:'Physical Science'}],
+  3:[{time:'07:30 - 09:30',subj:'Introduction to Philosophy'},{time:'09:45 - 11:45',subj:'Practical Research 2'},{time:'12:30 - 02:30',subj:'ICT Programming'},{time:'02:30 - 04:30',subj:'Physical Science'}],
+  4:[{time:'07:30 - 09:30',subj:'Contemporary Philippine Arts'},{time:'09:45 - 11:45',subj:'Practical Research 2'},{time:'12:30 - 02:30',subj:'Physical Science'},{time:'02:30 - 04:30',subj:'ICT Programming'}],
+  5:[{time:'07:30 - 09:30',subj:'Introduction to Philosophy'},{time:'09:45 - 11:45',subj:'Practical Research 2'},{time:'12:30 - 02:30',subj:'ICT Programming'},{time:'02:30 - 04:30',subj:'Contemporary Philippine Arts'}],
+};
+
+function refreshGlance(){
+  const day = new Date().getDay();
+  const todayClasses = weekSchedule[day];
+  const classEl=document.getElementById('glance-class');
+  if(classEl){
+    if(todayClasses){ classEl.textContent = `${todayClasses[0].subj} · ${todayClasses[0].time}`; }
+    else { classEl.textContent = 'No classes today — enjoy your break!'; }
+  }
+
+  const taskEl=document.getElementById('glance-task');
+  if(taskEl){
+    const pending = window.tasks ? window.tasks.filter(t=>t.status !== 'done').sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate)) : [];
+    if(pending.length===0){ taskEl.textContent='No tasks yet'; }
+    else{ taskEl.textContent = `${pending[0].name} · due ${pending[0].dueDate}`; }
+  }
+}
+
+/* ============ TIMER ============ */
+let timerInterval=null, timerRunning=false;
+
+function getTimerElements() {
+  return {
+    minSpan: document.getElementById('timer-minutes'),
+    secSpan: document.getElementById('timer-seconds'),
+    startBtn: document.getElementById('start-timer-btn')
+  };
+}
+
+function tick(){
+  const { minSpan, secSpan, startBtn } = getTimerElements();
+  if(!minSpan || !secSpan || !startBtn) return;
+
+  let m=parseInt(minSpan.textContent)||0;
+  let s=parseInt(secSpan.textContent)||0;
+
+  if(s===0){
+    if(m===0){ 
+      clearInterval(timerInterval); 
+      timerRunning=false; 
+      startBtn.innerHTML='<i class="fa-solid fa-play"></i>'; 
+      showToast('Focus session complete! 🍓'); 
+      GamificationRepository.addXP(currentUserId, 15).then(() => {
+        refreshPlant();
+      }).catch(err => console.error('Error awarding XP:', err));
+      return; 
+    }
+    m--; s=59;
+  } else { s--; }
+
+  minSpan.textContent=String(m).padStart(2,'0');
+  secSpan.textContent=String(s).padStart(2,'0');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const startBtn = document.getElementById('start-timer-btn');
+  const resetBtn = document.getElementById('reset-timer-btn');
+
+  if(startBtn){
+    startBtn.addEventListener('click', ()=>{
+      timerRunning=!timerRunning;
+      if(timerRunning){ 
+        startBtn.innerHTML='<i class="fa-solid fa-pause"></i>'; 
+        timerInterval=setInterval(tick,1000); 
+      }
+      else{ 
+        startBtn.innerHTML='<i class="fa-solid fa-play"></i>'; 
+        clearInterval(timerInterval); 
+      }
+    });
+  }
+
+  if(resetBtn){
+    resetBtn.addEventListener('click', ()=>{
+      clearInterval(timerInterval); 
+      timerRunning=false;
+      const { minSpan, secSpan, startBtn } = getTimerElements();
+      if(startBtn) startBtn.innerHTML='<i class="fa-solid fa-play"></i>';
+      if(minSpan) minSpan.textContent='25'; 
+      if(secSpan) secSpan.textContent='00';
+    });
+  }
+});
+
+/* ============ STICKY NOTES ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  const stickyBoard=document.getElementById('sticky-board');
+  const notesEmpty=document.getElementById('notes-empty');
+  const addNoteBtn=document.getElementById('add-note-btn');
+  const noteColors=['#FFE1EF','#E2F6FF','#E1FBF0','#F0E6FF','#FFF3CE'];
+
+  if(!addNoteBtn || !stickyBoard) return;
+
+  addNoteBtn.addEventListener('click', ()=>{
+    if(notesEmpty) notesEmpty.style.display='none';
+    const color=noteColors[Math.floor(Math.random()*noteColors.length)];
+    const rot=(Math.random()*6-3).toFixed(1);
+    const note=document.createElement('div');
+    note.className='sticky-note';
+    note.style.background=color;
+    note.style.transform=`rotate(${rot}deg)`;
+    note.innerHTML=`<textarea placeholder="Write a reminder..."></textarea><button class="note-del" title="Remove"><i class="fa-solid fa-trash"></i></button>`;
+    note.querySelector('.note-del').addEventListener('click', ()=>{
+      note.remove();
+      if(stickyBoard.querySelectorAll('.sticky-note').length===0 && notesEmpty) {
+        notesEmpty.style.display='block';
+      }
+    });
+    stickyBoard.appendChild(note);
+  });
+});
+
+/* ============ RELAX ARCADE ============ */
+function switchRelaxGame(idx){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active', i===idx));
+  document.querySelectorAll('.relax-game-panel').forEach((p,i)=>p.classList.toggle('active-panel', i===idx));
+  if(idx===1) setupZen();
+  if(idx===2) setupRipples();
+  if(idx===3) setupCatcher();
+  if(idx===4) setupBlossom();
+}
+
+/* --- Bubble popper --- */
+const bubbleColors=['#FFB3C6','#AEE2FF','#BEEFC7','#D6C6FF','#FFE49E'];
+function resetBubbles(){
+  const grid=document.getElementById('bubbleGrid');
+  if(!grid) return;
+  grid.innerHTML='';
+  for(let i=0;i<50;i++){
+    const b=document.createElement('button');
+    b.className='bubble';
+    b.style.background=bubbleColors[i%bubbleColors.length];
+    b.addEventListener('click', ()=>{ b.classList.add('popped'); });
+    grid.appendChild(b);
+  }
+}
+
+/* --- Zen garden --- */
+let zenCtx, zenDrawing=false, zenReady=false;
+function setupZen(){
+  const canvas=document.getElementById('zenCanvas');
+  if(!canvas) return;
+  if(!zenReady){
+    // Get the DISPLAY size from CSS
+    const rect = canvas.getBoundingClientRect();
+    // Set internal resolution to match display size for crisp drawing
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    zenCtx=canvas.getContext('2d');
+    zenCtx.strokeStyle='rgba(122,51,88,.35)';
+    zenCtx.lineWidth=6; 
+    zenCtx.lineCap='round';
+
+    canvas.addEventListener('pointerdown', e=>{ 
+      zenDrawing=true; 
+      zenCtx.beginPath(); 
+      const rect = canvas.getBoundingClientRect();
+      zenCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top); 
+    });
+    canvas.addEventListener('pointermove', e=>{ 
+      if(zenDrawing){ 
+        const rect = canvas.getBoundingClientRect();
+        zenCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top); 
+        zenCtx.stroke(); 
+      } 
+    });
+    canvas.addEventListener('pointerup', ()=>zenDrawing=false);
+    canvas.addEventListener('pointerleave', ()=>zenDrawing=false);
+    zenReady=true;
+  }
+}
+function clearSand(){ 
+  if(zenCtx){ 
+    zenCtx.clearRect(0,0,zenCtx.canvas.width,zenCtx.canvas.height); 
+  } 
+}
+
+/* --- Musical ripples --- */
+let rippleCtx, rippleReady=false, audioCtx;
+const pentatonic=[261.6,293.7,329.6,392.0,440.0,523.3];
+let ripples=[];
+
+function setupRipples(){
+  const canvas=document.getElementById('rippleCanvas');
+  if(!canvas) return;
+  if(!rippleReady){
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    rippleCtx=canvas.getContext('2d');
+
+    canvas.addEventListener('click', e=>{
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      spawnRipple(x, y);
+      playNote(pentatonic[Math.floor(Math.random()*pentatonic.length)]);
+    });
+    rippleReady=true;
+    animateRipples();
+  }
+}
+
+function spawnRipple(x,y){ ripples.push({x,y,r:2,alpha:0.6}); }
+
+function animateRipples(){
+  if(rippleCtx){
+    rippleCtx.clearRect(0,0,rippleCtx.canvas.width,rippleCtx.canvas.height);
+    ripples.forEach(r=>{
+      rippleCtx.beginPath();
+      rippleCtx.arc(r.x,r.y,r.r,0,Math.PI*2);
+      rippleCtx.strokeStyle=`rgba(63,193,255,${r.alpha})`;
+      rippleCtx.lineWidth=3;
+      rippleCtx.stroke();
+      r.r+=2.2; 
+      r.alpha-=0.012;
+    });
+    ripples=ripples.filter(r=>r.alpha>0);
+  }
+  requestAnimationFrame(animateRipples);
+}
+
+function playNote(freq){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    const osc=audioCtx.createOscillator();
+    const gain=audioCtx.createGain();
+    osc.type='sine'; 
+    osc.frequency.value=freq;
+    gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+1.1);
+    osc.connect(gain); 
+    gain.connect(audioCtx.destination);
+    osc.start(); 
+    osc.stop(audioCtx.currentTime+1.1);
+  }catch(err){ 
+    console.log('Audio not available:', err);
+  }
+}
+
+/* --- Star Catcher --- */
+let catcherCtx, catcherReady=false, catcherRunning=false, catcherSpawnTimer=null;
+let stars=[], catcherScore=0;
+
+function setupCatcher(){
+  const canvas=document.getElementById('catcherCanvas');
+  if(!canvas) return;
+  if(!catcherReady){
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    catcherCtx=canvas.getContext('2d');
+
+    canvas.addEventListener('click', e=>{
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      for(let i=stars.length-1;i>=0;i--){
+        const s=stars[i];
+        const dx=clickX-s.x, dy=clickY-s.y;
+        if(Math.sqrt(dx*dx+dy*dy) < s.size+10){
+          stars.splice(i,1);
+          catcherScore++;
+          const scoreEl = document.getElementById('catcher-score');
+          if(scoreEl) scoreEl.textContent=catcherScore;
+          if(catcherScore%10===0){ 
+            GamificationRepository.addXP(currentUserId, 5).then(() => {
+              refreshPlant();
+              showToast('+5 XP · starry streak! ⭐');
+            }).catch(err => console.error('Error:', err));
+          }
+          break;
+        }
+      }
+    });
+    catcherReady=true;
+  }
+
+  catcherRunning=true;
+  if(!catcherSpawnTimer){
+    catcherSpawnTimer=setInterval(()=>{
+      if(!catcherRunning || !catcherCtx) return;
+      stars.push({
+        x:Math.random()*catcherCtx.canvas.width, 
+        y:-10, 
+        size:12+Math.random()*8, 
+        speed:0.6+Math.random()*1.2
+      });
+    },900);
+  }
+  if(!window.catcherAnimating){
+    window.catcherAnimating = true;
+    animateCatcher();
+  }
+}
+
+function animateCatcher(){
+  const isActive = document.getElementById('r-game-3')?.classList.contains('active-panel');
+
+  if(catcherCtx && isActive){
+    catcherRunning=true;
+    catcherCtx.clearRect(0,0,catcherCtx.canvas.width,catcherCtx.canvas.height);
+    stars.forEach(s=>{
+      s.y += s.speed;
+      catcherCtx.font=s.size*2+'px sans-serif';
+      catcherCtx.textAlign='center'; 
+      catcherCtx.textBaseline='middle';
+      catcherCtx.fillText('⭐', s.x, s.y);
+    });
+    stars = stars.filter(s=>s.y < catcherCtx.canvas.height+20);
+  } else {
+    catcherRunning=false;
+  }
+  requestAnimationFrame(animateCatcher);
+}
+
+/* --- Memory Blossom --- */
+let blossomReady=false;
+const blossomEmojis=['🌸','🌷','🌼','🌻','🍀','🦋','🐝','🍄'];
+let blossomState={flipped:[], matched:[], lock:false};
+
+function setupBlossom(){
+  blossomReady=true;
+  blossomState={flipped:[], matched:[], lock:false};
+  const statusEl = document.getElementById('blossomStatus');
+  if (statusEl) statusEl.textContent='Find every matching pair 🌸';
+
+  const deck=[...blossomEmojis, ...blossomEmojis].sort(()=>Math.random()-0.5);
+  const grid=document.getElementById('blossomGrid');
+  if(!grid) return;
+  grid.innerHTML='';
+  deck.forEach((emoji,i)=>{
+    const card=document.createElement('button');
+    card.className='blossom-card';
+    card.dataset.emoji=emoji;
+    card.dataset.index=i;
+    card.textContent='❔';
+    card.addEventListener('click', ()=>flipBlossom(card));
+    grid.appendChild(card);
+  });
+}
+
+function flipBlossom(card){
+  if(blossomState.lock) return;
+  if(card.classList.contains('flipped')||card.classList.contains('matched')) return;
+
+  card.classList.add('flipped');
+  card.textContent=card.dataset.emoji;
+  blossomState.flipped.push(card);
+
+  if(blossomState.flipped.length===2){
+    blossomState.lock=true;
+    const [a,b]=blossomState.flipped;
+
+    if(a.dataset.emoji===b.dataset.emoji){
+      setTimeout(() => {
+        a.classList.add('matched'); 
+        b.classList.add('matched');
+        blossomState.matched.push(a,b);
+        blossomState.flipped=[]; 
+        blossomState.lock=false;
+
+        if(blossomState.matched.length===blossomEmojis.length*2){
+          const statusEl = document.getElementById('blossomStatus');
+          if (statusEl) statusEl.textContent='All blossoms matched! +20 XP 🎉';
+          GamificationRepository.addXP(currentUserId, 20).then(() => {
+            refreshPlant();
+            showToast('Memory Blossom cleared! 🌸');
+          }).catch(err => console.error('Error:', err));
+        }
+      }, 300);
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('flipped'); 
+        a.textContent='❔';
+        b.classList.remove('flipped'); 
+        b.textContent='❔';
+        blossomState.flipped=[]; 
+        blossomState.lock=false;
+      },700);
+    }
+  }
+}
+
+// ============ PROFILE WITH DATABASE ============
+const avatarSeeds = ['taskahead', 'cyber', 'pixel', 'coder', 'gamer', 'sparkle', 'bot', 'fairy', 'garden', 'future'];
+
+async function updateProfileUI() {
+  try {
+    const profile = await ProfileRepository.get(currentUserId);
+    window.profile = profile;
+
+    const nameEl = document.getElementById('profile-display-name');
+    const avatarImg = document.getElementById('profile-avatar-img');
+    const trackSelect = document.getElementById('profile-sub-track');
+    const bioEl = document.getElementById('profile-bio');
+    const badgeEl = document.getElementById('track-badge');
+
+    if (nameEl) nameEl.textContent = profile.displayName || 'ICT_Student_User';
+    if (avatarImg) avatarImg.src = `https://api.dicebear.com/7.x/bottts/svg?seed=${profile.avatarSeed}`;
+    if (trackSelect) trackSelect.value = profile.track || 'General ICT';
+    if (bioEl) bioEl.value = profile.bio || '';
+    if (badgeEl) badgeEl.textContent = `${profile.track || 'General ICT'} Specialist`;
+
+    console.log('✅ Profile UI updated');
+  } catch (error) {
+    console.error('❌ Error updating profile UI:', error);
+  }
+}
+
+async function cycleAvatar() {
+  try {
+    const profile = await ProfileRepository.get(currentUserId);
+    const currentIndex = avatarSeeds.indexOf(profile.avatarSeed);
+    const nextIndex = (currentIndex + 1) % avatarSeeds.length;
+    const newSeed = avatarSeeds[nextIndex];
+
+    await ProfileRepository.update(currentUserId, {
+      displayName: profile.displayName,
+      avatarSeed: newSeed,
+      track: profile.track,
+      bio: profile.bio
+    });
+
+    await updateProfileUI();
+    showToast(`Avatar changed to: ${newSeed} 🤖`);
+  } catch (error) {
+    console.error('❌ Error updating avatar:', error);
+    showToast('Error updating avatar');
+  }
+}
+
+async function updateTrackBadge() {
+  const trackSelect = document.getElementById('profile-sub-track');
+  if (!trackSelect) return;
+
+  const selectedTrack = trackSelect.value;
+  const badgeEl = document.getElementById('track-badge');
+
+  if (badgeEl) badgeEl.textContent = `${selectedTrack} Specialist`;
+
+  try {
+    const profile = await ProfileRepository.get(currentUserId);
+    await ProfileRepository.update(currentUserId, {
+      displayName: profile.displayName,
+      avatarSeed: profile.avatarSeed,
+      track: selectedTrack,
+      bio: profile.bio
+    });
+    if (document.activeElement === trackSelect) {
+      showToast(`Specialization set to ${selectedTrack}! ✨`);
+    }
+  } catch (error) {
+    console.error('❌ Error updating track:', error);
+    showToast('Error updating track');
+  }
+}
+
+// ============ PROFILE EVENT LISTENERS ============
+document.addEventListener('DOMContentLoaded', () => {
+  // Avatar click - using the block ID instead of inline onclick
+  const avatarBlock = document.getElementById('profile-avatar-block');
+  if (avatarBlock) {
+    avatarBlock.addEventListener('click', (e) => {
+      e.preventDefault();
+      cycleAvatar();
+    });
+  }
+
+  // Profile name edit
+  const nameEl = document.getElementById('profile-display-name');
+  if (nameEl) {
+    nameEl.addEventListener('blur', async (e) => {
+      const newName = e.target.textContent.trim() || 'ICT_Student_User';
+      try {
+        const profile = await ProfileRepository.get(currentUserId);
+        await ProfileRepository.update(currentUserId, {
+          displayName: newName,
+          avatarSeed: profile.avatarSeed,
+          track: profile.track,
+          bio: profile.bio
+        });
+        showToast('Profile name updated! ✨');
+      } catch (error) {
+        console.error('❌ Error updating name:', error);
+        showToast('Error updating name');
+      }
+    });
+  }
+
+  // Profile bio edit
+  const bioEl = document.getElementById('profile-bio');
+  if (bioEl) {
+    bioEl.addEventListener('blur', async (e) => {
+      const newBio = e.target.value;
+      try {
+        const profile = await ProfileRepository.get(currentUserId);
+        await ProfileRepository.update(currentUserId, {
+          displayName: profile.displayName,
+          avatarSeed: profile.avatarSeed,
+          track: profile.track,
+          bio: newBio
+        });
+        showToast('Bio saved! 🌸');
+      } catch (error) {
+        console.error('❌ Error saving bio:', error);
+        showToast('Error saving bio');
+      }
+    });
+  }
+
+  // Track selection change
+  const trackSelect = document.getElementById('profile-sub-track');
+  if (trackSelect) {
+    trackSelect.addEventListener('change', updateTrackBadge);
+  }
+});
+
+// ============================================
+// AUTHENTICATION SYSTEM
+// ============================================
+
+let currentUser = null;
+let isLoggedIn = false;
+
+async function userExists(username) {
+  try {
+    const allUsers = await db.getAll('users');
+    return allUsers.some(user => user.username === username);
+  } catch (error) {
+    console.error('Error checking user:', error);
+    return false;
+  }
+}
+
+async function registerUser(username, email, password) {
+  try {
+    const exists = await userExists(username);
+    if (exists) {
+      showToast('❌ Username already exists!');
+      return false;
+    }
+
+    const user = {
+      username: username,
+      email: email,
+      password: password,
+      createdAt: new Date().toISOString(),
+      userId: username
+    };
+
+    await db.add('users', user);
+
+    await ProfileRepository.update(username, {
+      displayName: username,
+      avatarSeed: 'taskahead',
+      track: 'General ICT',
+      bio: 'Welcome to TaskAhead! 🌸'
+    });
+
+    await GamificationRepository.update(username, {
+      xp: 0,
+      plantTier: 'Seedling',
+      lastUpdated: new Date().toISOString()
+    });
+
+    showToast('✅ Registration successful! Please login.');
+    return true;
+  } catch (error) {
+    console.error('Registration error:', error);
+    showToast('❌ Registration failed. Please try again.');
+    return false;
+  }
+}
+
+async function loginUser(username, password) {
+  try {
+    const allUsers = await db.getAll('users');
+    const user = allUsers.find(u => u.username === username && u.password === password);
+
+    if (!user) {
+      showToast('❌ Invalid username or password!');
+      return false;
+    }
+
+    currentUser = user;
+    isLoggedIn = true;
+    currentUserId = username;
+
+    await loadAllData();
+    refreshAllUI();
+    updateAuthUI();
+
+    showToast(`✅ Welcome back, ${username}! 🌸`);
+    return true;
+  } catch (error) {
+    console.error('Login error:', error);
+    showToast('❌ Login failed. Please try again.');
+    return false;
+  }
+}
+
+async function logoutUser() {
+  currentUser = null;
+  isLoggedIn = false;
+  currentUserId = 'default-user';
+
+  await loadAllData();
+  refreshAllUI();
+  updateAuthUI();
+
+  showToast('👋 Logged out successfully!');
+}
+
+function updateAuthUI() {
+  const loginBtn = document.querySelector('.mt-login-btn');
+  const navLoginBtns = document.querySelectorAll('.nav-btn[data-target="auth-section"]');
+  const authStatusText = document.getElementById('auth-status-text');
+
+  if (isLoggedIn && currentUser) {
+    if (loginBtn) {
+      loginBtn.innerHTML = `<i class="fa-solid fa-user-check"></i> ${currentUser.username}`;
+      loginBtn.style.color = 'var(--mint)';
+    }
+    navLoginBtns.forEach(btn => {
+      btn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Logout (${currentUser.username})`;
+      btn.dataset.target = 'logout';
+    });
+    if (authStatusText) {
+      authStatusText.innerHTML = `✅ Logged in as: <strong>${currentUser.username}</strong>`;
+      authStatusText.style.color = 'var(--mint)';
+    }
+  } else {
+    if (loginBtn) {
+      loginBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i>`;
+      loginBtn.style.color = '';
+    }
+    navLoginBtns.forEach(btn => {
+      btn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> Login / Register`;
+      btn.dataset.target = 'auth-section';
+    });
+    if (authStatusText) {
+      authStatusText.innerHTML = '🔓 Not logged in';
+      authStatusText.style.color = 'var(--ink-soft)';
+    }
+  }
+}
+
+// ============ AUTH FORM HANDLERS ============
+document.addEventListener('DOMContentLoaded', () => {
+  const regForm = document.getElementById('db-register-form');
+  const loginForm = document.getElementById('db-login-form');
+
+  if(regForm){
+    regForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('reg-uid').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-pwd').value;
+      const statusEl = document.getElementById('register-status');
+
+      if (!username || !email || !password) {
+        if (statusEl) { statusEl.innerHTML = '❌ Please fill in all fields'; statusEl.style.color = 'var(--pink)'; }
+        return;
+      }
+
+      if (password.length < 6) {
+        if (statusEl) { statusEl.innerHTML = '❌ Password must be at least 6 characters'; statusEl.style.color = 'var(--pink)'; }
+        return;
+      }
+
+      if (statusEl) { statusEl.innerHTML = '⏳ Creating account...'; statusEl.style.color = 'var(--ink-soft)'; }
+
+      const success = await registerUser(username, email, password);
+
+      if (success) {
+        if (statusEl) { statusEl.innerHTML = '✅ Account created! Please login.'; statusEl.style.color = 'var(--mint)'; }
+        regForm.reset();
+      } else {
+        if (statusEl) { statusEl.innerHTML = '❌ Username already exists or error occurred'; statusEl.style.color = 'var(--pink)'; }
+      }
+    });
+  }
+
+  if(loginForm){
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('login-uid').value.trim();
+      const password = document.getElementById('login-pwd').value;
+      const statusEl = document.getElementById('login-status');
+
+      if (!username || !password) {
+        if (statusEl) { statusEl.innerHTML = '❌ Please enter username and password'; statusEl.style.color = 'var(--pink)'; }
+        return;
+      }
+
+      if (statusEl) { statusEl.innerHTML = '⏳ Logging in...'; statusEl.style.color = 'var(--ink-soft)'; }
+
+      const success = await loginUser(username, password);
+
+      if (success) {
+        if (statusEl) { statusEl.innerHTML = '✅ Login successful! Welcome back! 🌸'; statusEl.style.color = 'var(--mint)'; }
+        loginForm.reset();
+        document.querySelector('.nav-btn[data-target="dashboard"]')?.click();
+      } else {
+        if (statusEl) { statusEl.innerHTML = '❌ Invalid username or password'; statusEl.style.color = 'var(--pink)'; }
+      }
+    });
+  }
+});
+
+// Handle logout
+document.addEventListener('click', async (e) => {
+  const btn = e.target.closest('.nav-btn');
+  if (btn && btn.dataset.target === 'logout') {
+    e.preventDefault();
+    await logoutUser();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateAuthUI();
+});
+
+// ============================================
+// END OF AUTHENTICATION SYSTEM
+// ============================================
+</script>
+
+</body>
+</html>
