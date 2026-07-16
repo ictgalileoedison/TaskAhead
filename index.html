@@ -8,534 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
-
 <base target="_blank">
 </head>
 <body>
-
-<div id="fireflies"></div>
-
-<!-- ============ MOBILE TOP BAR ============ -->
-<div class="mobile-topbar">
-  <button class="hamburger-btn" id="hamburgerBtn" title="Open menu"><i class="fa-solid fa-bars"></i></button>
-  <div class="mt-logo"><i class="fa-solid fa-seedling" style="color:var(--pink)"></i> Task<span>Ahead</span></div>
-  <button class="mt-login-btn nav-btn" data-target="auth-section" title="Login / Register"><i class="fa-solid fa-right-to-bracket"></i></button>
-</div>
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-<nav class="sidebar" id="sidebar">
-  <div class="logo-container">
-    <div class="logo-icon-box"><i class="fa-solid fa-seedling"></i></div>
-    <div class="logo-text">
-      <h2>Task<span>Ahead</span></h2>
-      <p>ANHS ICT Track</p>
-    </div>
-  </div>
-
-  <div class="nav-group">
-    <span class="nav-group-title">Overview</span>
-    <ul class="nav-links">
-      <li><a href="#" class="nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
-    </ul>
-  </div>
-
-  <div class="nav-group">
-    <span class="nav-group-title">Academics</span>
-    <ul class="nav-links">
-      <li class="dropdown-wrapper">
-        <button class="dropdown-toggle-btn" id="academicsDropdownBtn">
-          <span><i class="fa-solid fa-graduation-cap"></i> Subjects &amp; Terms</span>
-          <i class="fa-solid fa-chevron-down arrow"></i>
-        </button>
-        <ul class="dropdown-container" id="academicsMenu">
-          <li class="nested-dropdown">
-            <span class="term-title">Term 1</span>
-            <ul class="subject-list">
-              <li contenteditable="true">Introduction to Philosophy</li>
-              <li contenteditable="true">Contemporary Philippine Arts</li>
-              <li contenteditable="true">Practical Research 2</li>
-              <li contenteditable="true">ICT Programming</li>
-              <li contenteditable="true">Physical Science</li>
-              <li contenteditable="true">Homeroom Guidance</li>
-            </ul>
-          </li>
-          <li class="nested-dropdown"><span class="term-title">Term 2</span>
-            <ul class="subject-list">
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-            </ul>
-          </li>
-          <li class="nested-dropdown"><span class="term-title">Term 3</span>
-            <ul class="subject-list">
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><a href="#" class="nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i> Class Schedule</a></li>
-      <li><a href="#" class="nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</a></li>
-    </ul>
-  </div>
-
-  <div class="nav-group">
-    <span class="nav-group-title">Focus &amp; Wellness</span>
-    <ul class="nav-links">
-      <li><a href="#" class="nav-btn" data-target="timer-section"><i class="fa-solid fa-stopwatch"></i> Focus Timer</a></li>
-      <li><a href="#" class="nav-btn" data-target="notes-section"><i class="fa-solid fa-note-sticky"></i> Workspace Notes</a></li>
-      <li><a href="#" class="nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i> Relax Arcade</a></li>
-    </ul>
-  </div>
-
-  <div class="nav-group">
-    <span class="nav-group-title">Account</span>
-    <ul class="nav-links">
-      <li><a href="#" class="nav-btn" data-target="profile-section"><i class="fa-solid fa-user-gear"></i> Student Profile</a></li>
-      <li><a href="#" class="nav-btn" data-target="settings"><i class="fa-solid fa-sliders"></i> Configuration</a></li>
-      <li><a href="#" class="nav-btn" data-target="about"><i class="fa-solid fa-circle-info"></i> About Devs</a></li>
-      <li><a href="#" class="nav-btn" data-target="auth-section"><i class="fa-solid fa-right-to-bracket"></i> Login / Register</a></li>
-    </ul>
-  </div>
-
-  <div class="sidebar-footer">Made with 💖 by ANHS ICT students</div>
-</nav>
-
-<main class="main-content">
-
-  <!-- DASHBOARD -->
-  <section id="dashboard" class="content-section active-view">
-    <div class="welcome-hero">
-      <span class="hero-sparkle" style="top:16px; left:46%;">✨</span>
-      <span class="hero-sparkle" style="top:60%; left:8%; animation-delay:.8s;">✨</span>
-      <div class="hero-left">
-        <span class="system-tag">Garden status: growing</span>
-        <h1>Hi there, future dev! 🌸</h1>
-        <p class="hero-quote" id="motivational-quote">"Water your tasks a little each day and watch your whole term bloom."</p>
-        <div class="hero-actions">
-          <button class="btn btn-primary circle-btn nav-btn" data-target="tasks" title="Add a task"><i class="fa-solid fa-plus"></i></button>
-          <button class="btn btn-pink circle-btn nav-btn" data-target="relax" title="Arcade Breaks"><i class="fa-solid fa-gamepad"></i></button>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="plant-box">
-          <div class="plant-visual" id="plant-sprite">🌱</div>
-          <div class="plant-stats">
-            <h4>Growth Tier: <span id="rank-name" class="text-pink">Seedling</span></h4>
-            <p>Level Score: <span id="rank-points">0</span> XP</p>
-          </div>
-          <button class="btn glow-button-blue" id="manual-plant-grow-btn"><i class="fa-solid fa-droplet"></i> Water your plant</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="glance-grid">
-      <div class="card glance-card">
-        <div class="glance-icon gi-class"><i class="fa-solid fa-calendar-day"></i></div>
-        <div>
-          <h4>Next up today</h4>
-          <p id="glance-class">Loading…</p>
-          <a href="#" class="glance-link nav-btn" data-target="schedule-section">View schedule →</a>
-        </div>
-      </div>
-      <div class="card glance-card">
-        <div class="glance-icon gi-task"><i class="fa-solid fa-list-check"></i></div>
-        <div>
-          <h4>Closest deadline</h4>
-          <p id="glance-task">No tasks yet</p>
-          <a href="#" class="glance-link nav-btn" data-target="tasks">Manage tasks →</a>
-        </div>
-      </div>
-      <div class="card glance-card">
-        <div class="glance-icon gi-timer"><i class="fa-solid fa-stopwatch"></i></div>
-        <div>
-          <h4>Need to focus?</h4>
-          <p>Start a session</p>
-          <a href="#" class="glance-link nav-btn" data-target="timer-section">Open timer →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TASKS & DEADLINES (merged quick-add + tracker) -->
-  <section id="tasks" class="content-section">
-    <h2><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</h2>
-    <p class="section-sub">Plant a new requirement, then track it through to done.</p>
-
-    <div class="card quick-add-bar glow-box-blue">
-  <h3>🌷 Quick Add Task</h3>
-  <form id="db-task-form" class="task-form">
-    <input type="text" id="db-task-name" placeholder="Requirement name (e.g. Code Database Schema)" required>
-    
-    <!-- This text input linked to the datalist makes it fully editable -->
-    <input type="text" id="db-task-subject" placeholder="Select or type subject..." list="subject-options" required style="font-family: var(--font-body); font-weight: 500;">
-    
-    <!-- The datalist provides the default drop-down options -->
-    <datalist id="subject-options">
-      <option value="Introduction to Philosophy">
-      <option value="Contemporary Philippine Arts">
-      <option value="Practical Research 2">
-      <option value="ICT Programming">
-      <option value="Physical Science">
-      <option value="Homeroom Guidance">
-    </datalist>
-    
-    <input type="date" id="db-task-date" required>
-    <button type="submit" class="btn btn-primary circle-btn form-submit-circle" title="Deploy task"><i class="fa-solid fa-check"></i></button>
-  </form>
-</div>
-
-    <div class="card table-card glow-box-pink">
-      <table class="task-table">
-        <thead><tr><th>Task</th><th>Subject</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
-        <tbody id="db-task-table-body"></tbody>
-      </table>
-      <div class="empty-state-notice show" id="tasks-empty-notice">
-        <i class="fa-solid fa-seedling empty-icon"></i>
-        <p>No tasks planted yet. Add one above!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCHEDULE -->
-  <section id="schedule-section" class="content-section">
-    <h2><i class="fa-solid fa-calendar-days"></i> Weekly Class Schedule</h2>
-    <div class="schedule-matrix-grid">
-      <div class="card schedule-day-card">
-        <div class="day-header mon">Monday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
-        </ul>
-      </div>
-      <div class="card schedule-day-card">
-        <div class="day-header tue">Tuesday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
-        </ul>
-      </div>
-      <div class="card schedule-day-card">
-        <div class="day-header wed">Wednesday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
-        </ul>
-      </div>
-      <div class="card schedule-day-card">
-        <div class="day-header thu">Thursday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Physical Science</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">ICT Programming</strong></li>
-        </ul>
-      </div>
-      <div class="card schedule-day-card">
-        <div class="day-header fri">Friday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOCUS TIMER (own page now) -->
-  <section id="timer-section" class="content-section">
-    <h2><i class="fa-solid fa-stopwatch"></i> Focus Timer</h2>
-    <div class="timer-page-grid">
-      <div class="card timer-card glow-box-purple">
-        <h3>🍓 Focus Session</h3>
-        <div class="timer-display">
-          <span id="timer-minutes" contenteditable="true">25</span>:<span id="timer-seconds" contenteditable="true">00</span>
-        </div>
-        <div class="timer-controls">
-          <button class="btn btn-pink circle-btn" id="start-timer-btn" title="Toggle Timer"><i class="fa-solid fa-play"></i></button>
-          <button class="btn btn-outline circle-btn" id="reset-timer-btn" title="Reset"><i class="fa-solid fa-rotate-left"></i></button>
-        </div>
-        <div class="timer-note-area">
-          <textarea placeholder="Jot a quick note for this session..." class="editable-timer-note"></textarea>
-        </div>
-      </div>
-      <div class="card tip-card glow-box-blue">
-        <h3>🌼 Focus Tips</h3>
-        <p>Editable minutes let you tailor sessions to your energy for the day.</p>
-        <ul>
-          <li>25 min focus → 5 min break</li>
-          <li>Silence notifications first</li>
-          <li>Finish a session to earn plant XP</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- NOTES -->
-  <section id="notes-section" class="content-section">
-    <div class="section-header-flex">
-      <h2><i class="fa-solid fa-note-sticky"></i> Sticky Reminders</h2>
-      <button class="btn btn-primary circle-btn" id="add-note-btn" title="Add Sticky Note"><i class="fa-solid fa-plus"></i></button>
-    </div>
-    <div class="sticky-notes-board" id="sticky-board">
-      <p class="notes-empty" id="notes-empty">No notes yet — click + to stick one on the board 📌</p>
-    </div>
-  </section>
-
-  <!-- RELAX (5 games) -->
-  <section id="relax" class="content-section">
-    <h2><i class="fa-solid fa-gamepad"></i> Relax Arcade</h2>
-    <div class="arcade-card-container">
-      <div class="arcade-tabs">
-        <button class="tab-btn active" onclick="switchRelaxGame(0)">🫧 Bubble Popper</button>
-        <button class="tab-btn" onclick="switchRelaxGame(1)">🌾 Zen Garden</button>
-        <button class="tab-btn" onclick="switchRelaxGame(2)">💧 Musical Ripples</button>
-        <button class="tab-btn" onclick="switchRelaxGame(3)">⭐ Star Catcher</button>
-        <button class="tab-btn" onclick="switchRelaxGame(4)">🌸 Memory Blossom</button>
-      </div>
-      <div class="game-viewport-box">
-        <div class="relax-game-panel active-panel" id="r-game-0">
-          <div class="bubble-grid" id="bubbleGrid"></div>
-          <button class="btn btn-outline" onclick="resetBubbles()"><i class="fa-solid fa-rotate-left"></i> Refresh Sheet</button>
-        </div>
-        <div class="relax-game-panel" id="r-game-1">
-          <canvas id="zenCanvas"></canvas>
-          <button class="btn btn-outline reset-overlay-btn" onclick="clearSand()"><i class="fa-solid fa-rotate-left"></i> Smooth Sand</button>
-        </div>
-        <div class="relax-game-panel" id="r-game-2">
-          <canvas id="rippleCanvas"></canvas>
-          <p class="tap-hint-overlay">Tap anywhere inside to play a gentle note</p>
-        </div>
-        <div class="relax-game-panel" id="r-game-3">
-          <canvas id="catcherCanvas"></canvas>
-          <div class="game-score-row">
-            <span>Catch the falling stars ✨</span>
-            <span>Score: <span id="catcher-score">0</span></span>
-          </div>
-        </div>
-        <div class="relax-game-panel" id="r-game-4">
-          <div class="blossom-grid" id="blossomGrid"></div>
-          <p class="blossom-status" id="blossomStatus">Find every matching pair 🌸</p>
-          <div style="text-align:center; margin-top:12px;">
-            <button class="btn btn-outline" onclick="setupBlossom()"><i class="fa-solid fa-rotate-left"></i> Reshuffle</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROFILE -->
-  <section id="profile-section" class="content-section">
-    <h2><i class="fa-solid fa-user-gear"></i> Student Profile</h2>
-    <div class="card profile-card-layout glow-box-blue" style="flex-direction: column; align-items: flex-start; gap: 20px;">
-      
-      <div style="display: flex; align-items: center; gap: 26px; flex-wrap: wrap; width: 100%;">
-        <!-- Interactive Avatar Selector -->
-        <div class="profile-avatar-block" style="position: relative; cursor: pointer;" onclick="cycleAvatar()" title="Click to change avatar!">
-          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=taskahead" alt="Avatar" class="profile-large-avatar" id="profile-avatar-img">
-          <div style="position: absolute; bottom: 0; right: 0; background: var(--pink); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 2px solid var(--paper);">
-            <i class="fa-solid fa-rotate"></i>
-          </div>
-        </div>
-        
-        <div class="profile-details-block" style="flex: 1; min-width: 200px;">
-          <h3 contenteditable="true" id="profile-display-name" style="display: inline-block; border-bottom: 2px dashed var(--line); padding-right: 8px;">ICT_Student_User</h3>
-          
-          <!-- Dropdown Focus Selector -->
-          <p class="profile-track" style="margin-top: 8px;">
-            Track focus: 
-            <select id="profile-sub-track" style="padding: 4px 8px; border-radius: 8px; border: 2px solid var(--line); background: var(--paper-alt); color: var(--ink); font-weight: 700; font-family: var(--font-body);" onchange="updateTrackBadge()">
-              <option value="General ICT">Grade 12 General ICT Specialist</option>
-              <option value="Software Programming">Grade 12 Software Programming</option>
-              <option value="Animation & Graphics">Grade 12 Animation & Graphics</option>
-              <option value="Network Systems">Grade 12 Network Systems</option>
-            </select>
-          </p>
-          
-          <div class="profile-metrics-pills" style="margin-top: 10px;">
-            <span class="badge badge-purple">Level rank: <span id="profile-rank-tier">Seedling</span></span>
-            <span class="badge badge-blue" id="track-badge">General ICT Specialist</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Custom Bio Area -->
-      <div style="width: 100%; border-top: 2px dashed var(--line); padding-top: 16px;">
-        <h4 style="font-family: var(--font-display); font-size: 15px; margin-bottom: 6px;">🌸 Dev Bio / Motto</h4>
-        <textarea id="profile-bio" placeholder="Write something interesting about your coding journey or drop your favorite school motto here..." style="width: 100%; min-height: 60px; padding: 10px; border-radius: var(--r-sm); border: 2px dashed var(--line); background: var(--paper-alt); color: var(--ink); font-size: 13.5px; resize: vertical; font-family: var(--font-body);"></textarea>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SETTINGS / CONFIGURATION -->
-  <section id="settings" class="content-section">
-    <h2><i class="fa-solid fa-sliders"></i> Configuration</h2>
-    <div class="card settings-card glow-box-purple">
-      <div class="setting-row">
-        <div><h4>Theme Luminescence Switch</h4><p>Blossom daytime pastel mode, or Fairybloom Night's enchanted paradise glow</p></div>
-        <div class="theme-toggle">
-          <i class="fa-solid fa-sun"></i>
-          <label class="switch"><input type="checkbox" id="mode-checkbox" onchange="toggleTheme()"><span class="slider"></span></label>
-          <i class="fa-solid fa-moon"></i>
-        </div>
-      </div>
-      <div class="setting-row">
-        <div><h4>Mobile Optimized Layout</h4><p>Preview the compact phone-friendly interface on any screen size</p></div>
-        <label class="switch"><input type="checkbox" id="mobile-mode-checkbox" onchange="toggleMobileMode()"><span class="slider"></span></label>
-      </div>
-      <div class="setting-row">
-        <div><h4>Hardware Acceleration Toggle</h4><p>Optimize frame rendering for background task cycles</p></div>
-        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-      </div>
-      <div class="setting-row">
-        <div><h4>Automated Backup Sync</h4><p>Periodically send app state to your backup repository</p></div>
-        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-      </div>
-    </div>
-  </section>
-
-   <!-- AUTH SECTION -->
-  <section id="auth-section" class="content-section">
-    <h2><i class="fa-solid fa-user-shield"></i> Secure Data Storage Handshake</h2>
-    
-    <div class="dashboard-grid">
-      
-      <!-- LOGIN FORM -->
-      <div class="card glow-box-blue">
-        <h3>🔐 Sign In</h3>
-        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
-          Enter your credentials to access your garden 🌸
-        </p>
-        
-        <form id="db-login-form" class="task-form" style="flex-direction:column; gap:12px;">
-          <input 
-            type="text" 
-            id="login-uid" 
-            name="username" 
-            placeholder="👤 Username" 
-            required
-            style="width:100%;"
-          >
-          <input 
-            type="password" 
-            id="login-pwd" 
-            name="password" 
-            placeholder="🔑 Password" 
-            required
-            style="width:100%;"
-          >
-          <button 
-            type="submit" 
-            class="btn btn-primary form-submit-circle" 
-            style="width:100%; justify-content:center; padding:12px;"
-          >
-            <i class="fa-solid fa-unlock-keyhole"></i> Sign In
-          </button>
-        </form>
-        
-        <div id="login-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
-      </div>
-      
-      <!-- REGISTER FORM -->
-      <div class="card glow-box-pink">
-        <h3>🌼 Register</h3>
-        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
-          Create your garden account and start growing! 🌱
-        </p>
-        
-        <form id="db-register-form" class="task-form" style="flex-direction:column; gap:12px;">
-          <input 
-            type="text" 
-            id="reg-uid" 
-            name="username" 
-            placeholder="👤 Choose a username" 
-            required
-            style="width:100%;"
-          >
-          <input 
-            type="email" 
-            id="reg-email" 
-            name="email" 
-            placeholder="📧 School Email Address" 
-            required
-            style="width:100%;"
-          >
-          <input 
-            type="password" 
-            id="reg-pwd" 
-            name="password" 
-            placeholder="🔑 Password (min 6 characters)" 
-            required
-            style="width:100%;"
-          >
-          <button 
-            type="submit" 
-            class="btn btn-pink form-submit-circle" 
-            style="width:100%; justify-content:center; padding:12px;"
-          >
-            <i class="fa-solid fa-id-card"></i> Create Account
-          </button>
-        </form>
-        
-        <div id="register-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
-      </div>
-      
-    </div>
-    
-    <!-- Show current user status -->
-    <div id="auth-status" style="margin-top:20px; text-align:center; font-size:14px; color:var(--ink-soft);">
-      <i class="fa-solid fa-info-circle"></i> 
-      <span id="auth-status-text">Not logged in</span>
-    </div>
-    
-  </section>
-  <!-- ABOUT -->
-  <section id="about" class="content-section">
-    <h2><i class="fa-solid fa-circle-info"></i> About TaskAhead</h2>
-    <div class="card about-card-frame glow-box-pink">
-      <h3>TaskAhead Platform Framework</h3>
-      <p><strong>TaskAhead</strong> is a specialized, production-ready schoolwork workflow management application. Designed around the intensive track challenges of modern Senior High School environments, it pairs academic tracking with a cozy, garden-fairy interface that adapts across devices.</p>
-      <blockquote>
-        <strong>Credit Notice &amp; Research Attribution (ctto):</strong><br>
-        This application was researched, conceptualized, and built by <strong>Anonang National High School Students</strong> as a primary practical development solution for their formal research track study. Engineered to boost focus for ICT student tracking, its versatile design extends complete functional utility to multiple general tracks and student cohorts across institutions.
-      </blockquote>
-      <div class="framework-credits">© S.Y. 2026–2027 ANHS Academic Research Operations</div>
-    </div>
-  </section>
-
-</main>
-
-<!-- ============ BOTTOM TAB BAR (phones) ============ -->
-<div class="bottom-tabbar">
-  <button class="bt-btn nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i>Home</button>
-  <button class="bt-btn nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i>Tasks</button>
-  <button class="bt-btn nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i>Class</button>
-  <button class="bt-btn nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i>Relax</button>
-  <button class="bt-btn" id="bottomMenuBtn"><i class="fa-solid fa-bars"></i>Menu</button>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<style>
-/* ============================================================
+    <style>
+        /* ============================================================
    TOKENS — two full visual identities sharing one variable API
    LIGHT  = "Blossom"          → sugary, sparkly, girly-kawaii
    DARK   = "Fairybloom Night" → enchanted paradise fairy glow
@@ -768,7 +245,7 @@ body::before{
 .dashboard-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:6px;}
 @media(max-width:900px){.dashboard-grid{grid-template-columns:1fr;}}
 
-/* task quick-add bar (now inline atop Tasks section) */
+/* task quick-add bar */
 .quick-add-bar{margin-bottom:24px;}
 .task-form{display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
 .task-form input, .task-form select{
@@ -782,7 +259,7 @@ body::before{
 @media(max-width:900px){.timer-page-grid{grid-template-columns:1fr;}}
 .timer-card{text-align:center;}
 .timer-display{font-family:var(--font-display); font-size:52px; color:var(--lilac); margin:6px 0 16px;}
-.timer-display span{outline:none; border-bottom:2px dashed var(--line); padding:0 2px;}
+.timer-display span{padding:0 4px;}
 .timer-controls{display:flex; justify-content:center; gap:12px; margin-bottom:16px;}
 .timer-note-area textarea{width:100%; min-height:70px; resize:vertical; border-radius:var(--r-sm); border:2px dashed var(--line); background:var(--paper-alt); padding:12px; font-size:13px; color:var(--ink);}
 .tip-card p{font-size:13.5px; color:var(--ink-soft); line-height:1.7;}
@@ -833,34 +310,49 @@ body::before{
 .sticky-note .note-del:hover{opacity:1;}
 .notes-empty{color:var(--ink-soft); font-size:13.5px; grid-column:1/-1; text-align:center; padding:20px;}
 
-/* arcade */
+/* ============ ARCADE FIXES ============ */
 .arcade-card-container{background:var(--paper); border:2px solid var(--line); border-radius:var(--r-lg); padding:22px; box-shadow:var(--shadow);}
 .arcade-tabs{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
 .tab-btn{padding:9px 16px; border-radius:999px; border:2px solid var(--line); background:var(--paper-alt); color:var(--ink-soft); font-weight:700; font-size:12.5px; white-space:nowrap;}
 .tab-btn.active{background:var(--pink); border-color:var(--pink); color:#fff;}
 [data-theme="dark"] .tab-btn.active{box-shadow:var(--glow);}
 .game-viewport-box{background:var(--cream); border-radius:var(--r-md); padding:22px; min-height:340px; position:relative;}
-.relax-game-panel{display:none;}
+
+/* FIXED: Game panels need proper display handling */
+.relax-game-panel{display:none; width:100%;}
 .relax-game-panel.active-panel{display:block;}
+
+/* FIXED: Canvas sizing - CSS handles display, JS handles internal resolution */
+#zenCanvas, #rippleCanvas, #catcherCanvas{
+  width:100%;
+  height:280px;
+  border-radius:var(--r-sm);
+  display:block;
+  cursor:crosshair;
+  background:var(--sky-soft);
+}
+#zenCanvas{background:#EFE0C2;}
+[data-theme="dark"] #zenCanvas{background:#2A2245;}
+
+/* Bubble popper */
 .bubble-grid{display:grid; grid-template-columns:repeat(10,1fr); gap:8px; margin-bottom:16px;}
 .bubble{aspect-ratio:1; border-radius:50%; border:none; cursor:pointer; transition:transform .12s;}
 .bubble:hover{transform:scale(1.1);}
 .bubble.popped{visibility:hidden;}
-#zenCanvas, #rippleCanvas, #catcherCanvas{width:100%; height:280px; border-radius:var(--r-sm); display:block; cursor:crosshair; background:var(--sky-soft);}
-#zenCanvas{background:#EFE0C2;}
-[data-theme="dark"] #zenCanvas{background:#2A2245;}
+
 .reset-overlay-btn{margin-top:12px;}
 .tap-hint-overlay{text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:10px;}
 .game-score-row{display:flex; align-items:center; justify-content:space-between; margin-top:12px; font-size:13px; font-weight:700; color:var(--ink-soft);}
 .game-score-row span{color:var(--pink);}
 
-/* memory blossom */
+/* Memory blossom */
 .blossom-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:420px; margin:0 auto;}
 .blossom-card{
   aspect-ratio:1; border-radius:14px; border:2px solid var(--line); background:var(--paper);
   display:flex; align-items:center; justify-content:center; font-size:26px;
-  cursor:pointer; transition:transform .25s; user-select:none;
+  cursor:pointer; transition:transform .25s, background .25s; user-select:none;
 }
+.blossom-card:hover{transform:scale(1.05);}
 .blossom-card.flipped, .blossom-card.matched{background:var(--pink-soft); transform:scale(1.03);}
 .blossom-card.matched{opacity:.55; cursor:default;}
 .blossom-status{text-align:center; font-size:13px; color:var(--ink-soft); font-weight:700; margin-top:14px;}
@@ -899,7 +391,7 @@ body::before{
 .toast{position:fixed; bottom:26px; right:26px; background:var(--ink); color:var(--cream); padding:12px 20px; border-radius:999px; font-size:13.5px; font-weight:700; box-shadow:var(--shadow-lift); z-index:100; opacity:0; transform:translateY(10px); transition:.3s; pointer-events:none;}
 .toast.show{opacity:1; transform:translateY(0);}
 
-/* ============ BOTTOM TAB BAR (phones) ============ */
+/* ============ BOTTOM TAB BAR ============ */
 .bottom-tabbar{
   display:none; position:fixed; bottom:0; left:0; right:0; z-index:20;
   background:var(--paper); border-top:2px dashed var(--line);
@@ -914,106 +406,32 @@ body::before{
 .bt-btn.active{color:var(--pink);}
 
 /* ============ RESPONSIVE ============ */
-/* ============ RESPONSIVE ============ */
-/* ============ RESPONSIVE ============ */
 @media(max-width:880px){
-  body {
-    flex-direction: column !important; /* Forces layout to stack vertically instead of side-by-side */
-  }
-  .mobile-topbar {
-    display: flex !important; 
-    padding: 8px 12px;
-    width: 100%;
-    box-sizing: border-box;
-  }
+  body { flex-direction: column !important; }
+  .mobile-topbar { display: flex !important; padding: 8px 12px; width: 100%; box-sizing: border-box; }
   .mobile-topbar .mt-logo { font-size: 14px; }
-  
-  /* Hides the desktop sidebar completely so it doesn't leave a massive empty space */
-  .sidebar {
-    position: fixed !important; 
-    top: 0; 
-    left: 0; 
-    height: 100vh; 
-    width: 78%; 
-    max-width: 300px;
-    transform: translateX(-100%);
-    transition: transform .3s ease; 
-    box-shadow: var(--shadow-lift); 
-    z-index: 25;
-  }
+  .sidebar { position: fixed !important; top: 0; left: 0; height: 100vh; width: 78%; max-width: 300px; transform: translateX(-100%); transition: transform .3s ease; box-shadow: var(--shadow-lift); z-index: 25; }
   .sidebar.open { transform: translateX(0) !important; }
-  
-  /* Fixes the content block to fill up the whole width */
-  .main-content {
-    padding: 12px 12px 90px !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box;
-    display: block !important;
-  }
+  .main-content { padding: 12px 12px 90px !important; max-width: 100% !important; width: 100% !important; box-sizing: border-box; display: block !important; }
   .bottom-tabbar { display: flex !important; }
-  
-  /* Make the hero card very thin and concise */
-  .welcome-hero {
-    flex-direction: column !important; 
-    text-align: center;
-    padding: 14px 12px !important;
-    gap: 10px !important;
-    width: 100% !important;
-    box-sizing: border-box;
-  }
+  .welcome-hero { flex-direction: column !important; text-align: center; padding: 14px 12px !important; gap: 10px !important; width: 100% !important; box-sizing: border-box; }
   .welcome-hero h1 { font-size: 18px !important; }
   .welcome-hero .hero-quote { font-size: 12px !important; margin-bottom: 6px !important; }
   .welcome-hero .plant-box { padding: 10px 14px !important; min-width: 100% !important; }
   .welcome-hero .plant-visual { font-size: 32px !important; }
-  
-  /* Force all layouts underneath to sit perfectly stacked at full size */
-  .glance-grid, .dashboard-grid, .timer-page-grid {
-    grid-template-columns: 1fr !important;
-    width: 100% !important;
-  }
+  .glance-grid, .dashboard-grid, .timer-page-grid { grid-template-columns: 1fr !important; width: 100% !important; }
+  .blossom-grid { grid-template-columns: repeat(4, 1fr) !important; }
 }
 
-/* manual "Mobile Optimized Layout" preview toggle — mirrors the absolute fix above */
-body.force-mobile {
-  flex-direction: column !important;
-}
-body.force-mobile .mobile-topbar {
-  display: flex !important; 
-  padding: 8px 12px;
-  width: 100%;
-  box-sizing: border-box;
-}
+/* manual "Mobile Optimized Layout" preview toggle */
+body.force-mobile { flex-direction: column !important; }
+body.force-mobile .mobile-topbar { display: flex !important; padding: 8px 12px; width: 100%; box-sizing: border-box; }
 body.force-mobile .mobile-topbar .mt-logo { font-size: 14px; }
-body.force-mobile .sidebar {
-  position: fixed !important; 
-  top: 0; 
-  left: 0; 
-  height: 100vh; 
-  width: 78%; 
-  max-width: 300px;
-  transform: translateX(-100%);
-  transition: transform .3s ease; 
-  box-shadow: var(--shadow-lift);
-  z-index: 25;
-}
+body.force-mobile .sidebar { position: fixed !important; top: 0; left: 0; height: 100vh; width: 78%; max-width: 300px; transform: translateX(-100%); transition: transform .3s ease; box-shadow: var(--shadow-lift); z-index: 25; }
 body.force-mobile .sidebar.open { transform: translateX(0) !important; }
-body.force-mobile .main-content {
-  padding: 12px 12px 90px !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  box-sizing: border-box;
-  display: block !important;
-}
+body.force-mobile .main-content { padding: 12px 12px 90px !important; max-width: 100% !important; width: 100% !important; box-sizing: border-box; display: block !important; }
 body.force-mobile .bottom-tabbar { display: flex !important; }
-body.force-mobile .welcome-hero {
-  flex-direction: column !important; 
-  text-align: center;
-  padding: 14px 12px !important;
-  gap: 10px !important;
-  width: 100% !important;
-  box-sizing: border-box;
-}
+body.force-mobile .welcome-hero { flex-direction: column !important; text-align: center; padding: 14px 12px !important; gap: 10px !important; width: 100% !important; box-sizing: border-box; }
 body.force-mobile .welcome-hero h1 { font-size: 18px !important; }
 body.force-mobile .welcome-hero .hero-quote { font-size: 12px !important; margin-bottom: 6px !important; }
 body.force-mobile .welcome-hero .plant-box { padding: 10px 14px !important; min-width: 100% !important; }
@@ -1021,242 +439,489 @@ body.force-mobile .welcome-hero .plant-visual { font-size: 32px !important; }
 body.force-mobile .glance-grid { grid-template-columns: 1fr !important; width: 100% !important; }
 body.force-mobile .dashboard-grid { grid-template-columns: 1fr !important; width: 100% !important; }
 body.force-mobile .timer-page-grid { grid-template-columns: 1fr !important; width: 100% !important; }
-</style>
+    </style>
+
+<div id="fireflies"></div>
+
+<!-- ============ MOBILE TOP BAR ============ -->
+<div class="mobile-topbar">
+  <button class="hamburger-btn" id="hamburgerBtn" title="Open menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="mt-logo"><i class="fa-solid fa-seedling" style="color:var(--pink)"></i> Task<span>Ahead</span></div>
+  <button class="mt-login-btn nav-btn" data-target="auth-section" title="Login / Register"><i class="fa-solid fa-right-to-bracket"></i></button>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="logo-container">
+    <div class="logo-icon-box"><i class="fa-solid fa-seedling"></i></div>
+    <div class="logo-text">
+      <h2>Task<span>Ahead</span></h2>
+      <p>ANHS ICT Track</p>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Overview</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Academics</span>
+    <ul class="nav-links">
+      <li class="dropdown-wrapper">
+        <button class="dropdown-toggle-btn" id="academicsDropdownBtn">
+          <span><i class="fa-solid fa-graduation-cap"></i> Subjects &amp; Terms</span>
+          <i class="fa-solid fa-chevron-down arrow"></i>
+        </button>
+        <ul class="dropdown-container" id="academicsMenu">
+          <li class="nested-dropdown">
+            <span class="term-title">Term 1</span>
+            <ul class="subject-list">
+              <li contenteditable="true">Introduction to Philosophy</li>
+              <li contenteditable="true">Contemporary Philippine Arts</li>
+              <li contenteditable="true">Practical Research 2</li>
+              <li contenteditable="true">ICT Programming</li>
+              <li contenteditable="true">Physical Science</li>
+              <li contenteditable="true">Homeroom Guidance</li>
+            </ul>
+          </li>
+          <li class="nested-dropdown"><span class="term-title">Term 2</span>
+            <ul class="subject-list">
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+            </ul>
+          </li>
+          <li class="nested-dropdown"><span class="term-title">Term 3</span>
+            <ul class="subject-list">
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#" class="nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i> Class Schedule</a></li>
+      <li><a href="#" class="nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Focus &amp; Wellness</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn" data-target="timer-section"><i class="fa-solid fa-stopwatch"></i> Focus Timer</a></li>
+      <li><a href="#" class="nav-btn" data-target="notes-section"><i class="fa-solid fa-note-sticky"></i> Workspace Notes</a></li>
+      <li><a href="#" class="nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i> Relax Arcade</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Account</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn" data-target="profile-section"><i class="fa-solid fa-user-gear"></i> Student Profile</a></li>
+      <li><a href="#" class="nav-btn" data-target="settings"><i class="fa-solid fa-sliders"></i> Configuration</a></li>
+      <li><a href="#" class="nav-btn" data-target="about"><i class="fa-solid fa-circle-info"></i> About Devs</a></li>
+      <li><a href="#" class="nav-btn" data-target="auth-section"><i class="fa-solid fa-right-to-bracket"></i> Login / Register</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">Made with 💖 by ANHS ICT students</div>
+</nav>
+
+<main class="main-content">
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="content-section active-view">
+    <div class="welcome-hero">
+      <span class="hero-sparkle" style="top:16px; left:46%;">✨</span>
+      <span class="hero-sparkle" style="top:60%; left:8%; animation-delay:.8s;">✨</span>
+      <div class="hero-left">
+        <span class="system-tag">Garden status: growing</span>
+        <h1>Hi there, future dev! 🌸</h1>
+        <p class="hero-quote" id="motivational-quote">"Water your tasks a little each day and watch your whole term bloom."</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary circle-btn nav-btn" data-target="tasks" title="Add a task"><i class="fa-solid fa-plus"></i></button>
+          <button class="btn btn-pink circle-btn nav-btn" data-target="relax" title="Arcade Breaks"><i class="fa-solid fa-gamepad"></i></button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="plant-box">
+          <div class="plant-visual" id="plant-sprite">🌱</div>
+          <div class="plant-stats">
+            <h4>Growth Tier: <span id="rank-name" class="text-pink">Seedling</span></h4>
+            <p>Level Score: <span id="rank-points">0</span> XP</p>
+          </div>
+          <button class="btn glow-button-blue" id="manual-plant-grow-btn"><i class="fa-solid fa-droplet"></i> Water your plant</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="glance-grid">
+      <div class="card glance-card">
+        <div class="glance-icon gi-class"><i class="fa-solid fa-calendar-day"></i></div>
+        <div>
+          <h4>Next up today</h4>
+          <p id="glance-class">Loading…</p>
+          <a href="#" class="glance-link nav-btn" data-target="schedule-section">View schedule →</a>
+        </div>
+      </div>
+      <div class="card glance-card">
+        <div class="glance-icon gi-task"><i class="fa-solid fa-list-check"></i></div>
+        <div>
+          <h4>Closest deadline</h4>
+          <p id="glance-task">No tasks yet</p>
+          <a href="#" class="glance-link nav-btn" data-target="tasks">Manage tasks →</a>
+        </div>
+      </div>
+      <div class="card glance-card">
+        <div class="glance-icon gi-timer"><i class="fa-solid fa-stopwatch"></i></div>
+        <div>
+          <h4>Need to focus?</h4>
+          <p>Start a session</p>
+          <a href="#" class="glance-link nav-btn" data-target="timer-section">Open timer →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TASKS & DEADLINES -->
+  <section id="tasks" class="content-section">
+    <h2><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</h2>
+    <p class="section-sub">Plant a new requirement, then track it through to done.</p>
+
+    <div class="card quick-add-bar glow-box-blue">
+      <h3>🌷 Quick Add Task</h3>
+      <form id="db-task-form" class="task-form">
+        <input type="text" id="db-task-name" placeholder="Requirement name (e.g. Code Database Schema)" required>
+        <input type="text" id="db-task-subject" placeholder="Select or type subject..." list="subject-options" required style="font-family: var(--font-body); font-weight: 500;">
+        <datalist id="subject-options">
+          <option value="Introduction to Philosophy">
+          <option value="Contemporary Philippine Arts">
+          <option value="Practical Research 2">
+          <option value="ICT Programming">
+          <option value="Physical Science">
+          <option value="Homeroom Guidance">
+        </datalist>
+        <input type="date" id="db-task-date" required>
+        <button type="submit" class="btn btn-primary circle-btn form-submit-circle" title="Deploy task"><i class="fa-solid fa-check"></i></button>
+      </form>
+    </div>
+
+    <div class="card table-card glow-box-pink">
+      <table class="task-table">
+        <thead><tr><th>Task</th><th>Subject</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="db-task-table-body"></tbody>
+      </table>
+      <div class="empty-state-notice show" id="tasks-empty-notice">
+        <i class="fa-solid fa-seedling empty-icon"></i>
+        <p>No tasks planted yet. Add one above!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule-section" class="content-section">
+    <h2><i class="fa-solid fa-calendar-days"></i> Weekly Class Schedule</h2>
+    <div class="schedule-matrix-grid">
+      <div class="card schedule-day-card">
+        <div class="day-header mon">Monday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header tue">Tuesday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header wed">Wednesday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header thu">Thursday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Physical Science</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">ICT Programming</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header fri">Friday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOCUS TIMER -->
+  <section id="timer-section" class="content-section">
+    <h2><i class="fa-solid fa-stopwatch"></i> Focus Timer</h2>
+    <div class="timer-page-grid">
+      <div class="card timer-card glow-box-purple">
+        <h3>🍓 Focus Session</h3>
+        <div class="timer-display">
+          <span id="timer-minutes">25</span>:<span id="timer-seconds">00</span>
+        </div>
+        <div class="timer-controls">
+          <button class="btn btn-pink circle-btn" id="start-timer-btn" title="Toggle Timer"><i class="fa-solid fa-play"></i></button>
+          <button class="btn btn-outline circle-btn" id="reset-timer-btn" title="Reset"><i class="fa-solid fa-rotate-left"></i></button>
+        </div>
+        <div class="timer-note-area">
+          <textarea placeholder="Jot a quick note for this session..." class="editable-timer-note"></textarea>
+        </div>
+      </div>
+      <div class="card tip-card glow-box-blue">
+        <h3>🌼 Focus Tips</h3>
+        <p>Use the timer to boost your productivity. Complete sessions to earn plant XP!</p>
+        <ul>
+          <li>25 min focus → 5 min break</li>
+          <li>Silence notifications first</li>
+          <li>Finish a session to earn plant XP</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="notes-section" class="content-section">
+    <div class="section-header-flex">
+      <h2><i class="fa-solid fa-note-sticky"></i> Sticky Reminders</h2>
+      <button class="btn btn-primary circle-btn" id="add-note-btn" title="Add Sticky Note"><i class="fa-solid fa-plus"></i></button>
+    </div>
+    <div class="sticky-notes-board" id="sticky-board">
+      <p class="notes-empty" id="notes-empty">No notes yet — click + to stick one on the board 📌</p>
+    </div>
+  </section>
+
+  <!-- RELAX (5 games) -->
+  <section id="relax" class="content-section">
+    <h2><i class="fa-solid fa-gamepad"></i> Relax Arcade</h2>
+    <div class="arcade-card-container">
+      <div class="arcade-tabs">
+        <button class="tab-btn active" onclick="switchRelaxGame(0)">🫧 Bubble Popper</button>
+        <button class="tab-btn" onclick="switchRelaxGame(1)">🌾 Zen Garden</button>
+        <button class="tab-btn" onclick="switchRelaxGame(2)">💧 Musical Ripples</button>
+        <button class="tab-btn" onclick="switchRelaxGame(3)">⭐ Star Catcher</button>
+        <button class="tab-btn" onclick="switchRelaxGame(4)">🌸 Memory Blossom</button>
+      </div>
+      <div class="game-viewport-box">
+        <div class="relax-game-panel active-panel" id="r-game-0">
+          <div class="bubble-grid" id="bubbleGrid"></div>
+          <button class="btn btn-outline" onclick="resetBubbles()"><i class="fa-solid fa-rotate-left"></i> Refresh Sheet</button>
+        </div>
+        <div class="relax-game-panel" id="r-game-1">
+          <canvas id="zenCanvas" width="800" height="280"></canvas>
+          <button class="btn btn-outline reset-overlay-btn" onclick="clearSand()"><i class="fa-solid fa-rotate-left"></i> Smooth Sand</button>
+        </div>
+        <div class="relax-game-panel" id="r-game-2">
+          <canvas id="rippleCanvas" width="800" height="280"></canvas>
+          <p class="tap-hint-overlay">Tap anywhere inside to play a gentle note</p>
+        </div>
+        <div class="relax-game-panel" id="r-game-3">
+          <canvas id="catcherCanvas" width="800" height="280"></canvas>
+          <div class="game-score-row">
+            <span>Catch the falling stars ✨</span>
+            <span>Score: <span id="catcher-score">0</span></span>
+          </div>
+        </div>
+        <div class="relax-game-panel" id="r-game-4">
+          <div class="blossom-grid" id="blossomGrid"></div>
+          <p class="blossom-status" id="blossomStatus">Find every matching pair 🌸</p>
+          <div style="text-align:center; margin-top:12px;">
+            <button class="btn btn-outline" onclick="setupBlossom()"><i class="fa-solid fa-rotate-left"></i> Reshuffle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile-section" class="content-section">
+    <h2><i class="fa-solid fa-user-gear"></i> Student Profile</h2>
+    <div class="card profile-card-layout glow-box-blue" style="flex-direction: column; align-items: flex-start; gap: 20px;">
+
+      <div style="display: flex; align-items: center; gap: 26px; flex-wrap: wrap; width: 100%;">
+        <!-- Interactive Avatar Selector -->
+        <div class="profile-avatar-block" id="profile-avatar-block" style="position: relative; cursor: pointer;" title="Click to change avatar!">
+          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=taskahead" alt="Avatar" class="profile-large-avatar" id="profile-avatar-img">
+          <div style="position: absolute; bottom: 0; right: 0; background: var(--pink); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 2px solid var(--paper);">
+            <i class="fa-solid fa-rotate"></i>
+          </div>
+        </div>
+
+        <div class="profile-details-block" style="flex: 1; min-width: 200px;">
+          <h3 contenteditable="true" id="profile-display-name" style="display: inline-block; border-bottom: 2px dashed var(--line); padding-right: 8px;">ICT_Student_User</h3>
+
+          <!-- Dropdown Focus Selector -->
+          <p class="profile-track" style="margin-top: 8px;">
+            Track focus: 
+            <select id="profile-sub-track" style="padding: 4px 8px; border-radius: 8px; border: 2px solid var(--line); background: var(--paper-alt); color: var(--ink); font-weight: 700; font-family: var(--font-body);">
+              <option value="General ICT">Grade 12 General ICT Specialist</option>
+              <option value="Software Programming">Grade 12 Software Programming</option>
+              <option value="Animation & Graphics">Grade 12 Animation & Graphics</option>
+              <option value="Network Systems">Grade 12 Network Systems</option>
+            </select>
+          </p>
+
+          <div class="profile-metrics-pills" style="margin-top: 10px;">
+            <span class="badge badge-purple">Level rank: <span id="profile-rank-tier">Seedling</span></span>
+            <span class="badge badge-blue" id="track-badge">General ICT Specialist</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Bio Area -->
+      <div style="width: 100%; border-top: 2px dashed var(--line); padding-top: 16px;">
+        <h4 style="font-family: var(--font-display); font-size: 15px; margin-bottom: 6px;">🌸 Dev Bio / Motto</h4>
+        <textarea id="profile-bio" placeholder="Write something interesting about your coding journey or drop your favorite school motto here..." style="width: 100%; min-height: 60px; padding: 10px; border-radius: var(--r-sm); border: 2px dashed var(--line); background: var(--paper-alt); color: var(--ink); font-size: 13.5px; resize: vertical; font-family: var(--font-body);"></textarea>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="settings" class="content-section">
+    <h2><i class="fa-solid fa-sliders"></i> Configuration</h2>
+    <div class="card settings-card glow-box-purple">
+      <div class="setting-row">
+        <div><h4>Theme Luminescence Switch</h4><p>Blossom daytime pastel mode, or Fairybloom Night's enchanted paradise glow</p></div>
+        <div class="theme-toggle">
+          <i class="fa-solid fa-sun"></i>
+          <label class="switch"><input type="checkbox" id="mode-checkbox" onchange="toggleTheme()"><span class="slider"></span></label>
+          <i class="fa-solid fa-moon"></i>
+        </div>
+      </div>
+      <div class="setting-row">
+        <div><h4>Mobile Optimized Layout</h4><p>Preview the compact phone-friendly interface on any screen size</p></div>
+        <label class="switch"><input type="checkbox" id="mobile-mode-checkbox" onchange="toggleMobileMode()"><span class="slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div><h4>Hardware Acceleration Toggle</h4><p>Optimize frame rendering for background task cycles</p></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div><h4>Automated Backup Sync</h4><p>Periodically send app state to your backup repository</p></div>
+        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTH SECTION -->
+  <section id="auth-section" class="content-section">
+    <h2><i class="fa-solid fa-user-shield"></i> Secure Data Storage Handshake</h2>
+
+    <div class="dashboard-grid">
+
+      <!-- LOGIN FORM -->
+      <div class="card glow-box-blue">
+        <h3>🔐 Sign In</h3>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
+          Enter your credentials to access your garden 🌸
+        </p>
+
+        <form id="db-login-form" class="task-form" style="flex-direction:column; gap:12px;">
+          <input type="text" id="login-uid" name="username" placeholder="👤 Username" required style="width:100%;">
+          <input type="password" id="login-pwd" name="password" placeholder="🔑 Password" required style="width:100%;">
+          <button type="submit" class="btn btn-primary form-submit-circle" style="width:100%; justify-content:center; padding:12px;">
+            <i class="fa-solid fa-unlock-keyhole"></i> Sign In
+          </button>
+        </form>
+
+        <div id="login-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="card glow-box-pink">
+        <h3>🌼 Register</h3>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
+          Create your garden account and start growing! 🌱
+        </p>
+
+        <form id="db-register-form" class="task-form" style="flex-direction:column; gap:12px;">
+          <input type="text" id="reg-uid" name="username" placeholder="👤 Choose a username" required style="width:100%;">
+          <input type="email" id="reg-email" name="email" placeholder="📧 School Email Address" required style="width:100%;">
+          <input type="password" id="reg-pwd" name="password" placeholder="🔑 Password (min 6 characters)" required style="width:100%;">
+          <button type="submit" class="btn btn-pink form-submit-circle" style="width:100%; justify-content:center; padding:12px;">
+            <i class="fa-solid fa-id-card"></i> Create Account
+          </button>
+        </form>
+
+        <div id="register-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
+      </div>
+
+    </div>
+
+    <div id="auth-status" style="margin-top:20px; text-align:center; font-size:14px; color:var(--ink-soft);">
+      <i class="fa-solid fa-info-circle"></i> 
+      <span id="auth-status-text">Not logged in</span>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="content-section">
+    <h2><i class="fa-solid fa-circle-info"></i> About TaskAhead</h2>
+    <div class="card about-card-frame glow-box-pink">
+      <h3>TaskAhead Platform Framework</h3>
+      <p><strong>TaskAhead</strong> is a specialized, production-ready schoolwork workflow management application. Designed around the intensive track challenges of modern Senior High School environments, it pairs academic tracking with a cozy, garden-fairy interface that adapts across devices.</p>
+      <blockquote>
+        <strong>Credit Notice &amp; Research Attribution (ctto):</strong><br>
+        This application was researched, conceptualized, and built by <strong>Anonang National High School Students</strong> as a primary practical development solution for their formal research track study. Engineered to boost focus for ICT student tracking, its versatile design extends complete functional utility to multiple general tracks and student cohorts across institutions.
+      </blockquote>
+      <div class="framework-credits">© S.Y. 2026–2027 ANHS Academic Research Operations</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- BOTTOM TAB BAR -->
+<div class="bottom-tabbar">
+  <button class="bt-btn nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i>Home</button>
+  <button class="bt-btn nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i>Tasks</button>
+  <button class="bt-btn nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i>Class</button>
+  <button class="bt-btn nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i>Relax</button>
+  <button class="bt-btn" id="bottomMenuBtn"><i class="fa-solid fa-bars"></i>Menu</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- FIXED: Removed 'js/' prefix since files are in root folder -->
+<script src="js/database.js" defer></script>
+<script src="js/models.js" defer></script>
+<script src="js/repository.js" defer></script>
+<script src="js/script.js" defer></script>
 
 <script>
-// ============ DATABASE.JS ============
-// ============================================
-// database.js — IndexedDB Engine
-// ============================================
-
-const DB_NAME = 'TaskAheadDB';
-const DB_VERSION = 1;
-
-const db = {
-  instance: null,
-
-  init() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => {
-        this.instance = request.result;
-        resolve(this.instance);
-      };
-
-      request.onupgradeneeded = (event) => {
-        const database = event.target.result;
-
-        if (!database.objectStoreNames.contains('users')) {
-          const userStore = database.createObjectStore('users', { keyPath: 'username' });
-          userStore.createIndex('email', 'email', { unique: true });
-        }
-
-        if (!database.objectStoreNames.contains('tasks')) {
-          const taskStore = database.createObjectStore('tasks', { keyPath: 'id', autoIncrement: true });
-          taskStore.createIndex('userId', 'userId', { unique: false });
-          taskStore.createIndex('status', 'status', { unique: false });
-        }
-
-        if (!database.objectStoreNames.contains('gamification')) {
-          database.createObjectStore('gamification', { keyPath: 'userId' });
-        }
-
-        if (!database.objectStoreNames.contains('profiles')) {
-          database.createObjectStore('profiles', { keyPath: 'userId' });
-        }
-      };
-    });
-  },
-
-  add(storeName, data) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readwrite');
-      const store = tx.objectStore(storeName);
-      const request = store.add(data);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  },
-
-  get(storeName, key) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readonly');
-      const store = tx.objectStore(storeName);
-      const request = store.get(key);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  },
-
-  getAll(storeName) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readonly');
-      const store = tx.objectStore(storeName);
-      const request = store.getAll();
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  },
-
-  put(storeName, data) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readwrite');
-      const store = tx.objectStore(storeName);
-      const request = store.put(data);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  },
-
-  delete(storeName, key) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readwrite');
-      const store = tx.objectStore(storeName);
-      const request = store.delete(key);
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
-    });
-  }
-};
-
-
-// ============ MODELS.JS ============
-// ============================================
-// models.js — Data Models & Defaults
-// ============================================
-
-function createDefaultProfile(userId) {
-  return {
-    userId: userId,
-    displayName: 'ICT_Student_User',
-    avatarSeed: 'taskahead',
-    track: 'General ICT',
-    bio: ''
-  };
-}
-
-function createDefaultGamification(userId) {
-  return {
-    userId: userId,
-    xp: 0,
-    plantTier: 'Seedling',
-    lastUpdated: new Date().toISOString()
-  };
-}
-
-function calculateTier(xp) {
-  if (xp >= 500) return 'Full Bloom';
-  if (xp >= 300) return 'Blooming';
-  if (xp >= 150) return 'Sapling';
-  if (xp >= 50) return 'Sprout';
-  return 'Seedling';
-}
-
-function createTask({ name, subject, dueDate, userId }) {
-  return {
-    name: name,
-    subject: subject || 'General',
-    dueDate: dueDate,
-    status: 'pending',
-    userId: userId,
-    createdAt: new Date().toISOString()
-  };
-}
-
-
-// ============ REPOSITORY.JS ============
-// ============================================
-// repository.js — Data Access Layer
-// ============================================
-
-const TaskRepository = {
-  async getAll(userId) {
-    const allTasks = await db.getAll('tasks');
-    return allTasks.filter(t => t.userId === userId);
-  },
-
-  async create(taskData) {
-    const task = createTask(taskData);
-    const id = await db.add('tasks', task);
-    return { ...task, id };
-  },
-
-  async toggleStatus(taskId) {
-    const tx = db.instance.transaction('tasks', 'readwrite');
-    const store = tx.objectStore('tasks');
-
-    return new Promise((resolve, reject) => {
-      const getReq = store.get(taskId);
-      getReq.onsuccess = () => {
-        const task = getReq.result;
-        if (!task) return reject(new Error('Task not found'));
-
-        task.status = task.status === 'done' ? 'pending' : 'done';
-
-        const putReq = store.put(task);
-        putReq.onsuccess = () => resolve(task);
-        putReq.onerror = () => reject(putReq.error);
-      };
-      getReq.onerror = () => reject(getReq.error);
-    });
-  },
-
-  async delete(taskId) {
-    await db.delete('tasks', taskId);
-  }
-};
-
-const GamificationRepository = {
-  async get(userId) {
-    let data = await db.get('gamification', userId);
-    if (!data) {
-      data = createDefaultGamification(userId);
-      await db.add('gamification', data);
-    }
-    return data;
-  },
-
-  async addXP(userId, amount) {
-    const data = await this.get(userId);
-    data.xp += amount;
-    data.plantTier = calculateTier(data.xp);
-    data.lastUpdated = new Date().toISOString();
-    await db.put('gamification', data);
-    return data;
-  },
-
-  async update(userId, updates) {
-    const data = await this.get(userId);
-    Object.assign(data, updates);
-    await db.put('gamification', data);
-    return data;
-  }
-};
-
-const ProfileRepository = {
-  async get(userId) {
-    let profile = await db.get('profiles', userId);
-    if (!profile) {
-      profile = createDefaultProfile(userId);
-      await db.add('profiles', profile);
-    }
-    return profile;
-  },
-
-  async update(userId, updates) {
-    const profile = await this.get(userId);
-    Object.assign(profile, updates);
-    profile.userId = userId;
-    await db.put('profiles', profile);
-    return profile;
-  }
-};
-
-
-// ============ SCRIPT.JS ============
-// ============================================
+    // ============================================
 // DATABASE INITIALIZATION
 // ============================================
 
@@ -1264,16 +929,10 @@ let currentUserId = 'default-user';
 
 async function initApp() {
   try {
-    // Initialize database
     await db.init();
     console.log('✅ Database ready!');
-    
-    // Load all data
     await loadAllData();
-    
-    // Refresh UI
     refreshAllUI();
-    
     showToast('🌸 Data loaded from database!');
   } catch (error) {
     console.error('❌ Failed to initialize:', error);
@@ -1283,17 +942,11 @@ async function initApp() {
 
 async function loadAllData() {
   try {
-    // Load tasks
     window.tasks = await TaskRepository.getAll(currentUserId);
-    
-    // Load gamification
     const gameData = await GamificationRepository.get(currentUserId);
     window.xp = gameData.xp;
-    
-    // Load profile
     const profile = await ProfileRepository.get(currentUserId);
     window.profile = profile;
-    
     console.log('✅ All data loaded');
   } catch (error) {
     console.error('❌ Error loading data:', error);
@@ -1314,6 +967,7 @@ document.addEventListener('DOMContentLoaded', initApp);
 let toastTimer;
 function showToast(msg){
   const t=document.getElementById('toast');
+  if(!t) return;
   t.textContent=msg; t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
@@ -1324,32 +978,43 @@ const sidebar=document.getElementById('sidebar');
 const overlay=document.getElementById('sidebarOverlay');
 function openDrawer(){ sidebar.classList.add('open'); overlay.classList.add('show'); }
 function closeDrawer(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
-document.getElementById('hamburgerBtn').addEventListener('click', openDrawer);
-document.getElementById('bottomMenuBtn').addEventListener('click', openDrawer);
-overlay.addEventListener('click', closeDrawer);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const bottomMenuBtn = document.getElementById('bottomMenuBtn');
+  if(hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+  if(bottomMenuBtn) bottomMenuBtn.addEventListener('click', openDrawer);
+  if(overlay) overlay.addEventListener('click', closeDrawer);
+});
 
 /* ============ NAV ============ */
-document.querySelectorAll('.nav-btn').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    e.preventDefault();
-    const target=btn.dataset.target;
-    if(!target) return;
-    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll(`.nav-btn[data-target="${target}"]`).forEach(b=>b.classList.add('active'));
-    document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active-view'));
-    const sec=document.getElementById(target);
-    if(sec) sec.classList.add('active-view');
-    closeDrawer();
-    window.scrollTo({top:0,behavior:'smooth'});
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.nav-btn').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.preventDefault();
+      const target=btn.dataset.target;
+      if(!target) return;
+      document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll(`.nav-btn[data-target="${target}"]`).forEach(b=>b.classList.add('active'));
+      document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active-view'));
+      const sec=document.getElementById(target);
+      if(sec) sec.classList.add('active-view');
+      closeDrawer();
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
   });
 });
 
 /* Academics dropdown */
-const acadBtn=document.getElementById('academicsDropdownBtn');
-const acadMenu=document.getElementById('academicsMenu');
-acadBtn.addEventListener('click', ()=>{
-  acadBtn.classList.toggle('open');
-  acadMenu.classList.toggle('open');
+document.addEventListener('DOMContentLoaded', () => {
+  const acadBtn=document.getElementById('academicsDropdownBtn');
+  const acadMenu=document.getElementById('academicsMenu');
+  if(acadBtn){
+    acadBtn.addEventListener('click', ()=>{
+      acadBtn.classList.toggle('open');
+      acadMenu.classList.toggle('open');
+    });
+  }
 });
 
 /* ============ THEME ============ */
@@ -1360,7 +1025,7 @@ function toggleTheme(){
 }
 function spawnFireflies(){
   const box=document.getElementById('fireflies');
-  if(box.childElementCount>0) return;
+  if(!box || box.childElementCount>0) return;
   for(let i=0;i<14;i++){
     const f=document.createElement('div');
     f.className='firefly';
@@ -1371,7 +1036,10 @@ function spawnFireflies(){
     box.appendChild(f);
   }
 }
-function clearFireflies(){ document.getElementById('fireflies').innerHTML=''; }
+function clearFireflies(){ 
+  const box = document.getElementById('fireflies');
+  if(box) box.innerHTML=''; 
+}
 
 /* ============ MOBILE LAYOUT PREVIEW TOGGLE ============ */
 function toggleMobileMode(){
@@ -1383,18 +1051,19 @@ function toggleMobileMode(){
 // ============ PLANT GROWTH WITH DATABASE ============
 async function refreshPlant() {
   try {
-    // Get fresh data from database
     const gameData = await GamificationRepository.get(currentUserId);
     window.xp = gameData.xp;
     const tier = gameData.plantTier;
-    
-    // Update UI
-    document.getElementById('rank-name').textContent = tier;
-    document.getElementById('profile-rank-tier').textContent = tier;
-    document.getElementById('rank-points').textContent = window.xp;
-    
-    // Update plant emoji
+
+    const rankName = document.getElementById('rank-name');
+    const profileRank = document.getElementById('profile-rank-tier');
+    const rankPoints = document.getElementById('rank-points');
     const sprite = document.getElementById('plant-sprite');
+
+    if(rankName) rankName.textContent = tier;
+    if(profileRank) profileRank.textContent = tier;
+    if(rankPoints) rankPoints.textContent = window.xp;
+
     const emojiMap = {
       'Seedling': '🌱',
       'Sprout': '🌿',
@@ -1402,50 +1071,53 @@ async function refreshPlant() {
       'Blooming': '🌸',
       'Full Bloom': '🌳'
     };
-    sprite.textContent = emojiMap[tier] || '🌱';
-    sprite.style.transform = 'scale(1.25)';
-    setTimeout(() => sprite.style.transform = 'scale(1)', 180);
+    if(sprite) {
+      sprite.textContent = emojiMap[tier] || '🌱';
+      sprite.style.transform = 'scale(1.25)';
+      setTimeout(() => sprite.style.transform = 'scale(1)', 180);
+    }
   } catch (error) {
     console.error('❌ Error refreshing plant:', error);
   }
 }
 
 // Manual grow button
-document.getElementById('manual-plant-grow-btn').addEventListener('click', async () => {
-  try {
-    await GamificationRepository.addXP(currentUserId, 5);
-    await refreshPlant();
-    showToast('+5 XP · your plant feels loved 🌱');
-  } catch (error) {
-    console.error('❌ Error watering plant:', error);
-    showToast('Error watering plant');
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('manual-plant-grow-btn');
+  if(btn){
+    btn.addEventListener('click', async () => {
+      try {
+        await GamificationRepository.addXP(currentUserId, 5);
+        await refreshPlant();
+        showToast('+5 XP · your plant feels loved 🌱');
+      } catch (error) {
+        console.error('❌ Error watering plant:', error);
+        showToast('Error watering plant');
+      }
+    });
   }
 });
 
-// Initial call
-refreshPlant();
-
 // ============ TASKS WITH DATABASE ============
-
 async function renderTasks() {
   const taskBody = document.getElementById('db-task-table-body');
   const emptyNotice = document.getElementById('tasks-empty-notice');
-  
+
+  if(!taskBody) return;
+
   try {
-    // Get tasks from database
     window.tasks = await TaskRepository.getAll(currentUserId);
-    
     taskBody.innerHTML = '';
-    
+
     if (window.tasks.length === 0) {
-      emptyNotice.classList.add('show');
+      if(emptyNotice) emptyNotice.classList.add('show');
     } else {
-      emptyNotice.classList.remove('show');
-      
+      if(emptyNotice) emptyNotice.classList.remove('show');
+
       window.tasks.forEach(task => {
         const tr = document.createElement('tr');
         if (task.status === 'done') tr.classList.add('task-done-row');
-        
+
         tr.innerHTML = `
           <td>${task.name}</td>
           <td>${task.subject}</td>
@@ -1464,8 +1136,7 @@ async function renderTasks() {
             </button>
           </td>
         `;
-        
-        // Toggle task status (complete/pending)
+
         tr.querySelector('.toggle-btn').addEventListener('click', async () => {
           try {
             const updated = await TaskRepository.toggleStatus(task.id);
@@ -1481,8 +1152,7 @@ async function renderTasks() {
             showToast('Error updating task');
           }
         });
-        
-        // Delete task
+
         tr.querySelector('.del-btn').addEventListener('click', async () => {
           if (confirm('Delete this task?')) {
             try {
@@ -1496,7 +1166,7 @@ async function renderTasks() {
             }
           }
         });
-        
+
         taskBody.appendChild(tr);
       });
     }
@@ -1507,33 +1177,38 @@ async function renderTasks() {
 }
 
 // ============ TASK FORM ============
-document.getElementById('db-task-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  const name = document.getElementById('db-task-name').value.trim();
-  const subject = document.getElementById('db-task-subject').value;
-  const dueDate = document.getElementById('db-task-date').value;
-  
-  if (!name || !dueDate) {
-    showToast('Please fill in all fields');
-    return;
-  }
-  
-  try {
-    await TaskRepository.create({
-      name: name,
-      subject: subject,
-      dueDate: dueDate,
-      userId: currentUserId
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('db-task-form');
+  if(form){
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('db-task-name').value.trim();
+      const subject = document.getElementById('db-task-subject').value;
+      const dueDate = document.getElementById('db-task-date').value;
+
+      if (!name || !dueDate) {
+        showToast('Please fill in all fields');
+        return;
+      }
+
+      try {
+        await TaskRepository.create({
+          name: name,
+          subject: subject,
+          dueDate: dueDate,
+          userId: currentUserId
+        });
+
+        await renderTasks();
+        refreshGlance();
+        showToast('Task planted in your queue 🌷');
+        e.target.reset();
+      } catch (error) {
+        console.error('❌ Error creating task:', error);
+        showToast('Error creating task');
+      }
     });
-    
-    await renderTasks();
-    refreshGlance();
-    showToast('Task planted in your queue 🌷');
-    e.target.reset();
-  } catch (error) {
-    console.error('❌ Error creating task:', error);
-    showToast('Error creating task');
   }
 });
 
@@ -1545,31 +1220,48 @@ const weekSchedule = {
   4:[{time:'07:30 - 09:30',subj:'Contemporary Philippine Arts'},{time:'09:45 - 11:45',subj:'Practical Research 2'},{time:'12:30 - 02:30',subj:'Physical Science'},{time:'02:30 - 04:30',subj:'ICT Programming'}],
   5:[{time:'07:30 - 09:30',subj:'Introduction to Philosophy'},{time:'09:45 - 11:45',subj:'Practical Research 2'},{time:'12:30 - 02:30',subj:'ICT Programming'},{time:'02:30 - 04:30',subj:'Contemporary Philippine Arts'}],
 };
+
 function refreshGlance(){
   const day = new Date().getDay();
   const todayClasses = weekSchedule[day];
   const classEl=document.getElementById('glance-class');
-  if(todayClasses){ classEl.textContent = `${todayClasses[0].subj} · ${todayClasses[0].time}`; }
-  else { classEl.textContent = 'No classes today — enjoy your break!'; }
+  if(classEl){
+    if(todayClasses){ classEl.textContent = `${todayClasses[0].subj} · ${todayClasses[0].time}`; }
+    else { classEl.textContent = 'No classes today — enjoy your break!'; }
+  }
 
   const taskEl=document.getElementById('glance-task');
-  const pending = window.tasks ? window.tasks.filter(t=>t.status !== 'done').sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate)) : [];
-  if(pending.length===0){ taskEl.textContent='No tasks yet'; }
-  else{ taskEl.textContent = `${pending[0].name} · due ${pending[0].dueDate}`; }
+  if(taskEl){
+    const pending = window.tasks ? window.tasks.filter(t=>t.status !== 'done').sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate)) : [];
+    if(pending.length===0){ taskEl.textContent='No tasks yet'; }
+    else{ taskEl.textContent = `${pending[0].name} · due ${pending[0].dueDate}`; }
+  }
 }
-refreshGlance();
 
 /* ============ TIMER ============ */
 let timerInterval=null, timerRunning=false;
-const minSpan=document.getElementById('timer-minutes');
-const secSpan=document.getElementById('timer-seconds');
-const startBtn=document.getElementById('start-timer-btn');
+
+function getTimerElements() {
+  return {
+    minSpan: document.getElementById('timer-minutes'),
+    secSpan: document.getElementById('timer-seconds'),
+    startBtn: document.getElementById('start-timer-btn')
+  };
+}
+
 function tick(){
+  const { minSpan, secSpan, startBtn } = getTimerElements();
+  if(!minSpan || !secSpan || !startBtn) return;
+
   let m=parseInt(minSpan.textContent)||0;
   let s=parseInt(secSpan.textContent)||0;
+
   if(s===0){
-    if(m===0){ clearInterval(timerInterval); timerRunning=false; startBtn.innerHTML='<i class="fa-solid fa-play"></i>'; showToast('Focus session complete! 🍓'); 
-      // Award XP
+    if(m===0){ 
+      clearInterval(timerInterval); 
+      timerRunning=false; 
+      startBtn.innerHTML='<i class="fa-solid fa-play"></i>'; 
+      showToast('Focus session complete! 🍓'); 
       GamificationRepository.addXP(currentUserId, 15).then(() => {
         refreshPlant();
       }).catch(err => console.error('Error awarding XP:', err));
@@ -1577,38 +1269,67 @@ function tick(){
     }
     m--; s=59;
   } else { s--; }
+
   minSpan.textContent=String(m).padStart(2,'0');
   secSpan.textContent=String(s).padStart(2,'0');
 }
-startBtn.addEventListener('click', ()=>{
-  timerRunning=!timerRunning;
-  if(timerRunning){ startBtn.innerHTML='<i class="fa-solid fa-pause"></i>'; timerInterval=setInterval(tick,1000); }
-  else{ startBtn.innerHTML='<i class="fa-solid fa-play"></i>'; clearInterval(timerInterval); }
-});
-document.getElementById('reset-timer-btn').addEventListener('click', ()=>{
-  clearInterval(timerInterval); timerRunning=false;
-  startBtn.innerHTML='<i class="fa-solid fa-play"></i>';
-  minSpan.textContent='25'; secSpan.textContent='00';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const startBtn = document.getElementById('start-timer-btn');
+  const resetBtn = document.getElementById('reset-timer-btn');
+
+  if(startBtn){
+    startBtn.addEventListener('click', ()=>{
+      timerRunning=!timerRunning;
+      if(timerRunning){ 
+        startBtn.innerHTML='<i class="fa-solid fa-pause"></i>'; 
+        timerInterval=setInterval(tick,1000); 
+      }
+      else{ 
+        startBtn.innerHTML='<i class="fa-solid fa-play"></i>'; 
+        clearInterval(timerInterval); 
+      }
+    });
+  }
+
+  if(resetBtn){
+    resetBtn.addEventListener('click', ()=>{
+      clearInterval(timerInterval); 
+      timerRunning=false;
+      const { minSpan, secSpan, startBtn } = getTimerElements();
+      if(startBtn) startBtn.innerHTML='<i class="fa-solid fa-play"></i>';
+      if(minSpan) minSpan.textContent='25'; 
+      if(secSpan) secSpan.textContent='00';
+    });
+  }
 });
 
 /* ============ STICKY NOTES ============ */
-const stickyBoard=document.getElementById('sticky-board');
-const notesEmpty=document.getElementById('notes-empty');
-const noteColors=['#FFE1EF','#E2F6FF','#E1FBF0','#F0E6FF','#FFF3CE'];
-document.getElementById('add-note-btn').addEventListener('click', ()=>{
-  notesEmpty.style.display='none';
-  const color=noteColors[Math.floor(Math.random()*noteColors.length)];
-  const rot=(Math.random()*6-3).toFixed(1);
-  const note=document.createElement('div');
-  note.className='sticky-note';
-  note.style.background=color;
-  note.style.transform=`rotate(${rot}deg)`;
-  note.innerHTML=`<textarea placeholder="Write a reminder..."></textarea><button class="note-del" title="Remove"><i class="fa-solid fa-trash"></i></button>`;
-  note.querySelector('.note-del').addEventListener('click', ()=>{
-    note.remove();
-    if(stickyBoard.querySelectorAll('.sticky-note').length===0) notesEmpty.style.display='block';
+document.addEventListener('DOMContentLoaded', () => {
+  const stickyBoard=document.getElementById('sticky-board');
+  const notesEmpty=document.getElementById('notes-empty');
+  const addNoteBtn=document.getElementById('add-note-btn');
+  const noteColors=['#FFE1EF','#E2F6FF','#E1FBF0','#F0E6FF','#FFF3CE'];
+
+  if(!addNoteBtn || !stickyBoard) return;
+
+  addNoteBtn.addEventListener('click', ()=>{
+    if(notesEmpty) notesEmpty.style.display='none';
+    const color=noteColors[Math.floor(Math.random()*noteColors.length)];
+    const rot=(Math.random()*6-3).toFixed(1);
+    const note=document.createElement('div');
+    note.className='sticky-note';
+    note.style.background=color;
+    note.style.transform=`rotate(${rot}deg)`;
+    note.innerHTML=`<textarea placeholder="Write a reminder..."></textarea><button class="note-del" title="Remove"><i class="fa-solid fa-trash"></i></button>`;
+    note.querySelector('.note-del').addEventListener('click', ()=>{
+      note.remove();
+      if(stickyBoard.querySelectorAll('.sticky-note').length===0 && notesEmpty) {
+        notesEmpty.style.display='block';
+      }
+    });
+    stickyBoard.appendChild(note);
   });
-  stickyBoard.appendChild(note);
 });
 
 /* ============ RELAX ARCADE ============ */
@@ -1618,13 +1339,14 @@ function switchRelaxGame(idx){
   if(idx===1) setupZen();
   if(idx===2) setupRipples();
   if(idx===3) setupCatcher();
-  if(idx===4 && !blossomReady) setupBlossom();
+  if(idx===4) setupBlossom();
 }
 
 /* --- Bubble popper --- */
 const bubbleColors=['#FFB3C6','#AEE2FF','#BEEFC7','#D6C6FF','#FFE49E'];
 function resetBubbles(){
   const grid=document.getElementById('bubbleGrid');
+  if(!grid) return;
   grid.innerHTML='';
   for(let i=0;i<50;i++){
     const b=document.createElement('button');
@@ -1634,43 +1356,77 @@ function resetBubbles(){
     grid.appendChild(b);
   }
 }
-resetBubbles();
 
 /* --- Zen garden --- */
 let zenCtx, zenDrawing=false, zenReady=false;
 function setupZen(){
   const canvas=document.getElementById('zenCanvas');
+  if(!canvas) return;
   if(!zenReady){
-    canvas.width=canvas.clientWidth; canvas.height=canvas.clientHeight;
+    // Get the DISPLAY size from CSS
+    const rect = canvas.getBoundingClientRect();
+    // Set internal resolution to match display size for crisp drawing
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
     zenCtx=canvas.getContext('2d');
     zenCtx.strokeStyle='rgba(122,51,88,.35)';
-    zenCtx.lineWidth=6; zenCtx.lineCap='round';
-    canvas.addEventListener('mousedown', e=>{ zenDrawing=true; zenCtx.beginPath(); zenCtx.moveTo(e.offsetX,e.offsetY); });
-    canvas.addEventListener('mousemove', e=>{ if(zenDrawing){ zenCtx.lineTo(e.offsetX,e.offsetY); zenCtx.stroke(); } });
-    window.addEventListener('mouseup', ()=>zenDrawing=false);
+    zenCtx.lineWidth=6; 
+    zenCtx.lineCap='round';
+
+    canvas.addEventListener('pointerdown', e=>{ 
+      zenDrawing=true; 
+      zenCtx.beginPath(); 
+      const rect = canvas.getBoundingClientRect();
+      zenCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top); 
+    });
+    canvas.addEventListener('pointermove', e=>{ 
+      if(zenDrawing){ 
+        const rect = canvas.getBoundingClientRect();
+        zenCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top); 
+        zenCtx.stroke(); 
+      } 
+    });
+    canvas.addEventListener('pointerup', ()=>zenDrawing=false);
+    canvas.addEventListener('pointerleave', ()=>zenDrawing=false);
     zenReady=true;
   }
 }
-function clearSand(){ if(zenCtx){ zenCtx.clearRect(0,0,zenCtx.canvas.width,zenCtx.canvas.height); } }
+function clearSand(){ 
+  if(zenCtx){ 
+    zenCtx.clearRect(0,0,zenCtx.canvas.width,zenCtx.canvas.height); 
+  } 
+}
 
 /* --- Musical ripples --- */
 let rippleCtx, rippleReady=false, audioCtx;
 const pentatonic=[261.6,293.7,329.6,392.0,440.0,523.3];
+let ripples=[];
+
 function setupRipples(){
   const canvas=document.getElementById('rippleCanvas');
+  if(!canvas) return;
   if(!rippleReady){
-    canvas.width=canvas.clientWidth; canvas.height=canvas.clientHeight;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
     rippleCtx=canvas.getContext('2d');
+
     canvas.addEventListener('click', e=>{
-      spawnRipple(e.offsetX,e.offsetY);
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      spawnRipple(x, y);
       playNote(pentatonic[Math.floor(Math.random()*pentatonic.length)]);
     });
     rippleReady=true;
     animateRipples();
   }
 }
-let ripples=[];
+
 function spawnRipple(x,y){ ripples.push({x,y,r:2,alpha:0.6}); }
+
 function animateRipples(){
   if(rippleCtx){
     rippleCtx.clearRect(0,0,rippleCtx.canvas.width,rippleCtx.canvas.height);
@@ -1680,41 +1436,62 @@ function animateRipples(){
       rippleCtx.strokeStyle=`rgba(63,193,255,${r.alpha})`;
       rippleCtx.lineWidth=3;
       rippleCtx.stroke();
-      r.r+=2.2; r.alpha-=0.012;
+      r.r+=2.2; 
+      r.alpha-=0.012;
     });
     ripples=ripples.filter(r=>r.alpha>0);
   }
   requestAnimationFrame(animateRipples);
 }
+
 function playNote(freq){
   try{
     audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
     const osc=audioCtx.createOscillator();
     const gain=audioCtx.createGain();
-    osc.type='sine'; osc.frequency.value=freq;
+    osc.type='sine'; 
+    osc.frequency.value=freq;
     gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+1.1);
-    osc.connect(gain); gain.connect(audioCtx.destination);
-    osc.start(); osc.stop(audioCtx.currentTime+1.1);
-  }catch(err){ /* audio unavailable */ }
+    osc.connect(gain); 
+    gain.connect(audioCtx.destination);
+    osc.start(); 
+    osc.stop(audioCtx.currentTime+1.1);
+  }catch(err){ 
+    console.log('Audio not available:', err);
+  }
 }
 
-/* --- Star Catcher (new) --- */
+/* --- Star Catcher --- */
 let catcherCtx, catcherReady=false, catcherRunning=false, catcherSpawnTimer=null;
 let stars=[], catcherScore=0;
+
 function setupCatcher(){
   const canvas=document.getElementById('catcherCanvas');
+  if(!canvas) return;
   if(!catcherReady){
-    canvas.width=canvas.clientWidth; canvas.height=canvas.clientHeight;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
     catcherCtx=canvas.getContext('2d');
+
     canvas.addEventListener('click', e=>{
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
       for(let i=stars.length-1;i>=0;i--){
         const s=stars[i];
-        const dx=e.offsetX-s.x, dy=e.offsetY-s.y;
+        const dx=clickX-s.x, dy=clickY-s.y;
         if(Math.sqrt(dx*dx+dy*dy) < s.size+10){
           stars.splice(i,1);
           catcherScore++;
-          document.getElementById('catcher-score').textContent=catcherScore;
+          const scoreEl = document.getElementById('catcher-score');
+          if(scoreEl) scoreEl.textContent=catcherScore;
           if(catcherScore%10===0){ 
             GamificationRepository.addXP(currentUserId, 5).then(() => {
               refreshPlant();
@@ -1727,42 +1504,59 @@ function setupCatcher(){
     });
     catcherReady=true;
   }
+
   catcherRunning=true;
   if(!catcherSpawnTimer){
     catcherSpawnTimer=setInterval(()=>{
-      if(!catcherRunning) return;
-      stars.push({x:Math.random()*catcherCtx.canvas.width, y:-10, size:12+Math.random()*8, speed:0.6+Math.random()*1.2});
+      if(!catcherRunning || !catcherCtx) return;
+      stars.push({
+        x:Math.random()*catcherCtx.canvas.width, 
+        y:-10, 
+        size:12+Math.random()*8, 
+        speed:0.6+Math.random()*1.2
+      });
     },900);
   }
-  requestAnimationFrame(animateCatcher);
+  if(!window.catcherAnimating){
+    window.catcherAnimating = true;
+    animateCatcher();
+  }
 }
+
 function animateCatcher(){
-  if(catcherCtx && document.getElementById('r-game-3').classList.contains('active-panel')){
+  const isActive = document.getElementById('r-game-3')?.classList.contains('active-panel');
+
+  if(catcherCtx && isActive){
     catcherRunning=true;
     catcherCtx.clearRect(0,0,catcherCtx.canvas.width,catcherCtx.canvas.height);
     stars.forEach(s=>{
       s.y += s.speed;
       catcherCtx.font=s.size*2+'px sans-serif';
-      catcherCtx.textAlign='center'; catcherCtx.textBaseline='middle';
+      catcherCtx.textAlign='center'; 
+      catcherCtx.textBaseline='middle';
       catcherCtx.fillText('⭐', s.x, s.y);
     });
     stars = stars.filter(s=>s.y < catcherCtx.canvas.height+20);
-    requestAnimationFrame(animateCatcher);
   } else {
     catcherRunning=false;
   }
+  requestAnimationFrame(animateCatcher);
 }
 
-/* --- Memory Blossom (new) --- */
+/* --- Memory Blossom --- */
 let blossomReady=false;
 const blossomEmojis=['🌸','🌷','🌼','🌻','🍀','🦋','🐝','🍄'];
 let blossomState={flipped:[], matched:[], lock:false};
+
 function setupBlossom(){
   blossomReady=true;
   blossomState={flipped:[], matched:[], lock:false};
-  document.getElementById('blossomStatus').textContent='Find every matching pair 🌸';
+  const statusEl = document.getElementById('blossomStatus');
+  if (statusEl) statusEl.textContent='Find every matching pair 🌸';
+
   const deck=[...blossomEmojis, ...blossomEmojis].sort(()=>Math.random()-0.5);
   const grid=document.getElementById('blossomGrid');
+  if(!grid) return;
   grid.innerHTML='';
   deck.forEach((emoji,i)=>{
     const card=document.createElement('button');
@@ -1774,95 +1568,89 @@ function setupBlossom(){
     grid.appendChild(card);
   });
 }
+
 function flipBlossom(card){
   if(blossomState.lock) return;
   if(card.classList.contains('flipped')||card.classList.contains('matched')) return;
+
   card.classList.add('flipped');
   card.textContent=card.dataset.emoji;
   blossomState.flipped.push(card);
+
   if(blossomState.flipped.length===2){
     blossomState.lock=true;
     const [a,b]=blossomState.flipped;
+
     if(a.dataset.emoji===b.dataset.emoji){
-      a.classList.add('matched'); b.classList.add('matched');
-      blossomState.matched.push(a,b);
-      blossomState.flipped=[]; blossomState.lock=false;
-      if(blossomState.matched.length===blossomEmojis.length*2){
-        document.getElementById('blossomStatus').textContent='All blossoms matched! +20 XP 🎉';
-        GamificationRepository.addXP(currentUserId, 20).then(() => {
-          refreshPlant();
-          showToast('Memory Blossom cleared! 🌸');
-        }).catch(err => console.error('Error:', err));
-      }
+      setTimeout(() => {
+        a.classList.add('matched'); 
+        b.classList.add('matched');
+        blossomState.matched.push(a,b);
+        blossomState.flipped=[]; 
+        blossomState.lock=false;
+
+        if(blossomState.matched.length===blossomEmojis.length*2){
+          const statusEl = document.getElementById('blossomStatus');
+          if (statusEl) statusEl.textContent='All blossoms matched! +20 XP 🎉';
+          GamificationRepository.addXP(currentUserId, 20).then(() => {
+            refreshPlant();
+            showToast('Memory Blossom cleared! 🌸');
+          }).catch(err => console.error('Error:', err));
+        }
+      }, 300);
     } else {
       setTimeout(()=>{
-        a.classList.remove('flipped'); a.textContent='❔';
-        b.classList.remove('flipped'); b.textContent='❔';
-        blossomState.flipped=[]; blossomState.lock=false;
+        a.classList.remove('flipped'); 
+        a.textContent='❔';
+        b.classList.remove('flipped'); 
+        b.textContent='❔';
+        blossomState.flipped=[]; 
+        blossomState.lock=false;
       },700);
     }
   }
 }
 
 // ============ PROFILE WITH DATABASE ============
-
-// Array of avatar seeds
 const avatarSeeds = ['taskahead', 'cyber', 'pixel', 'coder', 'gamer', 'sparkle', 'bot', 'fairy', 'garden', 'future'];
 
-// Update profile UI from database
 async function updateProfileUI() {
   try {
     const profile = await ProfileRepository.get(currentUserId);
     window.profile = profile;
-    
-    // Update display name
+
     const nameEl = document.getElementById('profile-display-name');
-    if (nameEl && nameEl.textContent !== profile.displayName) {
-      nameEl.textContent = profile.displayName;
-    }
-    
-    // Update avatar
     const avatarImg = document.getElementById('profile-avatar-img');
-    if (avatarImg) {
-      avatarImg.src = `https://api.dicebear.com/7.x/bottts/svg?seed=${profile.avatarSeed}`;
-    }
-    
-    // Update track selection
     const trackSelect = document.getElementById('profile-sub-track');
-    if (trackSelect && trackSelect.value !== profile.track) {
-      trackSelect.value = profile.track;
-    }
-    
-    // Update bio
     const bioEl = document.getElementById('profile-bio');
-    if (bioEl && bioEl.value !== profile.bio) {
-      bioEl.value = profile.bio;
-    }
-    
-    // Update track badge
-    updateTrackBadge();
-    
+    const badgeEl = document.getElementById('track-badge');
+
+    if (nameEl) nameEl.textContent = profile.displayName || 'ICT_Student_User';
+    if (avatarImg) avatarImg.src = `https://api.dicebear.com/7.x/bottts/svg?seed=${profile.avatarSeed}`;
+    if (trackSelect) trackSelect.value = profile.track || 'General ICT';
+    if (bioEl) bioEl.value = profile.bio || '';
+    if (badgeEl) badgeEl.textContent = `${profile.track || 'General ICT'} Specialist`;
+
     console.log('✅ Profile UI updated');
   } catch (error) {
     console.error('❌ Error updating profile UI:', error);
   }
 }
 
-// Cycle avatar - UPDATED with database
 async function cycleAvatar() {
   try {
     const profile = await ProfileRepository.get(currentUserId);
     const currentIndex = avatarSeeds.indexOf(profile.avatarSeed);
     const nextIndex = (currentIndex + 1) % avatarSeeds.length;
     const newSeed = avatarSeeds[nextIndex];
-    
+
     await ProfileRepository.update(currentUserId, {
       displayName: profile.displayName,
       avatarSeed: newSeed,
       track: profile.track,
       bio: profile.bio
     });
-    
+
     await updateProfileUI();
     showToast(`Avatar changed to: ${newSeed} 🤖`);
   } catch (error) {
@@ -1871,16 +1659,15 @@ async function cycleAvatar() {
   }
 }
 
-// Update track badge - UPDATED with database
 async function updateTrackBadge() {
   const trackSelect = document.getElementById('profile-sub-track');
+  if (!trackSelect) return;
+
   const selectedTrack = trackSelect.value;
   const badgeEl = document.getElementById('track-badge');
-  
-  if (badgeEl) {
-    badgeEl.textContent = `${selectedTrack} Specialist`;
-  }
-  
+
+  if (badgeEl) badgeEl.textContent = `${selectedTrack} Specialist`;
+
   try {
     const profile = await ProfileRepository.get(currentUserId);
     await ProfileRepository.update(currentUserId, {
@@ -1889,7 +1676,9 @@ async function updateTrackBadge() {
       track: selectedTrack,
       bio: profile.bio
     });
-    showToast(`Specialization set to ${selectedTrack}! ✨`);
+    if (document.activeElement === trackSelect) {
+      showToast(`Specialization set to ${selectedTrack}! ✨`);
+    }
   } catch (error) {
     console.error('❌ Error updating track:', error);
     showToast('Error updating track');
@@ -1897,17 +1686,17 @@ async function updateTrackBadge() {
 }
 
 // ============ PROFILE EVENT LISTENERS ============
-
-// Avatar click to cycle
-// ============ PROFILE EVENT LISTENERS ============
-
 document.addEventListener('DOMContentLoaded', () => {
-  const avatarBlock = document.querySelector('.profile-avatar-block');
+  // Avatar click - using the block ID instead of inline onclick
+  const avatarBlock = document.getElementById('profile-avatar-block');
   if (avatarBlock) {
-    avatarBlock.addEventListener('click', cycleAvatar);
+    avatarBlock.addEventListener('click', (e) => {
+      e.preventDefault();
+      cycleAvatar();
+    });
   }
-  
-  // Profile name edit - save to database on blur
+
+  // Profile name edit
   const nameEl = document.getElementById('profile-display-name');
   if (nameEl) {
     nameEl.addEventListener('blur', async (e) => {
@@ -1927,8 +1716,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  
-  // Profile bio edit - save to database on blur
+
+  // Profile bio edit
   const bioEl = document.getElementById('profile-bio');
   if (bioEl) {
     bioEl.addEventListener('blur', async (e) => {
@@ -1948,7 +1737,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  
+
   // Track selection change
   const trackSelect = document.getElementById('profile-sub-track');
   if (trackSelect) {
@@ -1956,20 +1745,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// ⬇️⬇️⬇️ PASTE THE AUTH CODE HERE ⬇️⬇️⬇️
-
 // ============================================
 // AUTHENTICATION SYSTEM
-// ============================================
-
-// ============================================
-// AUTH FUNCTIONS (Place these ABOVE the form handlers)
 // ============================================
 
 let currentUser = null;
 let isLoggedIn = false;
 
-// Check if user exists in database
 async function userExists(username) {
   try {
     const allUsers = await db.getAll('users');
@@ -1980,7 +1762,6 @@ async function userExists(username) {
   }
 }
 
-// Register new user
 async function registerUser(username, email, password) {
   try {
     const exists = await userExists(username);
@@ -1988,7 +1769,7 @@ async function registerUser(username, email, password) {
       showToast('❌ Username already exists!');
       return false;
     }
-    
+
     const user = {
       username: username,
       email: email,
@@ -1996,22 +1777,22 @@ async function registerUser(username, email, password) {
       createdAt: new Date().toISOString(),
       userId: username
     };
-    
+
     await db.add('users', user);
-    
+
     await ProfileRepository.update(username, {
       displayName: username,
       avatarSeed: 'taskahead',
       track: 'General ICT',
       bio: 'Welcome to TaskAhead! 🌸'
     });
-    
+
     await GamificationRepository.update(username, {
       xp: 0,
       plantTier: 'Seedling',
       lastUpdated: new Date().toISOString()
     });
-    
+
     showToast('✅ Registration successful! Please login.');
     return true;
   } catch (error) {
@@ -2021,25 +1802,24 @@ async function registerUser(username, email, password) {
   }
 }
 
-// Login user
 async function loginUser(username, password) {
   try {
     const allUsers = await db.getAll('users');
     const user = allUsers.find(u => u.username === username && u.password === password);
-    
+
     if (!user) {
       showToast('❌ Invalid username or password!');
       return false;
     }
-    
+
     currentUser = user;
     isLoggedIn = true;
     currentUserId = username;
-    
+
     await loadAllData();
     refreshAllUI();
     updateAuthUI();
-    
+
     showToast(`✅ Welcome back, ${username}! 🌸`);
     return true;
   } catch (error) {
@@ -2049,25 +1829,23 @@ async function loginUser(username, password) {
   }
 }
 
-// Logout user
 async function logoutUser() {
   currentUser = null;
   isLoggedIn = false;
   currentUserId = 'default-user';
-  
+
   await loadAllData();
   refreshAllUI();
   updateAuthUI();
-  
+
   showToast('👋 Logged out successfully!');
 }
 
-// Update UI based on auth state
 function updateAuthUI() {
   const loginBtn = document.querySelector('.mt-login-btn');
   const navLoginBtns = document.querySelectorAll('.nav-btn[data-target="auth-section"]');
   const authStatusText = document.getElementById('auth-status-text');
-  
+
   if (isLoggedIn && currentUser) {
     if (loginBtn) {
       loginBtn.innerHTML = `<i class="fa-solid fa-user-check"></i> ${currentUser.username}`;
@@ -2098,93 +1876,71 @@ function updateAuthUI() {
 }
 
 // ============ AUTH FORM HANDLERS ============
+document.addEventListener('DOMContentLoaded', () => {
+  const regForm = document.getElementById('db-register-form');
+  const loginForm = document.getElementById('db-login-form');
 
-// Handle registration
-document.getElementById('db-register-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  const username = document.getElementById('reg-uid').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const password = document.getElementById('reg-pwd').value;
-  const statusEl = document.getElementById('register-status');
-  
-  if (!username || !email || !password) {
-    if (statusEl) {
-      statusEl.innerHTML = '❌ Please fill in all fields';
-      statusEl.style.color = 'var(--pink)';
-    }
-    return;
+  if(regForm){
+    regForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('reg-uid').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-pwd').value;
+      const statusEl = document.getElementById('register-status');
+
+      if (!username || !email || !password) {
+        if (statusEl) { statusEl.innerHTML = '❌ Please fill in all fields'; statusEl.style.color = 'var(--pink)'; }
+        return;
+      }
+
+      if (password.length < 6) {
+        if (statusEl) { statusEl.innerHTML = '❌ Password must be at least 6 characters'; statusEl.style.color = 'var(--pink)'; }
+        return;
+      }
+
+      if (statusEl) { statusEl.innerHTML = '⏳ Creating account...'; statusEl.style.color = 'var(--ink-soft)'; }
+
+      const success = await registerUser(username, email, password);
+
+      if (success) {
+        if (statusEl) { statusEl.innerHTML = '✅ Account created! Please login.'; statusEl.style.color = 'var(--mint)'; }
+        regForm.reset();
+      } else {
+        if (statusEl) { statusEl.innerHTML = '❌ Username already exists or error occurred'; statusEl.style.color = 'var(--pink)'; }
+      }
+    });
   }
-  
-  if (password.length < 6) {
-    if (statusEl) {
-      statusEl.innerHTML = '❌ Password must be at least 6 characters';
-      statusEl.style.color = 'var(--pink)';
-    }
-    return;
-  }
-  
-  if (statusEl) {
-    statusEl.innerHTML = '⏳ Creating account...';
-    statusEl.style.color = 'var(--ink-soft)';
-  }
-  
-  const success = await registerUser(username, email, password);
-  
-  if (success) {
-    if (statusEl) {
-      statusEl.innerHTML = '✅ Account created! Please login.';
-      statusEl.style.color = 'var(--mint)';
-    }
-    document.getElementById('db-register-form').reset();
-  } else {
-    if (statusEl) {
-      statusEl.innerHTML = '❌ Username already exists or error occurred';
-      statusEl.style.color = 'var(--pink)';
-    }
+
+  if(loginForm){
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('login-uid').value.trim();
+      const password = document.getElementById('login-pwd').value;
+      const statusEl = document.getElementById('login-status');
+
+      if (!username || !password) {
+        if (statusEl) { statusEl.innerHTML = '❌ Please enter username and password'; statusEl.style.color = 'var(--pink)'; }
+        return;
+      }
+
+      if (statusEl) { statusEl.innerHTML = '⏳ Logging in...'; statusEl.style.color = 'var(--ink-soft)'; }
+
+      const success = await loginUser(username, password);
+
+      if (success) {
+        if (statusEl) { statusEl.innerHTML = '✅ Login successful! Welcome back! 🌸'; statusEl.style.color = 'var(--mint)'; }
+        loginForm.reset();
+        document.querySelector('.nav-btn[data-target="dashboard"]')?.click();
+      } else {
+        if (statusEl) { statusEl.innerHTML = '❌ Invalid username or password'; statusEl.style.color = 'var(--pink)'; }
+      }
+    });
   }
 });
 
-// Handle login
-document.getElementById('db-login-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  const username = document.getElementById('login-uid').value.trim();
-  const password = document.getElementById('login-pwd').value;
-  const statusEl = document.getElementById('login-status');
-  
-  if (!username || !password) {
-    if (statusEl) {
-      statusEl.innerHTML = '❌ Please enter username and password';
-      statusEl.style.color = 'var(--pink)';
-    }
-    return;
-  }
-  
-  if (statusEl) {
-    statusEl.innerHTML = '⏳ Logging in...';
-    statusEl.style.color = 'var(--ink-soft)';
-  }
-  
-  const success = await loginUser(username, password);
-  
-  if (success) {
-    if (statusEl) {
-      statusEl.innerHTML = '✅ Login successful! Welcome back! 🌸';
-      statusEl.style.color = 'var(--mint)';
-    }
-    document.getElementById('db-login-form').reset();
-    // Switch to dashboard
-    document.querySelector('.nav-btn[data-target="dashboard"]')?.click();
-  } else {
-    if (statusEl) {
-      statusEl.innerHTML = '❌ Invalid username or password';
-      statusEl.style.color = 'var(--pink)';
-    }
-  }
-});
-
-// Handle logout (when clicking the logout nav item)
+// Handle logout
 document.addEventListener('click', async (e) => {
   const btn = e.target.closest('.nav-btn');
   if (btn && btn.dataset.target === 'logout') {
@@ -2193,7 +1949,6 @@ document.addEventListener('click', async (e) => {
   }
 });
 
-// Call updateAuthUI on page load to set initial state
 document.addEventListener('DOMContentLoaded', () => {
   updateAuthUI();
 });
