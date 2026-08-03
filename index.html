@@ -3,574 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>TaskAhead 🌸 | Student Garden OS</title>
+<title>TaskAhead ⚔️|Grand Line OS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
-
 <base target="_blank">
 </head>
 <body>
+    <style>
+  :root {
+  /* --- LIGHT PIRATE THEME --- */
+  --cream: #FFFDF9;         /* Soft warm white canvas */
+  --paper: #FFFFFF;         /* Pure white background */
+  --paper-alt: #FFF8EB;     /* Sunlit parchment tint */
+  
+  --pink: #E63946;          /* Crimson red accent */
+  --pink-soft: #FFEBEE;     /* Soft crimson tint */
+  --pink-mid: #FFB3BA;      /* Rose highlight */
+  
+  --sky: #2B2D42;           /* Navy accents (replaces sky blue) */
+  --sky-soft: #EDF2F4;      /* Cool white tint */
+  --sky-mid: #8D99AE;       /* Steel blue tint */
+  
+  --mint: #10B981;          /* Emerald sea green */
+  --mint-soft: #E6F4EA;     /* Light sea foam */
+  --mint-mid: #A3E635;      /* Parrot green */
+  
+  --lilac: #D97706;         /* Warm amber (replaces lilac) */
+  --lilac-soft: #FEF3C7;    /* Light amber glow */
+  --lilac-mid: #FCD34D;     /* Golden accent */
+  
+  --butter: #FFC300;        /* Pirate gold / sunny yellow */
+  --butter-mid: #FFE169;    /* Bright gold tint */
+  
+  --ink: #1D3557;           /* Deep navy text */
+  --ink-soft: #457B9D;      /* Soft blue-grey text */
+  --ink-faint: #A8DADC;     /* Muted ocean text */
+  
+  --line: #FFB703;          /* Gold border line */
+  
+  --shadow: 0 6px 18px rgba(230, 57, 70, 0.12);
+  --shadow-lift: 0 14px 30px rgba(230, 57, 70, 0.20);
+  
+  --r-lg: 26px;
+  --r-md: 18px;
+  --r-sm: 12px;
+  
+  --font-display: 'Fredoka', sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+  
+  --deco-corner: "⚓";      /* Anchor icon */
+  --glow: none;
+}
+[data-theme="dark"] {
+  /* --- ONE PIECE DARK THEME --- */
+  --cream: #0B132B;         /* Deep ocean dark blue base */
+  --paper: #111625;         /* Obsidian / dark cabin black */
+  --paper-alt: #1C2541;     /* Dark navy container */
+  
+  --pink: #D90429;          /* Bold Luffy crimson red */
+  --pink-soft: #3D0814;     /* Deep crimson dark shadow */
+  --pink-mid: #EF233C;      /* Vibrant red glow */
+  
+  --sky: #3A86FF;           /* Vivid ocean blue */
+  --sky-soft: #14213D;      /* Deep sea shadow */
+  --sky-mid: #0077B6;       /* Mid ocean blue */
+  
+  --mint: #2EC4B6;          /* Bright sea green */
+  --mint-soft: #0A3A40;     /* Deep sea green shadow */
+  --mint-mid: #20A492;      /* Muted marine green */
+  
+  --lilac: #FFB703;         /* Bright mustard yellow */
+  --lilac-soft: #3D2B00;    /* Dark gold shadow */
+  --lilac-mid: #FB8500;     /* Treasure orange */
+  
+  --butter: #FFC300;        /* Pirate mustard gold */
+  --butter-mid: #8F6A00;    /* Muted gold / bronze */
+  
+  --ink: #FFFFFF;           /* Crisp white text */
+  --ink-soft: #E0E1DD;      /* Light parchment text */
+  --ink-faint: #778DA9;     /* Slate grey text */
+  
+  --line: #FFC300;          /* Mustard gold border line */
+  
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 0 0 1px rgba(255, 195, 0, 0.3), 0 16px 36px rgba(0, 0, 0, 0.75);
+  
+  --deco-corner: "";      /* Jolly Roger / Skull icon */
+  --glow: 0 0 18px rgba(217, 4, 41, 0.45);
+}
 
-<div id="fireflies"></div>
+/* ============ CONFIGURATION THEME SELECTOR GRID ============ */
+.theme-selection-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
 
-<!-- ============ MOBILE TOP BAR ============ -->
-<div class="mobile-topbar">
-  <button class="hamburger-btn" id="hamburgerBtn" title="Open menu"><i class="fa-solid fa-bars"></i></button>
-  <div class="mt-logo"><i class="fa-solid fa-seedling" style="color:var(--pink)"></i> Task<span>Ahead</span></div>
-  <button class="mt-login-btn nav-btn" data-target="auth-section" title="Login / Register"><i class="fa-solid fa-right-to-bracket"></i></button>
-</div>
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
+.theme-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin-top: 8px;
+}
 
-<nav class="sidebar" id="sidebar">
-  <div class="logo-container">
-    <div class="logo-icon-box"><i class="fa-solid fa-seedling"></i></div>
-    <div class="logo-text">
-      <h2>Task<span>Ahead</span></h2>
-      <p>ANHS ICT Track</p>
-    </div>
-  </div>
+.theme-option input[type="radio"] {
+  display: none; /* Hide default radio button */
+}
 
-  <div class="nav-group">
-    <span class="nav-group-title">Overview</span>
-    <ul class="nav-links">
-      <li><a href="#" class="nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
-    </ul>
-  </div>
+.theme-card-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 10px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  user-select: none;
+}
 
-  <div class="nav-group">
-    <span class="nav-group-title">Academics</span>
-    <ul class="nav-links">
-      <li class="dropdown-wrapper">
-        <button class="dropdown-toggle-btn" id="academicsDropdownBtn">
-          <span><i class="fa-solid fa-graduation-cap"></i> Subjects &amp; Terms</span>
-          <i class="fa-solid fa-chevron-down arrow"></i>
-        </button>
-        <ul class="dropdown-container" id="academicsMenu">
-          <li class="nested-dropdown">
-            <span class="term-title">Term 1</span>
-            <ul class="subject-list">
-              <li contenteditable="true">Introduction to Philosophy</li>
-              <li contenteditable="true">Contemporary Philippine Arts</li>
-              <li contenteditable="true">Practical Research 2</li>
-              <li contenteditable="true">ICT Programming</li>
-              <li contenteditable="true">Physical Science</li>
-              <li contenteditable="true">Homeroom Guidance</li>
-            </ul>
-          </li>
-          <li class="nested-dropdown"><span class="term-title">Term 2</span>
-            <ul class="subject-list">
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-            </ul>
-          </li>
-          <li class="nested-dropdown"><span class="term-title">Term 3</span>
-            <ul class="subject-list">
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-              <li contenteditable="true">[Editable Subject]</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><a href="#" class="nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i> Class Schedule</a></li>
-      <li><a href="#" class="nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</a></li>
-    </ul>
-  </div>
+.theme-card-preview .theme-icon {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
 
-  <div class="nav-group">
-    <span class="nav-group-title">Focus &amp; Wellness</span>
-    <ul class="nav-links">
-      <li><a href="#" class="nav-btn" data-target="timer-section"><i class="fa-solid fa-stopwatch"></i> Focus Timer</a></li>
-      <li><a href="#" class="nav-btn" data-target="notes-section"><i class="fa-solid fa-note-sticky"></i> Workspace Notes</a></li>
-      <li><a href="#" class="nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i> Relax Arcade</a></li>
-    </ul>
-  </div>
+.theme-card-preview .theme-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
 
-  <div class="nav-group">
-    <span class="nav-group-title">Account</span>
-    <ul class="nav-links">
-      <li><a href="#" class="nav-btn" data-target="profile-section"><i class="fa-solid fa-user-gear"></i> Student Profile</a></li>
-      <li><a href="#" class="nav-btn" data-target="settings"><i class="fa-solid fa-sliders"></i> Configuration</a></li>
-      <li><a href="#" class="nav-btn" data-target="about"><i class="fa-solid fa-circle-info"></i> About Devs</a></li>
-      <li><a href="#" class="nav-btn" data-target="auth-section"><i class="fa-solid fa-right-to-bracket"></i> Login / Register</a></li>
-    </ul>
-  </div>
+.theme-card-preview .theme-desc {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
 
-  <div class="sidebar-footer">Made with 💖 by ANHS ICT students</div>
-</nav>
+/* Radio Checked Active Ring State */
+.theme-option input[type="radio"]:checked + .theme-card-preview {
+  border-color: #00d2ff;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+  transform: translateY(-2px);
+}
 
-<main class="main-content">
+/* Individual Preview Card Styles */
+.theme-whitecap { background: #f4f6f9; color: #1e293b; border-color: #cbd5e1; }
+.theme-black-sails { background: #0f172a; color: #f8fafc; border-color: #334155; }
+.theme-ivory-dice { 
+  background: linear-gradient(135deg, #fefefe 0%, #e2e8f0 100%); 
+  color: #0f172a; 
+  box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.2), 0 0 8px rgba(59, 130, 246, 0.3);
+}
+.theme-cursed-gold { 
+  background: #050e0d; 
+  color: #5eead4; 
+  border-color: #134e4a;
+  box-shadow: inset 0 0 12px rgba(16, 185, 129, 0.2), 0 0 8px rgba(234, 179, 8, 0.2);
+}
 
-  <!-- DASHBOARD -->
-  <section id="dashboard" class="content-section active-view">
-    <div class="welcome-hero">
-      <span class="hero-sparkle" style="top:16px; left:46%;">✨</span>
-      <span class="hero-sparkle" style="top:60%; left:8%; animation-delay:.8s;">✨</span>
-      <div class="hero-left">
-        <span class="system-tag">Garden status: growing</span>
-        <h1>Hi there, future dev! 🌸</h1>
-        <p class="hero-quote" id="motivational-quote">"Water your tasks a little each day and watch your whole term bloom."</p>
-        <div class="hero-actions">
-          <button class="btn btn-primary circle-btn nav-btn" data-target="tasks" title="Add a task"><i class="fa-solid fa-plus"></i></button>
-          <button class="btn btn-pink circle-btn nav-btn" data-target="relax" title="Arcade Breaks"><i class="fa-solid fa-gamepad"></i></button>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="plant-box">
-          <div class="plant-visual" id="plant-sprite">🌱</div>
-          <div class="plant-stats">
-            <h4>Growth Tier: <span id="rank-name" class="text-pink">Seedling</span></h4>
-            <p>Level Score: <span id="rank-points">0</span> XP</p>
-          </div>
-          <button class="btn glow-button-blue" id="manual-plant-grow-btn"><i class="fa-solid fa-droplet"></i> Water your plant</button>
-        </div>
-      </div>
-    </div>
 
-    <div class="glance-grid">
-      <div class="card glance-card">
-        <div class="glance-icon gi-class"><i class="fa-solid fa-calendar-day"></i></div>
-        <div>
-          <h4>Next up today</h4>
-          <p id="glance-class">Loading…</p>
-          <a href="#" class="glance-link nav-btn" data-target="schedule-section">View schedule →</a>
-        </div>
-      </div>
-      <div class="card glance-card">
-        <div class="glance-icon gi-task"><i class="fa-solid fa-list-check"></i></div>
-        <div>
-          <h4>Closest deadline</h4>
-          <p id="glance-task">No tasks yet</p>
-          <a href="#" class="glance-link nav-btn" data-target="tasks">Manage tasks →</a>
-        </div>
-      </div>
-      <div class="card glance-card">
-        <div class="glance-icon gi-timer"><i class="fa-solid fa-stopwatch"></i></div>
-        <div>
-          <h4>Need to focus?</h4>
-          <p>Start a session</p>
-          <a href="#" class="glance-link nav-btn" data-target="timer-section">Open timer →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TASKS & DEADLINES (merged quick-add + tracker) -->
-  <section id="tasks" class="content-section">
-    <h2><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</h2>
-    <p class="section-sub">Plant a new requirement, then track it through to done.</p>
-
-    <div class="card quick-add-bar glow-box-blue">
-  <h3>🌷 Quick Add Task</h3>
-  <form id="db-task-form" class="task-form">
-    <input type="text" id="db-task-name" placeholder="Requirement name (e.g. Code Database Schema)" required>
-    
-    <!-- This text input linked to the datalist makes it fully editable -->
-    <input type="text" id="db-task-subject" placeholder="Select or type subject..." list="subject-options" required style="font-family: var(--font-body); font-weight: 500;">
-    
-    <!-- The datalist provides the default drop-down options -->
-    <datalist id="subject-options">
-      <option value="Introduction to Philosophy">
-      <option value="Contemporary Philippine Arts">
-      <option value="Practical Research 2">
-      <option value="ICT Programming">
-      <option value="Physical Science">
-      <option value="Homeroom Guidance">
-    </datalist>
-    
-    <input type="date" id="db-task-date" required>
-    <button type="submit" class="btn btn-primary circle-btn form-submit-circle" title="Deploy task"><i class="fa-solid fa-check"></i></button>
-  </form>
-</div>
-
-    <div class="card table-card glow-box-pink">
-      <table class="task-table">
-        <thead><tr><th>Task</th><th>Subject</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
-        <tbody id="db-task-table-body"></tbody>
-      </table>
-      <div class="empty-state-notice show" id="tasks-empty-notice">
-        <i class="fa-solid fa-seedling empty-icon"></i>
-        <p>No tasks planted yet. Add one above!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCHEDULE -->
-  <section id="schedule-section" class="content-section">
-    <h2><i class="fa-solid fa-calendar-days"></i> Weekly Class Schedule</h2>
-    <div class="schedule-matrix-grid">
-      <div class="card schedule-day-card">
-        <div class="day-header mon">Monday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
-        </ul>
-      </div>
-      <div class="card schedule-day-card">
-        <div class="day-header tue">Tuesday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
-        </ul>
-      </div>
-      <div class="card schedule-day-card">
-        <div class="day-header wed">Wednesday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
-        </ul>
-      </div>
-      <div class="card schedule-day-card">
-        <div class="day-header thu">Thursday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Physical Science</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">ICT Programming</strong></li>
-        </ul>
-      </div>
-      <div class="card schedule-day-card">
-        <div class="day-header fri">Friday</div>
-        <ul class="schedule-blocks">
-          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
-          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
-          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
-          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
-          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOCUS TIMER (own page now) -->
-  <section id="timer-section" class="content-section">
-    <h2><i class="fa-solid fa-stopwatch"></i> Focus Timer</h2>
-    <div class="timer-page-grid">
-      <div class="card timer-card glow-box-purple">
-        <h3>🍓 Focus Session</h3>
-        <div class="timer-display">
-          <span id="timer-minutes" contenteditable="true">25</span>:<span id="timer-seconds" contenteditable="true">00</span>
-        </div>
-        <div class="timer-controls">
-          <button class="btn btn-pink circle-btn" id="start-timer-btn" title="Toggle Timer"><i class="fa-solid fa-play"></i></button>
-          <button class="btn btn-outline circle-btn" id="reset-timer-btn" title="Reset"><i class="fa-solid fa-rotate-left"></i></button>
-        </div>
-        <div class="timer-note-area">
-          <textarea placeholder="Jot a quick note for this session..." class="editable-timer-note"></textarea>
-        </div>
-      </div>
-      <div class="card tip-card glow-box-blue">
-        <h3>🌼 Focus Tips</h3>
-        <p>Editable minutes let you tailor sessions to your energy for the day.</p>
-        <ul>
-          <li>25 min focus → 5 min break</li>
-          <li>Silence notifications first</li>
-          <li>Finish a session to earn plant XP</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- NOTES -->
-  <section id="notes-section" class="content-section">
-    <div class="section-header-flex">
-      <h2><i class="fa-solid fa-note-sticky"></i> Sticky Reminders</h2>
-      <button class="btn btn-primary circle-btn" id="add-note-btn" title="Add Sticky Note"><i class="fa-solid fa-plus"></i></button>
-    </div>
-    <div class="sticky-notes-board" id="sticky-board">
-      <p class="notes-empty" id="notes-empty">No notes yet — click + to stick one on the board 📌</p>
-    </div>
-  </section>
-
-  <!-- RELAX (5 games) -->
-  <section id="relax" class="content-section">
-    <h2><i class="fa-solid fa-gamepad"></i> Relax Arcade</h2>
-    <div class="arcade-card-container">
-      <div class="arcade-tabs">
-        <button class="tab-btn active" onclick="switchRelaxGame(0)">🫧 Bubble Popper</button>
-        <button class="tab-btn" onclick="switchRelaxGame(1)">🌾 Zen Garden</button>
-        <button class="tab-btn" onclick="switchRelaxGame(2)">💧 Musical Ripples</button>
-        <button class="tab-btn" onclick="switchRelaxGame(3)">⭐ Star Catcher</button>
-        <button class="tab-btn" onclick="switchRelaxGame(4)">🌸 Memory Blossom</button>
-      </div>
-      <div class="game-viewport-box">
-        <div class="relax-game-panel active-panel" id="r-game-0">
-          <div class="bubble-grid" id="bubbleGrid"></div>
-          <button class="btn btn-outline" onclick="resetBubbles()"><i class="fa-solid fa-rotate-left"></i> Refresh Sheet</button>
-        </div>
-        <div class="relax-game-panel" id="r-game-1">
-          <canvas id="zenCanvas"></canvas>
-          <button class="btn btn-outline reset-overlay-btn" onclick="clearSand()"><i class="fa-solid fa-rotate-left"></i> Smooth Sand</button>
-        </div>
-        <div class="relax-game-panel" id="r-game-2">
-          <canvas id="rippleCanvas"></canvas>
-          <p class="tap-hint-overlay">Tap anywhere inside to play a gentle note</p>
-        </div>
-        <div class="relax-game-panel" id="r-game-3">
-          <canvas id="catcherCanvas"></canvas>
-          <div class="game-score-row">
-            <span>Catch the falling stars ✨</span>
-            <span>Score: <span id="catcher-score">0</span></span>
-          </div>
-        </div>
-        <div class="relax-game-panel" id="r-game-4">
-          <div class="blossom-grid" id="blossomGrid"></div>
-          <p class="blossom-status" id="blossomStatus">Find every matching pair 🌸</p>
-          <div style="text-align:center; margin-top:12px;">
-            <button class="btn btn-outline" onclick="setupBlossom()"><i class="fa-solid fa-rotate-left"></i> Reshuffle</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROFILE -->
-  <section id="profile-section" class="content-section">
-    <h2><i class="fa-solid fa-user-gear"></i> Student Profile</h2>
-    <div class="card profile-card-layout glow-box-blue" style="flex-direction: column; align-items: flex-start; gap: 20px;">
-      
-      <div style="display: flex; align-items: center; gap: 26px; flex-wrap: wrap; width: 100%;">
-        <!-- Interactive Avatar Selector -->
-        <div class="profile-avatar-block" style="position: relative; cursor: pointer;" onclick="cycleAvatar()" title="Click to change avatar!">
-          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=taskahead" alt="Avatar" class="profile-large-avatar" id="profile-avatar-img">
-          <div style="position: absolute; bottom: 0; right: 0; background: var(--pink); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 2px solid var(--paper);">
-            <i class="fa-solid fa-rotate"></i>
-          </div>
-        </div>
-        
-        <div class="profile-details-block" style="flex: 1; min-width: 200px;">
-          <h3 contenteditable="true" id="profile-display-name" style="display: inline-block; border-bottom: 2px dashed var(--line); padding-right: 8px;">ICT_Student_User</h3>
-          
-          <!-- Dropdown Focus Selector -->
-          <p class="profile-track" style="margin-top: 8px;">
-            Track focus: 
-            <select id="profile-sub-track" style="padding: 4px 8px; border-radius: 8px; border: 2px solid var(--line); background: var(--paper-alt); color: var(--ink); font-weight: 700; font-family: var(--font-body);" onchange="updateTrackBadge()">
-              <option value="General ICT">Grade 12 General ICT Specialist</option>
-              <option value="Software Programming">Grade 12 Software Programming</option>
-              <option value="Animation & Graphics">Grade 12 Animation & Graphics</option>
-              <option value="Network Systems">Grade 12 Network Systems</option>
-            </select>
-          </p>
-          
-          <div class="profile-metrics-pills" style="margin-top: 10px;">
-            <span class="badge badge-purple">Level rank: <span id="profile-rank-tier">Seedling</span></span>
-            <span class="badge badge-blue" id="track-badge">General ICT Specialist</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Custom Bio Area -->
-      <div style="width: 100%; border-top: 2px dashed var(--line); padding-top: 16px;">
-        <h4 style="font-family: var(--font-display); font-size: 15px; margin-bottom: 6px;">🌸 Dev Bio / Motto</h4>
-        <textarea id="profile-bio" placeholder="Write something interesting about your coding journey or drop your favorite school motto here..." style="width: 100%; min-height: 60px; padding: 10px; border-radius: var(--r-sm); border: 2px dashed var(--line); background: var(--paper-alt); color: var(--ink); font-size: 13.5px; resize: vertical; font-family: var(--font-body);"></textarea>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SETTINGS / CONFIGURATION -->
-  <section id="settings" class="content-section">
-    <h2><i class="fa-solid fa-sliders"></i> Configuration</h2>
-    <div class="card settings-card glow-box-purple">
-      <div class="setting-row">
-        <div><h4>Theme Luminescence Switch</h4><p>Blossom daytime pastel mode, or Fairybloom Night's enchanted paradise glow</p></div>
-        <div class="theme-toggle">
-          <i class="fa-solid fa-sun"></i>
-          <label class="switch"><input type="checkbox" id="mode-checkbox" onchange="toggleTheme()"><span class="slider"></span></label>
-          <i class="fa-solid fa-moon"></i>
-        </div>
-      </div>
-      <div class="setting-row">
-        <div><h4>Mobile Optimized Layout</h4><p>Preview the compact phone-friendly interface on any screen size</p></div>
-        <label class="switch"><input type="checkbox" id="mobile-mode-checkbox" onchange="toggleMobileMode()"><span class="slider"></span></label>
-      </div>
-      <div class="setting-row">
-        <div><h4>Hardware Acceleration Toggle</h4><p>Optimize frame rendering for background task cycles</p></div>
-        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-      </div>
-      <div class="setting-row">
-        <div><h4>Automated Backup Sync</h4><p>Periodically send app state to your backup repository</p></div>
-        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-      </div>
-    </div>
-  </section>
-
-   <!-- AUTH SECTION -->
-  <section id="auth-section" class="content-section">
-    <h2><i class="fa-solid fa-user-shield"></i> Secure Data Storage Handshake</h2>
-    
-    <div class="dashboard-grid">
-      
-      <!-- LOGIN FORM -->
-      <div class="card glow-box-blue">
-        <h3>🔐 Sign In</h3>
-        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
-          Enter your credentials to access your garden 🌸
-        </p>
-        
-        <form id="db-login-form" class="task-form" style="flex-direction:column; gap:12px;">
-          <input 
-            type="text" 
-            id="login-uid" 
-            name="username" 
-            placeholder="👤 Username" 
-            required
-            style="width:100%;"
-          >
-          <input 
-            type="password" 
-            id="login-pwd" 
-            name="password" 
-            placeholder="🔑 Password" 
-            required
-            style="width:100%;"
-          >
-          <button 
-            type="submit" 
-            class="btn btn-primary form-submit-circle" 
-            style="width:100%; justify-content:center; padding:12px;"
-          >
-            <i class="fa-solid fa-unlock-keyhole"></i> Sign In
-          </button>
-        </form>
-        
-        <div id="login-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
-      </div>
-      
-      <!-- REGISTER FORM -->
-      <div class="card glow-box-pink">
-        <h3>🌼 Register</h3>
-        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
-          Create your garden account and start growing! 🌱
-        </p>
-        
-        <form id="db-register-form" class="task-form" style="flex-direction:column; gap:12px;">
-          <input 
-            type="text" 
-            id="reg-uid" 
-            name="username" 
-            placeholder="👤 Choose a username" 
-            required
-            style="width:100%;"
-          >
-          <input 
-            type="email" 
-            id="reg-email" 
-            name="email" 
-            placeholder="📧 School Email Address" 
-            required
-            style="width:100%;"
-          >
-          <input 
-            type="password" 
-            id="reg-pwd" 
-            name="password" 
-            placeholder="🔑 Password (min 6 characters)" 
-            required
-            style="width:100%;"
-          >
-          <button 
-            type="submit" 
-            class="btn btn-pink form-submit-circle" 
-            style="width:100%; justify-content:center; padding:12px;"
-          >
-            <i class="fa-solid fa-id-card"></i> Create Account
-          </button>
-        </form>
-        
-        <div id="register-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
-      </div>
-      
-    </div>
-    
-    <!-- Show current user status -->
-    <div id="auth-status" style="margin-top:20px; text-align:center; font-size:14px; color:var(--ink-soft);">
-      <i class="fa-solid fa-info-circle"></i> 
-      <span id="auth-status-text">Not logged in</span>
-    </div>
-    
-  </section>
-  <!-- ABOUT -->
-  <section id="about" class="content-section">
-    <h2><i class="fa-solid fa-circle-info"></i> About TaskAhead</h2>
-    <div class="card about-card-frame glow-box-pink">
-      <h3>TaskAhead Platform Framework</h3>
-      <p><strong>TaskAhead</strong> is a specialized, production-ready schoolwork workflow management application. Designed around the intensive track challenges of modern Senior High School environments, it pairs academic tracking with a cozy, garden-fairy interface that adapts across devices.</p>
-      <blockquote>
-        <strong>Credit Notice &amp; Research Attribution (ctto):</strong><br>
-        This application was researched, conceptualized, and built by <strong>Anonang National High School Students</strong> as a primary practical development solution for their formal research track study. Engineered to boost focus for ICT student tracking, its versatile design extends complete functional utility to multiple general tracks and student cohorts across institutions.
-      </blockquote>
-      <div class="framework-credits">© S.Y. 2026–2027 ANHS Academic Research Operations</div>
-    </div>
-  </section>
-
-</main>
-
-<!-- ============ BOTTOM TAB BAR (phones) ============ -->
-<div class="bottom-tabbar">
-  <button class="bt-btn nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i>Home</button>
-  <button class="bt-btn nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i>Tasks</button>
-  <button class="bt-btn nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i>Class</button>
-  <button class="bt-btn nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i>Relax</button>
-  <button class="bt-btn" id="bottomMenuBtn"><i class="fa-solid fa-bars"></i>Menu</button>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<style>
 /* ============================================================
-   TOKENS — two full visual identities sharing one variable API
-   LIGHT  = "Blossom"          → sugary, sparkly, girly-kawaii
-   DARK   = "Fairybloom Night" → enchanted paradise fairy glow
-   ============================================================ */
-:root{
-  --cream:#FFF3F8; --paper:#FFFFFF; --paper-alt:#FFF9FC;
-  --pink:#FF5FA0; --pink-soft:#FFE1EF; --pink-mid:#FFB6D8;
-  --sky:#3FC1FF; --sky-soft:#E2F6FF; --sky-mid:#AEE2FF;
-  --mint:#3FD693; --mint-soft:#E1FBF0; --mint-mid:#BEEFC7;
-  --lilac:#A374FF; --lilac-soft:#F0E6FF; --lilac-mid:#D6C6FF;
-  --butter:#FFD866; --butter-mid:#FFE49E;
-  --ink:#7A3358; --ink-soft:#B98CA8; --ink-faint:#E6C7D8;
-  --line:#FFD3E8;
-  --shadow:0 6px 18px rgba(255,95,160,.14);
-  --shadow-lift:0 14px 30px rgba(255,95,160,.22);
-  --r-lg:26px; --r-md:18px; --r-sm:12px;
-  --font-display:'Fredoka',sans-serif;
-  --font-body:'Quicksand',sans-serif;
-  --deco-corner:"🎀";
-  --glow:none;
+   THE REAL FIX: every element in this stylesheet is painted with
+   --cream / --paper / --paper-alt / --pink* / --sky* / --mint* /
+   --lilac* / --butter* / --ink* / --line / --shadow* / --glow.
+   The old theme blocks below only ever set --bg-main/--card-bg/
+   --accent (variables nothing else uses), so picking a theme
+   changed almost nothing on screen. Each block now sets the f
+   token set, so the whole page actually repaints. ============ */
+
+/* ============ THEME 1: WHITECAP (Light - unchanged) ============ */
+body.theme-whitecap {
+  --cream:#FFFDF9; --paper:#FFFFFF; --paper-alt:#FFF8EB;
+  --pink:#E63946; --pink-soft:#FFEBEE; --pink-mid:#FFB3BA;
+  --sky:#2B2D42; --sky-soft:#EDF2F4; --sky-mid:#8D99AE;
+  --mint:#10B981; --mint-soft:#E6F4EA; --mint-mid:#A3E635;
+  --lilac:#D97706; --lilac-soft:#FEF3C7; --lilac-mid:#FCD34D;
+  --butter:#FFC300; --butter-mid:#FFE169;
+  --ink:#1D3557; --ink-soft:#457B9D; --ink-faint:#A8DADC;
+  --line:#FFB703;
+  --shadow: 0 6px 18px rgba(230,57,70,.12);
+  --shadow-lift: 0 14px 30px rgba(230,57,70,.20);
+  --glow: none;
+  --deco-corner: "⚓";
 }
-[data-theme="dark"]{
-  --cream:#140F2E; --paper:#1F1840; --paper-alt:#261C4E;
-  --pink:#FF7ED4; --pink-soft:#3A2456; --pink-mid:#7A4B8F;
-  --sky:#5FE3E0; --sky-soft:#1D3A4A; --sky-mid:#3A6E7A;
-  --mint:#7CF2B0; --mint-soft:#1B3B34; --mint-mid:#3D7A5F;
-  --lilac:#B99BFF; --lilac-soft:#2A2154; --lilac-mid:#5B3F9E;
-  --butter:#FFE18A; --butter-mid:#8A6F2E;
-  --ink:#F3ECFF; --ink-soft:#B7A6E6; --ink-faint:#4C3E7A;
-  --line:#3F3170;
-  --shadow:0 8px 24px rgba(0,0,0,.4);
-  --shadow-lift:0 0 0 1px rgba(255,126,212,.15), 0 16px 36px rgba(0,0,0,.5);
-  --deco-corner:"✨";
-  --glow:0 0 18px rgba(122,222,255,.35);
+
+/* ============ THEME 2: BLACK SAILS (Dark - unchanged) ============ */
+body.theme-black-sails {
+  --cream:#0B132B; --paper:#111625; --paper-alt:#1C2541;
+  --pink:#D90429; --pink-soft:#3D0814; --pink-mid:#EF233C;
+  --sky:#3A86FF; --sky-soft:#14213D; --sky-mid:#0077B6;
+  --mint:#2EC4B6; --mint-soft:#0A3A40; --mint-mid:#20A492;
+  --lilac:#FFB703; --lilac-soft:#3D2B00; --lilac-mid:#FB8500;
+  --butter:#FFC300; --butter-mid:#8F6A00;
+  --ink:#FFFFFF; --ink-soft:#E0E1DD; --ink-faint:#778DA9;
+  --line:#FFC300;
+  --shadow: 0 8px 24px rgba(0,0,0,.6);
+  --shadow-lift: 0 0 0 1px rgba(255,195,0,.3), 0 16px 36px rgba(0,0,0,.75);
+  --glow: 0 0 18px rgba(217,4,41,.45);
+  --deco-corner: "☠️";
 }
+
+/* ============ THEME 3: IVORY DICE (rare glowing hybrid) ============
+   Semi-light ivory/white base with dark navy ink for readability,
+   accented with a red + yellow + blue + white glow combo. */
+body.theme-ivory-dice {
+  --cream:#F6F4EE; --paper:#FFFFFF; --paper-alt:#EFEDE4;
+  --pink:#EF4444; --pink-soft:#FEE2E2; --pink-mid:#FCA5A5;
+  --sky:#2563EB; --sky-soft:#DBEAFE; --sky-mid:#60A5FA;
+  --mint:#93C5FD; --mint-soft:#EFF6FF; --mint-mid:#3B82F6;
+  --lilac:#F59E0B; --lilac-soft:#FEF3C7; --lilac-mid:#FBBF24;
+  --butter:#FACC15; --butter-mid:#FDE68A;
+  --ink:#12182B; --ink-soft:#334155; --ink-faint:#64748B;
+  --line:#93C5FD;
+  --shadow: 0 6px 20px rgba(37,99,235,.15);
+  --shadow-lift: 0 0 22px rgba(250,204,21,.35), 0 0 34px rgba(239,68,68,.22), 0 16px 34px rgba(37,99,235,.2);
+  --glow: 0 0 16px rgba(255,255,255,.65), 0 0 26px rgba(96,165,250,.4);
+  --deco-corner: "🎲";
+
+  background-image: radial-gradient(circle at 10% 20%, rgba(239,68,68,.10) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(37,99,235,.10) 0%, transparent 40%),
+                    radial-gradient(circle at 50% 50%, rgba(250,204,21,.08) 0%, transparent 60%);
+  background-size: 200% 200%;
+  animation: ivoryFlow 14s ease-in-out infinite;
+}
+
+body.theme-ivory-dice .card {
+  border: 1px solid rgba(255,255,255,.8);
+  box-shadow: 0 0 15px rgba(255,255,255,.55),
+              0 0 25px rgba(96,165,250,.28),
+              0 0 35px rgba(239,68,68,.18);
+}
+
+/* ============ THEME 4: CURSED GOLD (eerie greenish-dark glow) ============
+   Same red/yellow/blue/white family as Ivory Dice, pushed much
+   darker with a sickly green undertone, still readable. */
+body.theme-cursed-gold {
+  --cream:#050807; --paper:#0A100D; --paper-alt:#0F1A15;
+  --pink:#B91C1C; --pink-soft:#2A0808; --pink-mid:#DC2626;
+  --sky:#155E56; --sky-soft:#062120; --sky-mid:#0E4F4A;
+  --mint:#10B981; --mint-soft:#052E1E; --mint-mid:#34D399;
+  --lilac:#CA8A04; --lilac-soft:#2A2003; --lilac-mid:#EAB308;
+  --butter:#EAB308; --butter-mid:#78350F;
+  --ink:#D9F5E7; --ink-soft:#7FA79A; --ink-faint:#3F5750;
+  --line:#134E4A;
+  --shadow: 0 8px 26px rgba(0,0,0,.75);
+  --shadow-lift: 0 0 0 1px rgba(16,185,129,.25), 0 16px 40px rgba(0,0,0,.85);
+  --glow: 0 0 20px rgba(16,185,129,.45), 0 0 30px rgba(234,179,8,.3), 0 0 10px rgba(220,38,38,.25);
+  --deco-corner: "☠️";
+
+  background-image: radial-gradient(circle at 50% 0%, rgba(16,185,129,.14) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(234,179,8,.09) 0%, transparent 40%),
+                    radial-gradient(circle at 10% 90%, rgba(220,38,38,.09) 0%, transparent 40%);
+  background-size: 200% 200%;
+  animation: cursedFlow 16s ease-in-out infinite;
+}
+
+body.theme-cursed-gold .card {
+  border: 1px solid rgba(16,185,129,.3);
+  box-shadow: inset 0 0 15px rgba(5,150,105,.15),
+              0 0 20px rgba(16,185,129,.25),
+              0 0 30px rgba(234,179,8,.15);
+}
+
+/* Slow drifting glow — the "flowing effect" for the two new themes */
+@keyframes ivoryFlow {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+@keyframes cursedFlow {
+  0%,100% { background-position: 0% 0%; }
+  50%     { background-position: 100% 100%; }
+}
+
 *{box-sizing:border-box; margin:0; padding:0;}
 body{
   font-family:var(--font-body);
@@ -632,10 +340,19 @@ body::before{
   width:40px; height:40px; border-radius:50%; border:2px solid var(--line); background:var(--paper-alt);
   color:var(--ink); font-size:16px; display:flex; align-items:center; justify-content:center;
 }
-.sidebar-overlay{
-  display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:15;
+.sidebar-overlay {
+  display: none; 
+  position: fixed; 
+  inset: 0; 
+  background: rgba(0,0,0,.35); 
+  z-index: 15;
+  pointer-events: none; /* Prevents blocking clicks when hidden */
 }
-.sidebar-overlay.show{display:block;}
+
+.sidebar-overlay.show {
+  display: block;
+  pointer-events: auto; /* Re-enables clicks when menu is open */
+}
 
 /* ============ SIDEBAR ============ */
 .sidebar{
@@ -726,12 +443,12 @@ body::before{
   gap:30px; position:relative; overflow:hidden; box-shadow:var(--shadow);
 }
 [data-theme="dark"] .welcome-hero{border-style:solid; box-shadow:var(--shadow-lift);}
-.welcome-hero::after{content:"✿"; position:absolute; top:-10px; right:-10px; font-size:120px; color:var(--pink-mid); opacity:.18; transform:rotate(12deg);}
-[data-theme="dark"] .welcome-hero::after{content:"🧚"; opacity:.15;}
+.welcome-hero::after{content:"⚔︎"; position:absolute; top:-10px; right:-10px; font-size:120px; color:var(--pink-mid); opacity:.18; transform:rotate(12deg);}
+[data-theme="dark"] .welcome-hero::after{content:"⎈"; opacity:.15;}
 .hero-sparkle{position:absolute; font-size:18px; opacity:.6; animation:twinkle 2.4s ease-in-out infinite;}
-@keyframes twinkle{0%,100%{opacity:.25; transform:scale(.9);} 50%{opacity:.8; transform:scale(1.1);}}
+@keyframes twinkle{0%,100%{opacity:.25; transform:scale(.9);} 0%{opacity:.8; transform:scale(1.1);}}
 .system-tag{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.6px; background:var(--mint-soft); color:var(--mint); padding:5px 12px; border-radius:999px; margin-bottom:10px;}
-.system-tag::before{content:"●"; font-size:8px;}
+.system-tag::before{content:"﴾ ﴿‏"; font-size:8px;}
 .hero-left h1{font-size:32px; margin-bottom:10px; color:var(--ink);}
 .hero-quote{font-size:14.5px; color:var(--ink-soft); max-width:420px; line-height:1.6; font-weight:600; margin-bottom:18px;}
 .hero-actions{display:flex; gap:10px;}
@@ -768,7 +485,7 @@ body::before{
 .dashboard-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:6px;}
 @media(max-width:900px){.dashboard-grid{grid-template-columns:1fr;}}
 
-/* task quick-add bar (now inline atop Tasks section) */
+/* task quick-add bar */
 .quick-add-bar{margin-bottom:24px;}
 .task-form{display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
 .task-form input, .task-form select{
@@ -782,7 +499,7 @@ body::before{
 @media(max-width:900px){.timer-page-grid{grid-template-columns:1fr;}}
 .timer-card{text-align:center;}
 .timer-display{font-family:var(--font-display); font-size:52px; color:var(--lilac); margin:6px 0 16px;}
-.timer-display span{outline:none; border-bottom:2px dashed var(--line); padding:0 2px;}
+.timer-display span{padding:0 4px;}
 .timer-controls{display:flex; justify-content:center; gap:12px; margin-bottom:16px;}
 .timer-note-area textarea{width:100%; min-height:70px; resize:vertical; border-radius:var(--r-sm); border:2px dashed var(--line); background:var(--paper-alt); padding:12px; font-size:13px; color:var(--ink);}
 .tip-card p{font-size:13.5px; color:var(--ink-soft); line-height:1.7;}
@@ -833,37 +550,326 @@ body::before{
 .sticky-note .note-del:hover{opacity:1;}
 .notes-empty{color:var(--ink-soft); font-size:13.5px; grid-column:1/-1; text-align:center; padding:20px;}
 
-/* arcade */
+/* ============ ARCADE FIXES ============ */
+/* ============ ARCADE TIMER STYLES ============ */
+.arcade-timer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 2px solid #ffb82e; /* Warm yellow border matching your UI */
+  border-radius: 16px;
+  padding: 10px 20px;
+  margin-bottom: 16px;
+  font-family: 'Outfit', 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 12px rgba(255, 184, 46, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Red theme when in 15-minute cooldown */
+.arcade-timer-bar.cooldown {
+  border-color: #e84255;
+  background: #fff5f6;
+}
+
+.timer-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.timer-time {
+  color: #e84255;
+  font-family: monospace;
+  font-size: 1.15rem;
+  background: #ffeef0;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+.arcade-timer-bar.cooldown .timer-time {
+  background: #e84255;
+  color: #ffffff;
+}
+
+.timer-desc {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+/* ============ LOCK OVERLAY STYLES ============ */
+.game-container {
+  position: relative; /* Essential for overlay positioning */
+}
+
+.lock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(4px);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.lock-overlay.hidden {
+  display: none !important;
+}
+
+.lock-card {
+  background: #ffffff;
+  border: 2px solid #e84255;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  max-width: 360px;
+  box-shadow: 0 10px 30px rgba(232, 66, 85, 0.15);
+}
+
+.lock-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.lock-card h2 {
+  font-size: 1.25rem;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+}
+
+.lock-card p {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin: 0 0 15px 0;
+}
+
+.cooldown-timer {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: monospace;
+  color: #e84255;
+  background: #ffeef0;
+  padding: 8px 16px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* ============ AMBIENT SOUNDS STYLES ============ */
+.ambient-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ambient-sub {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.ambient-sound-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ambient-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper-alt, #fff9fb);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 2px solid var(--line, #ffdbe6);
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--ink, #2c3e50);
+}
+
+.track-icon {
+  font-size: 1.2rem;
+}
+
+.track-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ambient-volume {
+  width: 70px;
+  accent-color: var(--pink, #e84255);
+  cursor: pointer;
+}
+
+.ambient-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ambient-sound-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Custom Scrollbar */
+.ambient-sound-list::-webkit-scrollbar {
+  width: 6px;
+}
+.ambient-sound-list::-webkit-scrollbar-thumb {
+  background: var(--line, #ffdbe6);
+  border-radius: 10px;
+}
+
+/* ============ STUDY TIPS STYLES ============ */
+.tip-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tip-sub {
+  font-size: 0.85rem;
+  color: var(--ink-soft, #6c757d);
+  margin-bottom: 4px;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--paper-alt, #f8f9fa);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line, #e9ecef);
+}
+
+/* Highlight style for the top 5-minute break tip */
+.tip-item.highlight-tip {
+  background: rgba(255, 235, 204, 0.4);
+  border: 2px solid #ffb347;
+}
+
+.tip-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.tip-text strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--ink, #2c3e50);
+  margin-bottom: 2px;
+}
+
+.tip-text p {
+  font-size: 0.8rem;
+  color: var(--ink-soft, #555);
+  margin: 0;
+  line-height: 1.3;
+}
+
 .arcade-card-container{background:var(--paper); border:2px solid var(--line); border-radius:var(--r-lg); padding:22px; box-shadow:var(--shadow);}
 .arcade-tabs{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
 .tab-btn{padding:9px 16px; border-radius:999px; border:2px solid var(--line); background:var(--paper-alt); color:var(--ink-soft); font-weight:700; font-size:12.5px; white-space:nowrap;}
 .tab-btn.active{background:var(--pink); border-color:var(--pink); color:#fff;}
 [data-theme="dark"] .tab-btn.active{box-shadow:var(--glow);}
 .game-viewport-box{background:var(--cream); border-radius:var(--r-md); padding:22px; min-height:340px; position:relative;}
-.relax-game-panel{display:none;}
+
+/* FIXED: Game panels need proper display handling */
+.relax-game-panel{display:none; width:100%;}
 .relax-game-panel.active-panel{display:block;}
+
+/* FIXED: Canvas sizing - CSS handles display, JS handles internal resolution */
+#zenCanvas, #rippleCanvas, #catcherCanvas{
+  width:100%;
+  height:280px;
+  border-radius:var(--r-sm);
+  display:block;
+  cursor:crosshair;
+  background:var(--sky-soft);
+}
+#zenCanvas{background:#afa798;}
+[data-theme="dark"] #zenCanvas{background:#1f1c29;}
+
+/* Bubble popper */
 .bubble-grid{display:grid; grid-template-columns:repeat(10,1fr); gap:8px; margin-bottom:16px;}
 .bubble{aspect-ratio:1; border-radius:50%; border:none; cursor:pointer; transition:transform .12s;}
 .bubble:hover{transform:scale(1.1);}
 .bubble.popped{visibility:hidden;}
-#zenCanvas, #rippleCanvas, #catcherCanvas{width:100%; height:280px; border-radius:var(--r-sm); display:block; cursor:crosshair; background:var(--sky-soft);}
-#zenCanvas{background:#EFE0C2;}
-[data-theme="dark"] #zenCanvas{background:#2A2245;}
+
 .reset-overlay-btn{margin-top:12px;}
 .tap-hint-overlay{text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:10px;}
 .game-score-row{display:flex; align-items:center; justify-content:space-between; margin-top:12px; font-size:13px; font-weight:700; color:var(--ink-soft);}
 .game-score-row span{color:var(--pink);}
 
-/* memory blossom */
+/* Memory blossom */
 .blossom-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:420px; margin:0 auto;}
 .blossom-card{
   aspect-ratio:1; border-radius:14px; border:2px solid var(--line); background:var(--paper);
   display:flex; align-items:center; justify-content:center; font-size:26px;
-  cursor:pointer; transition:transform .25s; user-select:none;
+  cursor:pointer; transition:transform .25s, background .25s; user-select:none;
 }
+.blossom-card:hover{transform:scale(1.05);}
 .blossom-card.flipped, .blossom-card.matched{background:var(--pink-soft); transform:scale(1.03);}
 .blossom-card.matched{opacity:.55; cursor:default;}
 .blossom-status{text-align:center; font-size:13px; color:var(--ink-soft); font-weight:700; margin-top:14px;}
+
+/* Overlay to lock the games when limit is reached */
+#time-limit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.95); /* Matches dark theme */
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  text-align: center;
+  color: #ffffff;
+}
+
+.overlay-content {
+  padding: 24px;
+  max-width: 400px;
+}
+
+.overlay-content h2 {
+  color: #ff4757;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
 
 /* profile */
 .profile-card-layout{display:flex; align-items:center; gap:26px; flex-wrap:wrap;}
@@ -899,7 +905,7 @@ body::before{
 .toast{position:fixed; bottom:26px; right:26px; background:var(--ink); color:var(--cream); padding:12px 20px; border-radius:999px; font-size:13.5px; font-weight:700; box-shadow:var(--shadow-lift); z-index:100; opacity:0; transform:translateY(10px); transition:.3s; pointer-events:none;}
 .toast.show{opacity:1; transform:translateY(0);}
 
-/* ============ BOTTOM TAB BAR (phones) ============ */
+/* ============ BOTTOM TAB BAR ============ */
 .bottom-tabbar{
   display:none; position:fixed; bottom:0; left:0; right:0; z-index:20;
   background:var(--paper); border-top:2px dashed var(--line);
@@ -914,106 +920,32 @@ body::before{
 .bt-btn.active{color:var(--pink);}
 
 /* ============ RESPONSIVE ============ */
-/* ============ RESPONSIVE ============ */
-/* ============ RESPONSIVE ============ */
 @media(max-width:880px){
-  body {
-    flex-direction: column !important; /* Forces layout to stack vertically instead of side-by-side */
-  }
-  .mobile-topbar {
-    display: flex !important; 
-    padding: 8px 12px;
-    width: 100%;
-    box-sizing: border-box;
-  }
+  body { flex-direction: column !important; }
+  .mobile-topbar { display: flex !important; padding: 8px 12px; width: 100%; box-sizing: border-box; }
   .mobile-topbar .mt-logo { font-size: 14px; }
-  
-  /* Hides the desktop sidebar completely so it doesn't leave a massive empty space */
-  .sidebar {
-    position: fixed !important; 
-    top: 0; 
-    left: 0; 
-    height: 100vh; 
-    width: 78%; 
-    max-width: 300px;
-    transform: translateX(-100%);
-    transition: transform .3s ease; 
-    box-shadow: var(--shadow-lift); 
-    z-index: 25;
-  }
+  .sidebar { position: fixed !important; top: 0; left: 0; height: 100vh; width: 78%; max-width: 300px; transform: translateX(-100%); transition: transform .3s ease; box-shadow: var(--shadow-lift); z-index: 25; }
   .sidebar.open { transform: translateX(0) !important; }
-  
-  /* Fixes the content block to fill up the whole width */
-  .main-content {
-    padding: 12px 12px 90px !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box;
-    display: block !important;
-  }
+  .main-content { padding: 12px 12px 90px !important; max-width: 100% !important; width: 100% !important; box-sizing: border-box; display: block !important; }
   .bottom-tabbar { display: flex !important; }
-  
-  /* Make the hero card very thin and concise */
-  .welcome-hero {
-    flex-direction: column !important; 
-    text-align: center;
-    padding: 14px 12px !important;
-    gap: 10px !important;
-    width: 100% !important;
-    box-sizing: border-box;
-  }
+  .welcome-hero { flex-direction: column !important; text-align: center; padding: 14px 12px !important; gap: 10px !important; width: 100% !important; box-sizing: border-box; }
   .welcome-hero h1 { font-size: 18px !important; }
   .welcome-hero .hero-quote { font-size: 12px !important; margin-bottom: 6px !important; }
   .welcome-hero .plant-box { padding: 10px 14px !important; min-width: 100% !important; }
   .welcome-hero .plant-visual { font-size: 32px !important; }
-  
-  /* Force all layouts underneath to sit perfectly stacked at full size */
-  .glance-grid, .dashboard-grid, .timer-page-grid {
-    grid-template-columns: 1fr !important;
-    width: 100% !important;
-  }
+  .glance-grid, .dashboard-grid, .timer-page-grid { grid-template-columns: 1fr !important; width: 100% !important; }
+  .blossom-grid { grid-template-columns: repeat(4, 1fr) !important; }
 }
 
-/* manual "Mobile Optimized Layout" preview toggle — mirrors the absolute fix above */
-body.force-mobile {
-  flex-direction: column !important;
-}
-body.force-mobile .mobile-topbar {
-  display: flex !important; 
-  padding: 8px 12px;
-  width: 100%;
-  box-sizing: border-box;
-}
+/* manual "Mobile Optimized Layout" preview toggle */
+body.force-mobile { flex-direction: column !important; }
+body.force-mobile .mobile-topbar { display: flex !important; padding: 8px 12px; width: 100%; box-sizing: border-box; }
 body.force-mobile .mobile-topbar .mt-logo { font-size: 14px; }
-body.force-mobile .sidebar {
-  position: fixed !important; 
-  top: 0; 
-  left: 0; 
-  height: 100vh; 
-  width: 78%; 
-  max-width: 300px;
-  transform: translateX(-100%);
-  transition: transform .3s ease; 
-  box-shadow: var(--shadow-lift);
-  z-index: 25;
-}
+body.force-mobile .sidebar { position: fixed !important; top: 0; left: 0; height: 100vh; width: 78%; max-width: 300px; transform: translateX(-100%); transition: transform .3s ease; box-shadow: var(--shadow-lift); z-index: 25; }
 body.force-mobile .sidebar.open { transform: translateX(0) !important; }
-body.force-mobile .main-content {
-  padding: 12px 12px 90px !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  box-sizing: border-box;
-  display: block !important;
-}
+body.force-mobile .main-content { padding: 12px 12px 90px !important; max-width: 100% !important; width: 100% !important; box-sizing: border-box; display: block !important; }
 body.force-mobile .bottom-tabbar { display: flex !important; }
-body.force-mobile .welcome-hero {
-  flex-direction: column !important; 
-  text-align: center;
-  padding: 14px 12px !important;
-  gap: 10px !important;
-  width: 100% !important;
-  box-sizing: border-box;
-}
+body.force-mobile .welcome-hero { flex-direction: column !important; text-align: center; padding: 14px 12px !important; gap: 10px !important; width: 100% !important; box-sizing: border-box; }
 body.force-mobile .welcome-hero h1 { font-size: 18px !important; }
 body.force-mobile .welcome-hero .hero-quote { font-size: 12px !important; margin-bottom: 6px !important; }
 body.force-mobile .welcome-hero .plant-box { padding: 10px 14px !important; min-width: 100% !important; }
@@ -1021,248 +953,914 @@ body.force-mobile .welcome-hero .plant-visual { font-size: 32px !important; }
 body.force-mobile .glance-grid { grid-template-columns: 1fr !important; width: 100% !important; }
 body.force-mobile .dashboard-grid { grid-template-columns: 1fr !important; width: 100% !important; }
 body.force-mobile .timer-page-grid { grid-template-columns: 1fr !important; width: 100% !important; }
-</style>
+
+/* ============ MAIN LAYOUT & SECTIONS ============ */
+.main-content {
+  flex: 1;
+  padding: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.content-section {
+  display: none;
+  animation: fadeIn 0.35s ease-in-out;
+}
+
+.content-section.active-view {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ CARD STYLING & GLOW EFFECTS ============ */
+.card {
+  background: var(--paper);
+  border: 2px dashed var(--line);
+  border-radius: var(--r-md);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+.glow-box-purple {
+  box-shadow: var(--glow-purple, var(--shadow));
+}
+
+.glow-box-pink, .glow-box-blue {
+  box-shadow: var(--glow-blue, var(--shadow));
+}
+
+/* ============ WELCOME HERO ============ */
+.welcome-hero {
+  background: var(--paper-alt);
+  border: 2px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.hero-left h1 {
+  font-size: 26px;
+  color: var(--ink);
+  margin: 8px 0;
+}
+
+.hero-quote {
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.plant-box {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.plant-visual {
+  font-size: 64px;
+  transition: transform 0.2s ease;
+}
+
+/* ============ BUTTONS & INPUTS ============ */
+.btn {
+  padding: 10px 18px;
+  border-radius: var(--r-sm);
+  border: 2px solid transparent;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--sky);
+  color: #fff;
+}
+
+.btn-pink {
+  background: var(--pink);
+  color: #fff;
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.circle-btn {
+  border-radius: 50%;
+  padding: 10px;
+  width: 42px;
+  height: 42px;
+  justify-content: center;
+}
+
+/* ============ TABLES & DASHBOARD GRID ============ */
+.glance-grid, .dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.task-table th, .task-table td {
+  padding: 12px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.task-done-row {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+/* ============ MOBILE NAVIGATION BAR ============ */
+.bottom-tabbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--paper);
+  border-top: 2px dashed var(--line);
+  padding: 8px;
+  justify-content: space-around;
+  z-index: 30;
+}
+
+@media (max-width: 768px) {
+  .mobile-topbar, .bottom-tabbar { display: flex; }
+  .main-content { padding: 16px; padding-bottom: 80px; }
+  .welcome-hero { flex-direction: column; text-align: center; }
+}
+    </style>
+
+<div id="fireflies"></div>
+
+<!-- ============ MOBILE TOP BAR ============ -->
+<div class="mobile-topbar">
+  <button class="hamburger-btn" id="hamburgerBtn" title="Open menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="mt-logo"><i class="fa-solid fa-seedling" style="color:var(--pink)"></i> Task<span>Ahead</span></div>
+  <button class="mt-login-btn nav-btn" data-target="auth-section" title="Login / Register"><i class="fa-solid fa-right-to-bracket"></i></button>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="logo-container">
+    <div class="logo-icon-box"><i class="fa-solid fa-laptop-code"></i></div>
+    <div class="logo-text">
+      <h2>Task<span>Ahead</span></h2>
+      <p>ANHS ICT Track</p>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Terminal Main</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">NAVIGATOR ACADEMICS</span>
+    <ul class="nav-links">
+      <li class="dropdown-wrapper">
+        <button class="dropdown-toggle-btn" id="academicsDropdownBtn">
+          <span><i class="fa-solid fa-graduation-cap"></i> Subjects &amp; Terms</span>
+          <i class="fa-solid fa-chevron-down arrow"></i>
+        </button>
+        <ul class="dropdown-container" id="academicsMenu">
+          <li class="nested-dropdown">
+            <span class="term-title">Term 1</span>
+            <ul class="subject-list">
+              <li contenteditable="true">Introduction to Philosophy</li>
+              <li contenteditable="true">Contemporary Philippine Arts</li>
+              <li contenteditable="true">Practical Research 2</li>
+              <li contenteditable="true">ICT Programming</li>
+              <li contenteditable="true">Physical Science</li>
+              <li contenteditable="true">Homeroom Guidance</li>
+            </ul>
+          </li>
+          <li class="nested-dropdown"><span class="term-title">Term 2</span>
+            <ul class="subject-list">
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+            </ul>
+          </li>
+          <li class="nested-dropdown"><span class="term-title">Term 3</span>
+            <ul class="subject-list">
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+              <li contenteditable="true">[Editable Subject]</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#" class="nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i> Class Schedule</a></li>
+      <li><a href="#" class="nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Focus &amp; Wellness</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn" data-target="timer-section"><i class="fa-solid fa-stopwatch"></i> Focus Timer</a></li>
+      <li><a href="#" class="nav-btn" data-target="notes-section"><i class="fa-solid fa-note-sticky"></i> Workspace Notes</a></li>
+      <li><a href="#" class="nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i> Chill Zone</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-title">Account & Settings</span>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn" data-target="profile-section"><i class="fa-solid fa-user-gear"></i> Student Profile</a></li>
+      <li><a href="#" class="nav-btn" data-target="config-section"><i class="fa-solid fa-sliders"></i> Configuration</a></li>
+      <li><a href="#" class="nav-btn" data-target="about"><i class="fa-solid fa-circle-info"></i> About Devs</a></li>
+      <li><a href="#" class="nav-btn" data-target="auth-section"><i class="fa-solid fa-right-to-bracket"></i> Login / Register</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">Made by ANHS ICT students</div>
+</nav>
+
+<main class="main-content">
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="content-section active-view">
+    <div class="welcome-hero">
+      <span class="hero-sparkle" style="top:16px; left:46%;">⚔️</span>
+      <span class="hero-sparkle" style="top:60%; left:8%; animation-delay:.8s;">☠️</span>
+      <div class="hero-left">
+        <span class="system-tag"> System status: Mainframe Online ⚡</span>
+        <h1> System online, future net-runner! ⚔️</h1>
+        <p class="hero-quote" id="motivational-quote">"Code your loot daily and watch your whole digital empire upload."</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary circle-btn nav-btn" data-target="tasks" title="Add a task"><i class="fa-solid fa-plus"></i></button>
+          <button class="btn btn-pink circle-btn nav-btn" data-target="relax" title="Arcade Breaks"><i class="fa-solid fa-gamepad"></i></button>
+        </div>
+      </div>
+        <div class="plant-box">
+
+          <div class="plant-visual" id="plant-sprite">🏴‍☠️</div>
+
+          <div class="plant-stats">
+
+            <h4>Conqueror Tier: <span id="rank-name" class="text-pink">East Blue Rookie</span></h4>
+
+            <p>Level Score: <span id="rank-points">0</span> XP</p>
+
+          </div>
+
+          <button class="btn glow-button-blue" id="manual-plant-grow-btn"><i class="fa-solid fa-hurricane"></i> Power Up</button>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="glance-grid">
+      <div class="card glance-card">
+        <div class="glance-icon gi-class"><i class="fa-solid fa-calendar-day"></i></div>
+        <div>
+          <h4>Next up today</h4>
+          <p id="glance-class">Loading…</p>
+          <a href="#" class="glance-link nav-btn" data-target="schedule-section">View schedule →</a>
+        </div>
+      </div>
+      <div class="card glance-card">
+        <div class="glance-icon gi-task"><i class="fa-solid fa-list-check"></i></div>
+        <div>
+          <h4>Closest deadline</h4>
+          <p id="glance-task">No tasks yet</p>
+          <a href="#" class="glance-link nav-btn" data-target="tasks">Manage tasks →</a>
+        </div>
+      </div>
+      <div class="card glance-card">
+        <div class="glance-icon gi-timer"><i class="fa-solid fa-stopwatch"></i></div>
+        <div>
+          <h4>Need to focus?</h4>
+          <p>Start a session</p>
+          <a href="#" class="glance-link nav-btn" data-target="timer-section">Open timer →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TASKS & DEADLINES -->
+  <section id="tasks" class="content-section">
+    <h2><i class="fa-solid fa-list-check"></i> Tasks &amp; Deadlines</h2>
+    <p class="section-sub">Log a Bug, then execute it! ⚔️💻 </p>
+
+    <div class="card quick-add-bar glow-box-blue">
+      <h3>🚢 Quick Add Task</h3>
+      <form id="db-task-form" class="task-form">
+        <input type="text" id="db-task-name" placeholder="Requirement name (e.g. Code Database Schema)" required>
+        <input type="text" id="db-task-subject" placeholder="Select or type subject..." list="subject-options" required style="font-family: var(--font-body); font-weight: 500;">
+        <datalist id="subject-options">
+          <option value="Introduction to Philosophy">
+          <option value="Contemporary Philippine Arts">
+          <option value="Practical Research 2">
+          <option value="ICT Programming">
+          <option value="Physical Science">
+          <option value="Homeroom Guidance">
+        </datalist>
+        <input type="date" id="db-task-date" required>
+        <button type="submit" class="btn btn-primary circle-btn form-submit-circle" title="Deploy task"><i class="fa-solid fa-check"></i></button>
+      </form>
+    </div>
+
+    <div class="card table-card glow-box-pink">
+      <table class="task-table">
+        <thead><tr><th>Task</th><th>Subject</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="db-task-table-body"></tbody>
+      </table>
+      <div class="empty-state-notice show" id="tasks-empty-notice">
+        <i class="fa-solid fa-laptop-code empty-icon"></i>
+        <p>Log Pose is empty. Add one above!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule-section" class="content-section">
+    <h2><i class="fa-solid fa-calendar-days"></i> Weekly Class Schedule</h2>
+    <div class="schedule-matrix-grid">
+      <div class="card schedule-day-card">
+        <div class="day-header mon">Monday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header tue">Tuesday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header wed">Wednesday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Physical Science</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header thu">Thursday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">Physical Science</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">ICT Programming</strong></li>
+        </ul>
+      </div>
+      <div class="card schedule-day-card">
+        <div class="day-header fri">Friday</div>
+        <ul class="schedule-blocks">
+          <li><span class="time" contenteditable="true">07:30 - 09:30</span><strong contenteditable="true">Introduction to Philosophy</strong></li>
+          <li><span class="time" contenteditable="true">09:45 - 11:45</span><strong contenteditable="true">Practical Research 2</strong></li>
+          <li class="noon-break" contenteditable="true">11:45 - 12:30 · Mid-day Break</li>
+          <li><span class="time" contenteditable="true">12:30 - 02:30</span><strong contenteditable="true">ICT Programming</strong></li>
+          <li><span class="time" contenteditable="true">02:30 - 04:30</span><strong contenteditable="true">Contemporary Philippine Arts</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+ <!-- FOCUS TIMER SECTION -->
+<section id="timer-section" class="content-section">
+  <h2><i class="fa-solid fa-stopwatch"></i> Focus Timer</h2>
+  
+  <div class="timer-page-grid">
+    
+    <!-- Single Focus Timer Card -->
+    <div class="card timer-card glow-box-purple">
+      <h3>💎 Focus Session</h3>
+      
+      <!-- Editable Timer Display -->
+      <div class="timer-display">
+        <span id="timer-minutes" contenteditable="true" title="Click to edit minutes">25</span>:<span id="timer-seconds" contenteditable="true" title="Click to edit seconds">00</span>
+      </div>
+      
+      <div class="timer-controls">
+        <button class="btn btn-pink circle-btn" id="start-timer-btn" title="Toggle Timer"><i class="fa-solid fa-play"></i></button>
+        <button class="btn btn-outline circle-btn" id="reset-timer-btn" title="Reset"><i class="fa-solid fa-rotate-left"></i></button>
+      </div>
+      
+      <div class="timer-note-area">
+        <textarea placeholder="Jot a quick note for this session..." class="editable-timer-note"></textarea>
+      </div>
+
+      <!-- Study Tips placed INSIDE the card below the textarea -->
+      <div class="inner-tips-container">
+        <h4>💡 Quick Focus Tips</h4>
+        
+        <div class="inner-tip-item highlight-tip">
+          <span>☕</span>
+          <p><strong>5-Minute Break Rule:</strong> Take a 5-minute break after every 25-minute focus session to recharge!</p>
+        </div>
+        
+        <div class="inner-tip-item">
+          <span>🎯</span>
+          <p><strong>Single-Tasking:</strong> Focus on one task per timer session to maximize productivity.</p>
+        </div>
+        
+        <div class="inner-tip-item">
+          <span>🧠</span>
+          <p><strong>Brain Dump:</strong> Use the note area above to clear stray thoughts without breaking focus.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+    <!-- Ambient Relaxing Sounds Card -->
+<div class="card ambient-card glow-box-pink">
+  <h3>🎧 Relaxing Study Ambience</h3>
+  <p class="ambient-sub">Mix and match cozy background sounds while you focus.</p>
+  
+  <div class="ambient-sound-list">
+    <!-- Cozy Rain -->
+    <div class="ambient-track">
+      <div class="track-info">
+        <span class="track-icon">🌧️</span>
+        <span class="track-name">Cozy Rain</span>
+      </div>
+      <div class="track-controls">
+        <input type="range" class="ambient-volume" id="rain-vol" min="0" max="1" step="0.05" value="0.5">
+        <button class="btn btn-outline circle-btn ambient-btn" id="btn-sound-rain" title="Toggle Rain"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+    <!-- Forest Birds -->
+    <div class="ambient-track">
+      <div class="track-info">
+        <span class="track-icon">🐦</span>
+        <span class="track-name">Forest Birds</span>
+      </div>
+      <div class="track-controls">
+        <input type="range" class="ambient-volume" id="birds-vol" min="0" max="1" step="0.05" value="0.4">
+        <button class="btn btn-outline circle-btn ambient-btn" id="btn-sound-birds" title="Toggle Birds"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+    <!-- Chill Waves -->
+    <div class="ambient-track">
+      <div class="track-info">
+        <span class="track-icon">🌊</span>
+        <span class="track-name">Chill Waves</span>
+      </div>
+      <div class="track-controls">
+        <input type="range" class="ambient-volume" id="waves-vol" min="0" max="1" step="0.05" value="0.5">
+        <button class="btn btn-outline circle-btn ambient-btn" id="btn-sound-waves" title="Toggle Waves"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+    <!-- NEW: Pink Noise -->
+    <div class="ambient-track">
+      <div class="track-info">
+        <span class="track-icon">🎧</span>
+        <span class="track-name">Pink Noise</span>
+      </div>
+      <div class="track-controls">
+        <input type="range" class="ambient-volume" id="pink-vol" min="0" max="1" step="0.05" value="0.4">
+        <button class="btn btn-outline circle-btn ambient-btn" id="btn-sound-pink" title="Toggle Pink Noise"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+    <!-- NEW: Cozy Campfire -->
+    <div class="ambient-track">
+      <div class="track-info">
+        <span class="track-icon">🔥</span>
+        <span class="track-name">Cozy Campfire</span>
+      </div>
+      <div class="track-controls">
+        <input type="range" class="ambient-volume" id="fire-vol" min="0" max="1" step="0.05" value="0.5">
+        <button class="btn btn-outline circle-btn ambient-btn" id="btn-sound-fire" title="Toggle Campfire"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+    <!-- NEW: Clock Ticking -->
+    <div class="ambient-track">
+      <div class="track-info">
+        <span class="track-icon">⏱️</span>
+        <span class="track-name">Clock Ticking</span>
+      </div>
+      <div class="track-controls">
+        <input type="range" class="ambient-volume" id="clock-vol" min="0" max="1" step="0.05" value="0.3">
+        <button class="btn btn-outline circle-btn ambient-btn" id="btn-sound-clock" title="Toggle Clock Ticking"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+    <!-- NEW: Rustling Leaves -->
+    <div class="ambient-track">
+      <div class="track-info">
+        <span class="track-icon">🍃</span>
+        <span class="track-name">Rustling Leaves</span>
+      </div>
+      <div class="track-controls">
+        <input type="range" class="ambient-volume" id="leaves-vol" min="0" max="1" step="0.05" value="0.4">
+        <button class="btn btn-outline circle-btn ambient-btn" id="btn-sound-leaves" title="Toggle Rustling Leaves"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+    <!-- NEW: Blizzard Wind -->
+    <div class="ambient-track">
+      <div class="track-info">
+        <span class="track-icon">❄️</span>
+        <span class="track-name">Blizzard Wind</span>
+      </div>
+      <div class="track-controls">
+        <input type="range" class="ambient-volume" id="wind-vol" min="0" max="1" step="0.05" value="0.5">
+        <button class="btn btn-outline circle-btn ambient-btn" id="btn-sound-wind" title="Toggle Blizzard Wind"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</section>
+
+
+
+  <!-- NOTES -->
+  <section id="notes-section" class="content-section">
+    <div class="section-header-flex">
+      <h2><i class="fa-solid fa-note-sticky"></i> Sticky Reminders</h2>
+      <button class="btn btn-primary circle-btn" id="add-note-btn" title="Add Sticky Note"><i class="fa-solid fa-plus"></i></button>
+    </div>
+    <div class="sticky-notes-board" id="sticky-board">
+      <p class="notes-empty" id="notes-empty">No notes yet — click + to stick one on the board 📌</p>
+    </div>
+  
+  </section>
+
+  <!-- RELAX (5 games) -->
+  
+  <section id="relax" class="content-section">
+    <h2><i class="fa-solid fa-gamepad"></i> Break Time Zone</h2>
+   
+
+
+    <!-- Timer Bar (Styled to match TaskAhead Theme) -->
+<div class="arcade-timer-bar" id="timerCard">
+  <div class="timer-info">
+    <span class="timer-icon">⏳</span>
+    <span id="timerStatusTitle" class="timer-title">Playtime Remaining:</span>
+    <span id="timerDisplay" class="timer-time">05:00</span>
+  </div>
+  <div id="timerStatusDesc" class="timer-desc">Starts on your first click</div>
+</div>
+
+<!-- Lock Overlay Screen (Place inside your .game-container) -->
+<div class="lock-overlay hidden" id="lockOverlay">
+  <div class="lock-card">
+    <div class="lock-icon">🔒</div>
+    <h2>5-Minute Playtime Limit Reached!</h2>
+    <p>Take a well-deserved study break. Games will unlock in:</p>
+    <div class="cooldown-timer" id="cooldownDisplay">15:00</div>
+  </div>
+</div>
+
+
+
+    <div class="arcade-card-container">
+      <div class="arcade-tabs">
+        <button class="tab-btn active" onclick="switchRelaxGame(0)">🫧 Bubble Popper</button>
+        <button class="tab-btn" onclick="switchRelaxGame(1)">🌾 Zen Garden</button>
+        <button class="tab-btn" onclick="switchRelaxGame(2)">💧 Musical Ripples</button>
+        <button class="tab-btn" onclick="switchRelaxGame(3)">🍇 Fruit Catcher</button>
+        <button class="tab-btn" onclick="switchRelaxGame(4)">🏴‍☠️ Pirate Match</button>
+      </div>
+      <div class="game-viewport-box">
+        <div class="relax-game-panel active-panel" id="r-game-0">
+          <div class="bubble-grid" id="bubbleGrid"></div>
+          <button class="btn btn-outline" onclick="resetBubbles()"><i class="fa-solid fa-rotate-left"></i> Refresh Sheet</button>
+        </div>
+        <div class="relax-game-panel" id="r-game-1">
+          <canvas id="zenCanvas" width="800" height="280"></canvas>
+          <button class="btn btn-outline reset-overlay-btn" onclick="clearSand()"><i class="fa-solid fa-rotate-left"></i> Smooth Sand</button>
+        </div>
+        <div class="relax-game-panel" id="r-game-2">
+          <canvas id="rippleCanvas" width="800" height="280"></canvas>
+          <p class="tap-hint-overlay">Tap anywhere inside to play a gentle note</p>
+        </div>
+        <div class="relax-game-panel" id="r-game-3">
+          <canvas id="catcherCanvas" width="800" height="280"></canvas>
+          <div class="game-score-row">
+            <span>Catch the falling fruits</span>
+            <span>Score: <span id="catcher-score">0</span></span>
+          </div>
+        </div>
+        <div class="relax-game-panel" id="r-game-4">
+          <div class="blossom-grid" id="blossomGrid"></div>
+          <p class="blossom-status" id="blossomStatus">Find every matching pair🔭</p>
+          <div style="text-align:center; margin-top:12px;">
+            <button class="btn btn-outline" onclick="setupBlossom()"><i class="fa-solid fa-rotate-left"></i> Reshuffle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="chill-zone-wrapper" style="position: relative;">
+  
+  <!-- Top bar showing remaining time -->
+  <div id="chill-zone-timer-display" style="color: #fff; margin-bottom: 10px;">
+    Time Remaining Today: 15m 00s
+  </div>
+
+  <!-- Your game container -->
+  <div id="chill-zone-container">
+    <!-- Minigames tabs, game grid, reshuffle button go here -->
+  </div>
+
+  <!-- Blocked Overlay (Hidden by default) -->
+  <div id="time-limit-overlay" style="display: none;">
+    <div class="overlay-content">
+      <h2>⏰ Time's Up!</h2>
+      <p>You've reached your daily limit for the Chill Zone. Take a break and get back to study tasks!</p>
+    </div>
+  </div>
+
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile-section" class="content-section">
+    <h2><i class="fa-solid fa-user-gear"></i> Student Profile</h2>
+    <div class="card profile-card-layout glow-box-blue" style="flex-direction: column; align-items: flex-start; gap: 20px;">
+
+      <div style="display: flex; align-items: center; gap: 26px; flex-wrap: wrap; width: 100%;">
+        <!-- Interactive Avatar Selector -->
+        <div class="profile-avatar-block" id="profile-avatar-block" style="position: relative; cursor: pointer;" title="Click to change avatar!">
+          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=taskahead" alt="Avatar" class="profile-large-avatar" id="profile-avatar-img">
+          <div style="position: absolute; bottom: 0; right: 0; background: var(--pink); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 2px solid var(--paper);">
+            <i class="fa-solid fa-rotate"></i>
+          </div>
+        </div>
+
+        <div class="profile-details-block" style="flex: 1; min-width: 200px;">
+          <h3 contenteditable="true" id="profile-display-name" style="display: inline-block; border-bottom: 2px dashed var(--line); padding-right: 8px;">ICT_Student_User</h3>
+
+          <!-- Dropdown Focus Selector -->
+          <p class="profile-track" style="margin-top: 8px;">
+            Track focus: 
+            <select id="profile-sub-track" style="padding: 4px 8px; border-radius: 8px; border: 2px solid var(--line); background: var(--paper-alt); color: var(--ink); font-weight: 700; font-family: var(--font-body);">
+              <option value="General ICT">Grade 12 General ICT Specialist</option>
+              <option value="Software Programming">Grade 12 Software Programming</option>
+              <option value="Animation & Graphics">Grade 12 Animation & Graphics</option>
+              <option value="Network Systems">Grade 12 Network Systems</option>
+            </select>
+          </p>
+
+          <div class="profile-metrics-pills" style="margin-top: 10px;">
+            <span class="badge badge-purple">Level rank: <span id="profile-rank-tier">Seedling</span></span>
+            <span class="badge badge-blue" id="track-badge">General ICT Specialist</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Bio Area -->
+      <div style="width: 100%; border-top: 2px dashed var(--line); padding-top: 16px;">
+        <h4 style="font-family: var(--font-display); font-size: 15px; margin-bottom: 6px;">🦜 Dev Bio / Motto</h4>
+        <textarea id="profile-bio" placeholder="Write something interesting about your coding journey or drop your favorite school motto here..." style="width: 100%; min-height: 60px; padding: 10px; border-radius: var(--r-sm); border: 2px dashed var(--line); background: var(--paper-alt); color: var(--ink); font-size: 13.5px; resize: vertical; font-family: var(--font-body);"></textarea>
+      </div>
+
+    </div>
+  </section>
+
+ <!-- CONFIGURATION SECTION -->
+<section id="config-section" class="content-section">
+  <h2><i class="fa-solid fa-sliders"></i> Configuration</h2>
+  <p class="section-sub">Fine-tune how TaskAhead looks and behaves.</p>
+
+  <div class="card config-card glow-box-purple">
+
+    <!-- 4-Theme Selector -->
+    <div class="config-item theme-selection-wrapper">
+      <div class="config-info">
+        <h3><span class="setting-icon"><i class="fa-solid fa-palette"></i></span> Theme Luminescence Style</h3>
+        <p>Select your preferred aesthetic experience across the app interface.</p>
+      </div>
+
+      <div class="theme-options-grid">
+        <label class="theme-option">
+          <input type="radio" name="app-theme" value="whitecap" checked onclick="setAppTheme('whitecap')">
+          <div class="theme-card-preview theme-whitecap">
+            <span class="theme-check"><i class="fa-solid fa-check"></i></span>
+            <span class="theme-swatch-row">
+              <span class="swatch" style="background:#E63946"></span>
+              <span class="swatch" style="background:#2B2D42"></span>
+              <span class="swatch" style="background:#FFC300"></span>
+            </span>
+            <span class="theme-icon">☀️</span>
+            <span class="theme-name">Whitecap</span>
+            <span class="theme-desc">Classic Light</span>
+          </div>
+        </label>
+
+        <label class="theme-option">
+          <input type="radio" name="app-theme" value="black-sails" onclick="setAppTheme('black-sails')">
+          <div class="theme-card-preview theme-black-sails">
+            <span class="theme-check"><i class="fa-solid fa-check"></i></span>
+            <span class="theme-swatch-row">
+              <span class="swatch" style="background:#D90429"></span>
+              <span class="swatch" style="background:#3A86FF"></span>
+              <span class="swatch" style="background:#FFC300"></span>
+            </span>
+            <span class="theme-icon">🌙</span>
+            <span class="theme-name">Black Sails</span>
+            <span class="theme-desc">Classic Dark</span>
+          </div>
+        </label>
+
+        <label class="theme-option">
+          <input type="radio" name="app-theme" value="ivory-dice" onclick="setAppTheme('ivory-dice')">
+          <div class="theme-card-preview theme-ivory-dice">
+            <span class="theme-check"><i class="fa-solid fa-check"></i></span>
+            <span class="theme-swatch-row">
+              <span class="swatch" style="background:#EF4444"></span>
+              <span class="swatch" style="background:#2563EB"></span>
+              <span class="swatch" style="background:#FACC15"></span>
+            </span>
+            <span class="theme-icon">🎲</span>
+            <span class="theme-name">Ivory Dice</span>
+            <span class="theme-desc">Luminous Hybrid</span>
+          </div>
+        </label>
+
+        <label class="theme-option">
+          <input type="radio" name="app-theme" value="cursed-gold" onclick="setAppTheme('cursed-gold')">
+          <div class="theme-card-preview theme-cursed-gold">
+            <span class="theme-check"><i class="fa-solid fa-check"></i></span>
+            <span class="theme-swatch-row">
+              <span class="swatch" style="background:#10B981"></span>
+              <span class="swatch" style="background:#CA8A04"></span>
+              <span class="swatch" style="background:#B91C1C"></span>
+            </span>
+            <span class="theme-icon">🏴‍☠️</span>
+            <span class="theme-name">Cursed Gold</span>
+            <span class="theme-desc">Eerie Dark Glow</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+   <div class="setting-row">
+        <div><h4>Mobile Optimized Layout</h4><p>Preview the compact phone-friendly interface on any screen size</p></div>
+      
+       
+        <label class="switch"><input type="checkbox" id="mobile-mode-checkbox" onchange="toggleMobileMode()"><span class="slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div><h4>Hardware Acceleration Toggle</h4><p>Optimize frame rendering for background task cycles</p></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div><h4>Automated Backup Sync</h4><p>Periodically send app state to your backup repository</p></div>
+        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+      </div>
+    </div>
+  </section>	
+
+  </div>
+</section>
+
+  <!-- AUTH SECTION -->
+  <section id="auth-section" class="content-section">
+    <h2><i class="fa-solid fa-user-shield"></i> Secure Data Storage Handshake</h2>
+
+    <div class="dashboard-grid">
+
+      <!-- LOGIN FORM -->
+      <div class="card glow-box-blue">
+        <h3>🔐 Sign In</h3>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
+         Authenticate credentials to access the Grand Line Mainframe 📜💻
+        </p>
+
+        <form id="db-login-form" class="task-form" style="flex-direction:column; gap:12px;">
+          <input type="text" id="login-uid" name="username" placeholder="👤 Username" required style="width:100%;">
+          <input type="password" id="login-pwd" name="password" placeholder="🔑 Password" required style="width:100%;">
+          <button type="submit" class="btn btn-primary form-submit-circle" style="width:100%; justify-content:center; padding:12px;">
+            <i class="fa-solid fa-unlock-keyhole"></i> Sign In
+          </button>
+        </form>
+
+        <div id="login-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="card glow-box-pink">
+        <h3>📡 Register</h3>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
+          Create your account and deploy your fleet! ⚓⚡
+        </p>
+
+        <form id="db-register-form" class="task-form" style="flex-direction:column; gap:12px;">
+          <input type="text" id="reg-uid" name="username" placeholder="👤 Choose a username" required style="width:100%;">
+          <input type="email" id="reg-email" name="email" placeholder="📧 School Email Address" required style="width:100%;">
+          <input type="password" id="reg-pwd" name="password" placeholder="🔑 Password (min 6 characters)" required style="width:100%;">
+          <button type="submit" class="btn btn-pink form-submit-circle" style="width:100%; justify-content:center; padding:12px;">
+            <i class="fa-solid fa-id-card"></i> Create Account
+          </button>
+        </form>
+
+        <div id="register-status" style="margin-top:10px; font-size:13px; text-align:center; min-height:20px;"></div>
+      </div>
+
+    </div>
+
+    <div id="auth-status" style="margin-top:20px; text-align:center; font-size:14px; color:var(--ink-soft);">
+      <i class="fa-solid fa-info-circle"></i> 
+      <span id="auth-status-text">Not logged in</span>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="content-section">
+    <h2><i class="fa-solid fa-circle-info"></i> About TaskAhead</h2>
+    <div class="card about-card-frame glow-box-pink">
+      <h3>TaskAhead Platform Framework</h3>
+      <p><strong>TaskAhead</strong> is a specialized, production-ready schoolwork workflow management application. Designed around the intensive track challenges of modern Senior High School environments, it pairs academic tracking with a cozy, garden-fairy interface that adapts across devices.</p>
+      <blockquote>
+        <strong>Credit Notice &amp; Research Attribution (ctto):</strong><br>
+        This application was researched, conceptualized, and built by <strong>Anonang National High School Students</strong> as a primary practical development solution for their formal research track study. Engineered to boost focus for ICT student tracking, its versatile design extends complete functional utility to multiple general tracks and student cohorts across institutions.
+      </blockquote>
+      <div class="framework-credits">© S.Y. 2026–2027 ANHS Academic Research Operations</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- BOTTOM TAB BAR -->
+<div class="bottom-tabbar">
+  <button class="bt-btn nav-btn active" data-target="dashboard"><i class="fa-solid fa-gauge"></i>Home</button>
+  <button class="bt-btn nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i>Tasks</button>
+  <button class="bt-btn nav-btn" data-target="schedule-section"><i class="fa-solid fa-calendar-days"></i>Class</button>
+  <button class="bt-btn nav-btn" data-target="relax"><i class="fa-solid fa-gamepad"></i>Relax</button>
+  <button class="bt-btn" id="bottomMenuBtn"><i class="fa-solid fa-bars"></i>Menu</button>
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+<!-- FIXED: Removed 'js/' prefix since files are in root folder -->
+<script src="js/database.js" defer></script>
+<script src="js/models.js" defer></script>
+<script src="js/repository.js" defer></script>
+<script src="js/script.js" defer></script>
 
 <script>
-// ============ DATABASE.JS ============
-// ============================================
-// database.js — IndexedDB Engine
-// ============================================
-
-const DB_NAME = 'TaskAheadDB';
-const DB_VERSION = 1;
-
-const db = {
-  instance: null,
-
-  init() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => {
-        this.instance = request.result;
-        resolve(this.instance);
-      };
-
-      request.onupgradeneeded = (event) => {
-        const database = event.target.result;
-
-        if (!database.objectStoreNames.contains('users')) {
-          const userStore = database.createObjectStore('users', { keyPath: 'username' });
-          userStore.createIndex('email', 'email', { unique: true });
-        }
-
-        if (!database.objectStoreNames.contains('tasks')) {
-          const taskStore = database.createObjectStore('tasks', { keyPath: 'id', autoIncrement: true });
-          taskStore.createIndex('userId', 'userId', { unique: false });
-          taskStore.createIndex('status', 'status', { unique: false });
-        }
-
-        if (!database.objectStoreNames.contains('gamification')) {
-          database.createObjectStore('gamification', { keyPath: 'userId' });
-        }
-
-        if (!database.objectStoreNames.contains('profiles')) {
-          database.createObjectStore('profiles', { keyPath: 'userId' });
-        }
-      };
-    });
-  },
-
-  add(storeName, data) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readwrite');
-      const store = tx.objectStore(storeName);
-      const request = store.add(data);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  },
-
-  get(storeName, key) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readonly');
-      const store = tx.objectStore(storeName);
-      const request = store.get(key);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  },
-
-  getAll(storeName) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readonly');
-      const store = tx.objectStore(storeName);
-      const request = store.getAll();
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  },
-
-  put(storeName, data) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readwrite');
-      const store = tx.objectStore(storeName);
-      const request = store.put(data);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  },
-
-  delete(storeName, key) {
-    return new Promise((resolve, reject) => {
-      const tx = this.instance.transaction(storeName, 'readwrite');
-      const store = tx.objectStore(storeName);
-      const request = store.delete(key);
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
-    });
-  }
-};
-
-
-// ============ MODELS.JS ============
-// ============================================
-// models.js — Data Models & Defaults
-// ============================================
-
-function createDefaultProfile(userId) {
-  return {
-    userId: userId,
-    displayName: userId || 'ICT_Student_User',
-    avatarSeed: 'taskahead',
-    track: 'General ICT',
-    bio: ''
-  };
-}
-
-function createDefaultGamification(userId) {
-  return {
-    userId: userId,
-    xp: 0,
-    plantTier: 'Seedling',
-    lastUpdated: new Date().toISOString()
-  };
-}
-
-function calculateTier(xp) {
-  if (xp >= 500) return 'Full Bloom';
-  if (xp >= 300) return 'Blooming';
-  if (xp >= 150) return 'Sapling';
-  if (xp >= 50) return 'Sprout';
-  return 'Seedling';
-}
-
-function createTask({ name, subject, dueDate, userId }) {
-  return {
-    name: name,
-    subject: subject || 'General',
-    dueDate: dueDate,
-    status: 'pending',
-    userId: userId,
-    createdAt: new Date().toISOString()
-  };
-}
-
-
-// ============ REPOSITORY.JS ============
-// ============================================
-// repository.js — Data Access Layer
-// ============================================
-
-const TaskRepository = {
-  async getAll(userId) {
-    const allTasks = await db.getAll('tasks');
-    return allTasks.filter(t => t.userId === userId);
-  },
-
-  async create(taskData) {
-    const task = createTask(taskData);
-    const id = await db.add('tasks', task);
-    return { ...task, id };
-  },
-
-  async toggleStatus(taskId) {
-    const tx = db.instance.transaction('tasks', 'readwrite');
-    const store = tx.objectStore('tasks');
-
-    return new Promise((resolve, reject) => {
-      const getReq = store.get(taskId);
-      getReq.onsuccess = () => {
-        const task = getReq.result;
-        if (!task) return reject(new Error('Task not found'));
-
-        task.status = task.status === 'done' ? 'pending' : 'done';
-
-        const putReq = store.put(task);
-        putReq.onsuccess = () => resolve(task);
-        putReq.onerror = () => reject(putReq.error);
-      };
-      getReq.onerror = () => reject(getReq.error);
-    });
-  },
-
-  async delete(taskId) {
-    await db.delete('tasks', taskId);
-  }
-};
-
-const GamificationRepository = {
-  async get(userId) {
-    let data = await db.get('gamification', userId);
-    if (!data) {
-      data = createDefaultGamification(userId);
-      await db.add('gamification', data);
-    }
-    return data;
-  },
-
-  async addXP(userId, amount) {
-    const data = await this.get(userId);
-    data.xp += amount;
-    data.plantTier = calculateTier(data.xp);
-    data.lastUpdated = new Date().toISOString();
-    await db.put('gamification', data);
-    return data;
-  },
-
-  async update(userId, updates) {
-    const data = await this.get(userId);
-    Object.assign(data, updates);
-    await db.put('gamification', data);
-    return data;
-  }
-};
-
-const ProfileRepository = {
-  async get(userId) {
-    let profile = await db.get('profiles', userId);
-    if (!profile) {
-      profile = createDefaultProfile(userId);
-      await db.add('profiles', profile);
-    }
-    return profile;
-  },
-
-  async update(userId, updates) {
-    const profile = await this.get(userId);
-    Object.assign(profile, updates);
-    profile.userId = userId;
-    await db.put('profiles', profile);
-    return profile;
-  }
-};
-
-
-// ============ SCRIPT.JS ============
-// ============================================
-// DATABASE INITIALIZATION & APP STATE
+    // ============================================
+// DATABASE INITIALIZATION
 // ============================================
 
 let currentUserId = 'default-user';
-let currentUser = null;
-let isLoggedIn = false;
 
 async function initApp() {
   try {
@@ -1270,7 +1868,7 @@ async function initApp() {
     console.log('✅ Database ready!');
     await loadAllData();
     refreshAllUI();
-    showToast('🌸 Data loaded from database!');
+    showToast('⚓ Data loaded from database!');
   } catch (error) {
     console.error('❌ Failed to initialize:', error);
     showToast('Error loading data. Please refresh.');
@@ -1284,7 +1882,7 @@ async function loadAllData() {
     window.xp = gameData.xp;
     const profile = await ProfileRepository.get(currentUserId);
     window.profile = profile;
-    console.log('✅ All data loaded for user:', currentUserId);
+    console.log('✅ All data loaded');
   } catch (error) {
     console.error('❌ Error loading data:', error);
   }
@@ -1295,7 +1893,6 @@ function refreshAllUI() {
   renderTasks();
   refreshGlance();
   updateProfileUI();
-  updateAuthUI();
 }
 
 // Start app when page loads
@@ -1314,8 +1911,8 @@ function showToast(msg){
 /* ============ MOBILE DRAWER ============ */
 const sidebar=document.getElementById('sidebar');
 const overlay=document.getElementById('sidebarOverlay');
-function openDrawer(){ if(sidebar) sidebar.classList.add('open'); if(overlay) overlay.classList.add('show'); }
-function closeDrawer(){ if(sidebar) sidebar.classList.remove('open'); if(overlay) overlay.classList.remove('show'); }
+function openDrawer(){ sidebar.classList.add('open'); overlay.classList.add('show'); }
+function closeDrawer(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
 
 document.addEventListener('DOMContentLoaded', () => {
   const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -1330,16 +1927,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.nav-btn').forEach(btn=>{
     btn.addEventListener('click', e=>{
       e.preventDefault();
-      e.stopPropagation();
       const target=btn.dataset.target;
       if(!target) return;
-
-      // Handle logout
-      if(target === 'logout'){
-        logoutUser();
-        return;
-      }
-
       document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
       document.querySelectorAll(`.nav-btn[data-target="${target}"]`).forEach(b=>b.classList.add('active'));
       document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active-view'));
@@ -1355,9 +1944,8 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const acadBtn=document.getElementById('academicsDropdownBtn');
   const acadMenu=document.getElementById('academicsMenu');
-  if(acadBtn && acadMenu){
-    acadBtn.addEventListener('click', (e)=>{
-      e.preventDefault();
+  if(acadBtn){
+    acadBtn.addEventListener('click', ()=>{
       acadBtn.classList.toggle('open');
       acadMenu.classList.toggle('open');
     });
@@ -1366,7 +1954,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ============ THEME ============ */
 function toggleTheme(){
-  const dark = document.getElementById('mode-checkbox')?.checked;
+  const dark = document.getElementById('mode-checkbox').checked;
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
   if(dark) spawnFireflies(); else clearFireflies();
 }
@@ -1390,60 +1978,85 @@ function clearFireflies(){
 
 /* ============ MOBILE LAYOUT PREVIEW TOGGLE ============ */
 function toggleMobileMode(){
-  const on=document.getElementById('mobile-mode-checkbox')?.checked;
+  const on=document.getElementById('mobile-mode-checkbox').checked;
   document.body.classList.toggle('force-mobile', on);
   showToast(on ? 'Mobile-optimized layout enabled 📱' : 'Mobile-optimized layout disabled');
+}
+
+// Helper function to get Tier Name & Emoji based on XP
+function getTierInfo(xp) {
+  if (xp >= 1000) return { title: 'Dread Admiral', emoji: '👑' };
+  if (xp >= 500)  return { title: 'Fleet Captain', emoji: '⚔️' };
+  if (xp >= 250)  return { title: 'Cyber Corsair', emoji: '🏴‍☠️' };
+  if (xp >= 100)  return { title: 'Worst Generation Supernova', emoji: '⚓' };
+  return { title: 'East Blue Rookie', emoji: '🍖' };
 }
 
 // ============ PLANT GROWTH WITH DATABASE ============
 async function refreshPlant() {
   try {
+    // Ensure currentUserId is available
+    if (typeof currentUserId === 'undefined' || !currentUserId) {
+      console.warn('⚠️ currentUserId is not defined yet.');
+      return;
+    }
+
     const gameData = await GamificationRepository.get(currentUserId);
-    window.xp = gameData.xp;
-    const tier = gameData.plantTier;
+    if (!gameData) return;
+
+    window.xp = gameData.xp || 0;
+
+    // Determine tier based on XP score
+    const tierInfo = getTierInfo(window.xp);
 
     const rankName = document.getElementById('rank-name');
     const profileRank = document.getElementById('profile-rank-tier');
     const rankPoints = document.getElementById('rank-points');
     const sprite = document.getElementById('plant-sprite');
 
-    if(rankName) rankName.textContent = tier;
-    if(profileRank) profileRank.textContent = tier;
-    if(rankPoints) rankPoints.textContent = window.xp;
+    if (rankName) rankName.textContent = tierInfo.title;
+    if (profileRank) profileRank.textContent = tierInfo.title;
+    if (rankPoints) rankPoints.textContent = window.xp;
 
-    const emojiMap = {
-      'Seedling': '🌱',
-      'Sprout': '🌿',
-      'Sapling': '🪴',
-      'Blooming': '🌸',
-      'Full Bloom': '🌳'
-    };
-    if(sprite) {
-      sprite.textContent = emojiMap[tier] || '🌱';
+    if (sprite) {
+      sprite.textContent = tierInfo.emoji;
       sprite.style.transform = 'scale(1.25)';
-      setTimeout(() => sprite.style.transform = 'scale(1)', 180);
+      setTimeout(() => (sprite.style.transform = 'scale(1)'), 180);
     }
   } catch (error) {
     console.error('❌ Error refreshing plant:', error);
   }
 }
 
-// Manual grow button
+// Manual grow button listener
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('manual-plant-grow-btn');
-  if(btn){
+  if (btn) {
     btn.addEventListener('click', async () => {
       try {
+        if (typeof currentUserId === 'undefined' || !currentUserId) {
+          showToast('User not authenticated');
+          return;
+        }
+
         await GamificationRepository.addXP(currentUserId, 5);
         await refreshPlant();
-        showToast('+5 XP · your plant feels loved 🌱');
+        if (typeof showToast === 'function') {
+          showToast('+5 XP · Your power awakened! 🌀');
+        }
       } catch (error) {
-        console.error('❌ Error watering plant:', error);
-        showToast('Error watering plant');
+        console.error('❌ Error powering up:', error);
+        if (typeof showToast === 'function') {
+          showToast('Error powering up!');
+        }
       }
     });
   }
+
+  // Initial call to load data
+  refreshPlant();
 });
+
 
 // ============ TASKS WITH DATABASE ============
 async function renderTasks() {
@@ -1490,7 +2103,7 @@ async function renderTasks() {
             if (updated.status === 'done') {
               await GamificationRepository.addXP(currentUserId, 10);
               await refreshPlant();
-              showToast('Task complete! +10 XP 🌼');
+              showToast('Task Smashed! +10 XP💎');
             }
             await renderTasks();
             refreshGlance();
@@ -1549,7 +2162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         await renderTasks();
         refreshGlance();
-        showToast('Task planted in your queue 🌷');
+        showToast('Raid target added to the map! 🗺️');
         e.target.reset();
       } catch (error) {
         console.error('❌ Error creating task:', error);
@@ -1585,72 +2198,6 @@ function refreshGlance(){
   }
 }
 
-/* ============ TIMER ============ */
-let timerInterval=null, timerRunning=false;
-
-function getTimerElements() {
-  return {
-    minSpan: document.getElementById('timer-minutes'),
-    secSpan: document.getElementById('timer-seconds'),
-    startBtn: document.getElementById('start-timer-btn')
-  };
-}
-
-function tick(){
-  const { minSpan, secSpan, startBtn } = getTimerElements();
-  if(!minSpan || !secSpan || !startBtn) return;
-
-  let m=parseInt(minSpan.textContent)||0;
-  let s=parseInt(secSpan.textContent)||0;
-
-  if(s===0){
-    if(m===0){ 
-      clearInterval(timerInterval); 
-      timerRunning=false; 
-      startBtn.innerHTML='<i class="fa-solid fa-play"></i>'; 
-      showToast('Focus session complete! 🍓'); 
-      GamificationRepository.addXP(currentUserId, 15).then(() => {
-        refreshPlant();
-      }).catch(err => console.error('Error awarding XP:', err));
-      return; 
-    }
-    m--; s=59;
-  } else { s--; }
-
-  minSpan.textContent=String(m).padStart(2,'0');
-  secSpan.textContent=String(s).padStart(2,'0');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const startBtn = document.getElementById('start-timer-btn');
-  const resetBtn = document.getElementById('reset-timer-btn');
-
-  if(startBtn){
-    startBtn.addEventListener('click', ()=>{
-      timerRunning=!timerRunning;
-      if(timerRunning){ 
-        startBtn.innerHTML='<i class="fa-solid fa-pause"></i>'; 
-        timerInterval=setInterval(tick,1000); 
-      }
-      else{ 
-        startBtn.innerHTML='<i class="fa-solid fa-play"></i>'; 
-        clearInterval(timerInterval); 
-      }
-    });
-  }
-
-  if(resetBtn){
-    resetBtn.addEventListener('click', ()=>{
-      clearInterval(timerInterval); 
-      timerRunning=false;
-      const { minSpan, secSpan, startBtn } = getTimerElements();
-      if(startBtn) startBtn.innerHTML='<i class="fa-solid fa-play"></i>';
-      if(minSpan) minSpan.textContent='25'; 
-      if(secSpan) secSpan.textContent='00';
-    });
-  }
-});
-
 /* ============ STICKY NOTES ============ */
 document.addEventListener('DOMContentLoaded', () => {
   const stickyBoard=document.getElementById('sticky-board');
@@ -1680,6 +2227,104 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ============ RELAX ARCADE ============ */
+
+/* ============ RELAX ARCADE SYSTEM & TIMER ============ */
+
+// 1. TIMER CONSTANTS & STATE VARIABLES
+const ALLOWED_PLAY_TIME = 5 * 60; // 5 minutes in seconds
+const COOLDOWN_TIME = 15 * 60;    // 15 minutes cooldown in seconds
+
+let sessionState = 'IDLE'; // 'IDLE', 'PLAYING', or 'LOCKED'
+let timeRemaining = ALLOWED_PLAY_TIME;
+let arcadeTimerInterval = null;
+
+// Helper to reliably grab timer DOM elements
+function getTimerElements() {
+  return {
+    timerCard: document.getElementById('timerCard'),
+    timerDisplay: document.getElementById('timerDisplay'),
+    cooldownDisplay: document.getElementById('cooldownDisplay'),
+    timerTitle: document.getElementById('timerStatusTitle'),
+    timerDesc: document.getElementById('timerStatusDesc'),
+    lockOverlay: document.getElementById('lockOverlay')
+  };
+}
+
+// Format seconds into MM:SS
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+  const s = (seconds % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+// 2. MAIN TIMER LOGIC
+function startArcadeTimer() {
+  if (sessionState !== 'IDLE') return; // Only trigger from idle start
+  
+  sessionState = 'PLAYING';
+  timeRemaining = ALLOWED_PLAY_TIME;
+  updateUI();
+
+  clearInterval(arcadeTimerInterval);
+  arcadeTimerInterval = setInterval(() => {
+    if (sessionState === 'PLAYING') {
+      timeRemaining--;
+      if (timeRemaining <= 0) {
+        // Lock out after 5 minutes
+        sessionState = 'LOCKED';
+        timeRemaining = COOLDOWN_TIME;
+        showToast('🔒 Playtime limit reached! Time for a study break.');
+      }
+    } else if (sessionState === 'LOCKED') {
+      timeRemaining--;
+      if (timeRemaining <= 0) {
+        // Cooldown finished
+        sessionState = 'IDLE';
+        timeRemaining = ALLOWED_PLAY_TIME;
+        clearInterval(arcadeTimerInterval);
+        showToast('🔓 Games are unlocked! Enjoy your break.');
+      }
+    }
+    updateUI();
+  }, 1000);
+}
+
+// Trigger check called whenever any game action occurs
+function handleGameActivity() {
+  if (sessionState === 'IDLE') {
+    startArcadeTimer();
+  }
+}
+
+// 3. UI UPDATER
+function updateUI() {
+  const { timerCard, timerDisplay, cooldownDisplay, timerTitle, timerDesc, lockOverlay } = getTimerElements();
+
+  if (sessionState === 'IDLE') {
+    if (lockOverlay) lockOverlay.classList.add('hidden');
+    if (timerCard) timerCard.classList.remove('cooldown');
+    if (timerTitle) timerTitle.textContent = "Playtime Remaining:";
+    if (timerDesc) timerDesc.textContent = "Starts on your first click";
+    if (timerDisplay) timerDisplay.textContent = formatTime(ALLOWED_PLAY_TIME);
+  }
+  else if (sessionState === 'PLAYING') {
+    if (lockOverlay) lockOverlay.classList.add('hidden');
+    if (timerCard) timerCard.classList.remove('cooldown');
+    if (timerTitle) timerTitle.textContent = "Playtime Remaining:";
+    if (timerDesc) timerDesc.textContent = "Session active";
+    if (timerDisplay) timerDisplay.textContent = formatTime(timeRemaining);
+  } 
+  else if (sessionState === 'LOCKED') {
+    if (lockOverlay) lockOverlay.classList.remove('hidden');
+    if (timerCard) timerCard.classList.add('cooldown');
+    if (timerTitle) timerTitle.textContent = "Rest Period Active:";
+    if (timerDesc) timerDesc.textContent = "Games temporarily locked";
+    if (timerDisplay) timerDisplay.textContent = formatTime(timeRemaining);
+    if (cooldownDisplay) cooldownDisplay.textContent = formatTime(timeRemaining);
+  }
+}
+
+// Game switcher
 function switchRelaxGame(idx){
   document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active', i===idx));
   document.querySelectorAll('.relax-game-panel').forEach((p,i)=>p.classList.toggle('active-panel', i===idx));
@@ -1689,7 +2334,7 @@ function switchRelaxGame(idx){
   if(idx===4) setupBlossom();
 }
 
-/* --- Bubble popper --- */
+/* --- Bubble Popper --- */
 const bubbleColors=['#FFB3C6','#AEE2FF','#BEEFC7','#D6C6FF','#FFE49E'];
 function resetBubbles(){
   const grid=document.getElementById('bubbleGrid');
@@ -1699,20 +2344,23 @@ function resetBubbles(){
     const b=document.createElement('button');
     b.className='bubble';
     b.style.background=bubbleColors[i%bubbleColors.length];
-    b.addEventListener('click', ()=>{ b.classList.add('popped'); });
+    b.addEventListener('click', ()=>{ 
+      handleGameActivity(); // Start timer on click
+      b.classList.add('popped'); 
+    });
     grid.appendChild(b);
   }
 }
 
-/* --- Zen garden --- */
+/* --- Zen Garden --- */
 let zenCtx, zenDrawing=false, zenReady=false;
 function setupZen(){
   const canvas=document.getElementById('zenCanvas');
   if(!canvas) return;
   if(!zenReady){
-    const rect = canvas.parentElement.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
-    canvas.height = 280;
+    canvas.height = rect.height;
 
     zenCtx=canvas.getContext('2d');
     zenCtx.strokeStyle='rgba(122,51,88,.35)';
@@ -1720,6 +2368,7 @@ function setupZen(){
     zenCtx.lineCap='round';
 
     canvas.addEventListener('pointerdown', e=>{ 
+      handleGameActivity(); // Start timer on sand draw
       zenDrawing=true; 
       zenCtx.beginPath(); 
       const rect = canvas.getBoundingClientRect();
@@ -1743,7 +2392,7 @@ function clearSand(){
   } 
 }
 
-/* --- Musical ripples --- */
+/* --- Musical Ripples --- */
 let rippleCtx, rippleReady=false, audioCtx;
 const pentatonic=[261.6,293.7,329.6,392.0,440.0,523.3];
 let ripples=[];
@@ -1752,13 +2401,14 @@ function setupRipples(){
   const canvas=document.getElementById('rippleCanvas');
   if(!canvas) return;
   if(!rippleReady){
-    const rect = canvas.parentElement.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
-    canvas.height = 280;
+    canvas.height = rect.height;
 
     rippleCtx=canvas.getContext('2d');
 
     canvas.addEventListener('click', e=>{
+      handleGameActivity(); // Start timer on ripple creation
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -1810,96 +2460,113 @@ function playNote(freq){
   }
 }
 
-/* --- Star Catcher --- */
-let catcherCtx, catcherReady=false, catcherRunning=false, catcherSpawnTimer=null;
-let stars=[], catcherScore=0;
+/* --- Fruit Catcher Game --- */
+let catcherCtx, catcherReady = false, catcherRunning = false, catcherSpawnTimer = null;
+let stars = [], catcherScore = 0;
 
-function setupCatcher(){
-  const canvas=document.getElementById('catcherCanvas');
-  if(!canvas) return;
-  if(!catcherReady){
-    const rect = canvas.parentElement.getBoundingClientRect();
+function setupCatcher() {
+  const canvas = document.getElementById('catcherCanvas');
+  if (!canvas) return;
+
+  if (!catcherReady) {
+    const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
-    canvas.height = 280;
+    canvas.height = rect.height;
 
-    catcherCtx=canvas.getContext('2d');
+    catcherCtx = canvas.getContext('2d');
 
-    canvas.addEventListener('click', e=>{
+    canvas.addEventListener('click', e => {
+      handleGameActivity(); // Start timer on fruit click
       const rect = canvas.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickY = e.clientY - rect.top;
 
-      for(let i=stars.length-1;i>=0;i--){
-        const s=stars[i];
-        const dx=clickX-s.x, dy=clickY-s.y;
-        if(Math.sqrt(dx*dx+dy*dy) < s.size+10){
-          stars.splice(i,1);
+      for (let i = stars.length - 1; i >= 0; i--) {
+        const s = stars[i];
+        const dx = clickX - s.x;
+        const dy = clickY - s.y;
+
+        if (Math.sqrt(dx * dx + dy * dy) < s.size + 15) {
+          stars.splice(i, 1);
           catcherScore++;
+
           const scoreEl = document.getElementById('catcher-score');
-          if(scoreEl) scoreEl.textContent=catcherScore;
-          if(catcherScore%10===0){ 
+          if (scoreEl) scoreEl.textContent = catcherScore;
+
+          if (catcherScore % 10 === 0) { 
             GamificationRepository.addXP(currentUserId, 5).then(() => {
               refreshPlant();
-              showToast('+5 XP · starry streak! ⭐');
+              showToast('+5 XP · fruity streak! 🍇');
             }).catch(err => console.error('Error:', err));
           }
           break;
         }
       }
     });
-    catcherReady=true;
+
+    catcherReady = true;
   }
 
-  catcherRunning=true;
-  if(!catcherSpawnTimer){
-    catcherSpawnTimer=setInterval(()=>{
-      if(!catcherRunning || !catcherCtx) return;
+  catcherRunning = true;
+  if (!catcherSpawnTimer) {
+    const FRUITS = ['🍎', '🍌', '🍋', '🍐', '🍊'];
+
+    catcherSpawnTimer = setInterval(() => {
+      if (!catcherRunning || !catcherCtx) return;
+
+      const randomIcon = FRUITS[Math.floor(Math.random() * FRUITS.length)];
+
       stars.push({
-        x:Math.random()*catcherCtx.canvas.width, 
-        y:-10, 
-        size:12+Math.random()*8, 
-        speed:0.6+Math.random()*1.2
+        x: Math.random() * (catcherCtx.canvas.width - 40) + 20,
+        y: -10, 
+        size: 12 + Math.random() * 8, 
+        speed: 0.6 + Math.random() * 1.2,
+        icon: randomIcon
       });
-    },900);
+    }, 900);
   }
-  if(!window.catcherAnimating){
+
+  if (!window.catcherAnimating) {
     window.catcherAnimating = true;
     animateCatcher();
   }
 }
 
-function animateCatcher(){
+function animateCatcher() {
   const isActive = document.getElementById('r-game-3')?.classList.contains('active-panel');
 
-  if(catcherCtx && isActive){
-    catcherRunning=true;
-    catcherCtx.clearRect(0,0,catcherCtx.canvas.width,catcherCtx.canvas.height);
-    stars.forEach(s=>{
+  if (catcherCtx && isActive) {
+    catcherRunning = true;
+    catcherCtx.clearRect(0, 0, catcherCtx.canvas.width, catcherCtx.canvas.height);
+
+    stars.forEach(s => {
       s.y += s.speed;
-      catcherCtx.font=s.size*2+'px sans-serif';
-      catcherCtx.textAlign='center'; 
-      catcherCtx.textBaseline='middle';
-      catcherCtx.fillText('⭐', s.x, s.y);
+      catcherCtx.font = (s.size * 2) + 'px sans-serif';
+      catcherCtx.textAlign = 'center'; 
+      catcherCtx.textBaseline = 'middle';
+      catcherCtx.fillText(s.icon || '🍎', s.x, s.y); 
     });
-    stars = stars.filter(s=>s.y < catcherCtx.canvas.height+20);
+
+    stars = stars.filter(s => s.y < catcherCtx.canvas.height + 20);
   } else {
-    catcherRunning=false;
+    catcherRunning = false;
   }
+
   requestAnimationFrame(animateCatcher);
 }
 
-/* --- Memory Blossom --- */
+/* --- Memory Blossom / Pirate Match --- */
 let blossomReady=false;
-const blossomEmojis=['🌸','🌷','🌼','🌻','🍀','🦋','🐝','🍄'];
+const blossomEmojis=['MAP','SHIP','ANCHOR','MONEY','PIRATE','SWORD','WAVE','APPLE'];
 let blossomState={flipped:[], matched:[], lock:false};
 
 function setupBlossom(){
   blossomReady=true;
   blossomState={flipped:[], matched:[], lock:false};
   const statusEl = document.getElementById('blossomStatus');
-  if (statusEl) statusEl.textContent='Find every matching pair 🌸';
+  if (statusEl) statusEl.textContent='Find every matching pair ⚓';
 
-  const deck=[...blossomEmojis, ...blossomEmojis].sort(()=>Math.random()-0.5);
+  const deck=['🗺️','🚢','⚓','💰','🏴‍☠️','🗡️','🌊','🍎','🗺️','🚢','⚓','💰','🏴‍☠️','🗡️','🌊','🍎'].sort(()=>Math.random()-0.5);
   const grid=document.getElementById('blossomGrid');
   if(!grid) return;
   grid.innerHTML='';
@@ -1918,6 +2585,8 @@ function flipBlossom(card){
   if(blossomState.lock) return;
   if(card.classList.contains('flipped')||card.classList.contains('matched')) return;
 
+  handleGameActivity(); // Start timer on card flip
+
   card.classList.add('flipped');
   card.textContent=card.dataset.emoji;
   blossomState.flipped.push(card);
@@ -1928,33 +2597,41 @@ function flipBlossom(card){
 
     if(a.dataset.emoji===b.dataset.emoji){
       setTimeout(() => {
-        a.classList.add('matched'); 
+        a.classList.add('matched');
         b.classList.add('matched');
         blossomState.matched.push(a,b);
-        blossomState.flipped=[]; 
+        blossomState.flipped=[];
         blossomState.lock=false;
 
-        if(blossomState.matched.length===blossomEmojis.length*2){
+        if(blossomState.matched.length===16){
           const statusEl = document.getElementById('blossomStatus');
           if (statusEl) statusEl.textContent='All blossoms matched! +20 XP 🎉';
           GamificationRepository.addXP(currentUserId, 20).then(() => {
             refreshPlant();
-            showToast('Memory Blossom cleared! 🌸');
+            showToast('Memory Match cleared! 🏴‍☠️');
           }).catch(err => console.error('Error:', err));
         }
       }, 300);
     } else {
       setTimeout(()=>{
-        a.classList.remove('flipped'); 
+        a.classList.remove('flipped');
         a.textContent='❔';
-        b.classList.remove('flipped'); 
+        b.classList.remove('flipped');
         b.textContent='❔';
-        blossomState.flipped=[]; 
+        blossomState.flipped=[];
         blossomState.lock=false;
       },700);
     }
   }
 }
+
+// Auto-initialize default game grid on script load
+document.addEventListener('DOMContentLoaded', () => {
+  resetBubbles();
+});
+
+
+
 
 // ============ PROFILE WITH DATABASE ============
 const avatarSeeds = ['taskahead', 'cyber', 'pixel', 'coder', 'gamer', 'sparkle', 'bot', 'fairy', 'garden', 'future'];
@@ -1976,7 +2653,7 @@ async function updateProfileUI() {
     if (bioEl) bioEl.value = profile.bio || '';
     if (badgeEl) badgeEl.textContent = `${profile.track || 'General ICT'} Specialist`;
 
-    console.log('✅ Profile UI updated for user:', currentUserId);
+    console.log('✅ Profile UI updated');
   } catch (error) {
     console.error('❌ Error updating profile UI:', error);
   }
@@ -2032,6 +2709,7 @@ async function updateTrackBadge() {
 
 // ============ PROFILE EVENT LISTENERS ============
 document.addEventListener('DOMContentLoaded', () => {
+  // Avatar click - using the block ID instead of inline onclick
   const avatarBlock = document.getElementById('profile-avatar-block');
   if (avatarBlock) {
     avatarBlock.addEventListener('click', (e) => {
@@ -2040,6 +2718,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Profile name edit
   const nameEl = document.getElementById('profile-display-name');
   if (nameEl) {
     nameEl.addEventListener('blur', async (e) => {
@@ -2060,6 +2739,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Profile bio edit
   const bioEl = document.getElementById('profile-bio');
   if (bioEl) {
     bioEl.addEventListener('blur', async (e) => {
@@ -2072,7 +2752,7 @@ document.addEventListener('DOMContentLoaded', () => {
           track: profile.track,
           bio: newBio
         });
-        showToast('Bio saved! 🌸');
+        showToast('Bio saved! 📜');
       } catch (error) {
         console.error('❌ Error saving bio:', error);
         showToast('Error saving bio');
@@ -2080,6 +2760,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Track selection change
   const trackSelect = document.getElementById('profile-sub-track');
   if (trackSelect) {
     trackSelect.addEventListener('change', updateTrackBadge);
@@ -2087,8 +2768,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// AUTHENTICATION SYSTEM - FIXED
+// AUTHENTICATION SYSTEM
 // ============================================
+
+let currentUser = null;
+let isLoggedIn = false;
 
 async function userExists(username) {
   try {
@@ -2122,7 +2806,7 @@ async function registerUser(username, email, password) {
       displayName: username,
       avatarSeed: 'taskahead',
       track: 'General ICT',
-      bio: 'Welcome to TaskAhead! 🌸'
+      bio: 'Welcome to TaskAhead!⌨️'
     });
 
     await GamificationRepository.update(username, {
@@ -2156,8 +2840,9 @@ async function loginUser(username, password) {
 
     await loadAllData();
     refreshAllUI();
+    updateAuthUI();
 
-    showToast(`✅ Welcome back, ${username}! 🌸`);
+    showToast(`✅ Welcome back, ${username}! ⌨`);
     return true;
   } catch (error) {
     console.error('Login error:', error);
@@ -2173,15 +2858,9 @@ async function logoutUser() {
 
   await loadAllData();
   refreshAllUI();
+  updateAuthUI();
 
   showToast('👋 Logged out successfully!');
-
-  // Switch to dashboard
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.nav-btn[data-target="dashboard"]').forEach(b=>b.classList.add('active'));
-  document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active-view'));
-  const dash = document.getElementById('dashboard');
-  if(dash) dash.classList.add('active-view');
 }
 
 function updateAuthUI() {
@@ -2273,14 +2952,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const success = await loginUser(username, password);
 
       if (success) {
-        if (statusEl) { statusEl.innerHTML = '✅ Login successful! Welcome back! 🌸'; statusEl.style.color = 'var(--mint)'; }
+        if (statusEl) { statusEl.innerHTML = '✅ Login successful! Welcome back! ⚓'; statusEl.style.color = 'var(--mint)'; }
         loginForm.reset();
-        // Switch to dashboard instead of auth page
-        document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-        document.querySelectorAll('.nav-btn[data-target="dashboard"]').forEach(b=>b.classList.add('active'));
-        document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active-view'));
-        const dash = document.getElementById('dashboard');
-        if(dash) dash.classList.add('active-view');
+        document.querySelector('.nav-btn[data-target="dashboard"]')?.click();
       } else {
         if (statusEl) { statusEl.innerHTML = '❌ Invalid username or password'; statusEl.style.color = 'var(--pink)'; }
       }
@@ -2288,10 +2962,528 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Handle logout
+document.addEventListener('click', async (e) => {
+  const btn = e.target.closest('.nav-btn');
+  if (btn && btn.dataset.target === 'logout') {
+    e.preventDefault();
+    await logoutUser();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateAuthUI();
+});
+
+// ============ AMBIENT AUDIO SYNTHESIZER ============ //
+let ambAudioCtx = null;
+const activeSounds = {};
+
+function getAmbContext() {
+  if (!ambAudioCtx) {
+    ambAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (ambAudioCtx.state === 'suspended') {
+    ambAudioCtx.resume();
+  }
+  return ambAudioCtx;
+}
+
+// Generates smooth pink noise buffer
+function createNoiseBuffer(ctx) {
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+
+  for (let i = 0; i < bufferSize; i++) {
+    const white = Math.random() * 2 - 1;
+    b0 = 0.99886 * b0 + white * 0.0555179;
+    b1 = 0.99332 * b1 + white * 0.0750759;
+    b2 = 0.96900 * b2 + white * 0.1538520;
+    b3 = 0.86650 * b3 + white * 0.3104856;
+    b4 = 0.55000 * b4 + white * 0.5329522;
+    b5 = -0.7616 * b5 - white * 0.0168980;
+    data[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+    data[i] *= 0.11;
+    b6 = white * 0.115926;
+  }
+  return buffer;
+}
+
+// Stop sound helper
+function stopAmbientSound(type, btnId) {
+  const btn = document.getElementById(btnId);
+  if (activeSounds[type]) {
+    if (activeSounds[type].interval) clearInterval(activeSounds[type].interval);
+    if (activeSounds[type].gain) {
+      activeSounds[type].gain.gain.exponentialRampToValueAtTime(0.0001, ambAudioCtx.currentTime + 0.4);
+    }
+    setTimeout(() => {
+      if (activeSounds[type] && activeSounds[type].src) {
+        activeSounds[type].src.stop();
+      }
+      delete activeSounds[type];
+    }, 450);
+  }
+  if (btn) {
+    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    btn.classList.remove('active');
+  }
+}
+
+// 1. COZY RAIN
+function toggleRainSound(type, btnId, volId) {
+  if (activeSounds[type]) return stopAmbientSound(type, btnId);
+  const ctx = getAmbContext();
+  const src = ctx.createBufferSource();
+  src.buffer = createNoiseBuffer(ctx);
+  src.loop = true;
+
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 1000;
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(parseFloat(document.getElementById(volId).value), ctx.currentTime);
+
+  src.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+  src.start();
+
+  activeSounds[type] = { src, gain, filter };
+  document.getElementById(btnId).innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+// 2. FOREST BIRDS
+function toggleBirdsSound(type, btnId, volId) {
+  if (activeSounds[type]) return stopAmbientSound(type, btnId);
+  const ctx = getAmbContext();
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(parseFloat(document.getElementById(volId).value), ctx.currentTime);
+  gain.connect(ctx.destination);
+
+  const chirp = () => {
+    if (!activeSounds[type]) return;
+    const osc = ctx.createOscillator();
+    const chirpGain = ctx.createGain();
+    const startFreq = 2200 + Math.random() * 800;
+    osc.frequency.setValueAtTime(startFreq, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(startFreq + 600, ctx.currentTime + 0.1);
+    chirpGain.gain.setValueAtTime(0.08, ctx.currentTime);
+    chirpGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+    osc.connect(chirpGain);
+    chirpGain.connect(gain);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.15);
+  };
+
+  const interval = setInterval(() => {
+    if (Math.random() > 0.4) {
+      chirp();
+      if (Math.random() > 0.5) setTimeout(chirp, 160);
+    }
+  }, 2000);
+
+  activeSounds[type] = { gain, interval };
+  document.getElementById(btnId).innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+// 3. CHILL WAVES
+function toggleWavesSound(type, btnId, volId) {
+  if (activeSounds[type]) return stopAmbientSound(type, btnId);
+  const ctx = getAmbContext();
+  const src = ctx.createBufferSource();
+  src.buffer = createNoiseBuffer(ctx);
+  src.loop = true;
+
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 350;
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(parseFloat(document.getElementById(volId).value), ctx.currentTime);
+
+  src.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+  src.start();
+
+  let up = true;
+  const interval = setInterval(() => {
+    if (filter.frequency) {
+      filter.frequency.exponentialRampToValueAtTime(up ? 800 : 250, ctx.currentTime + 4);
+      up = !up;
+    }
+  }, 4500);
+
+  activeSounds[type] = { src, gain, filter, interval };
+  document.getElementById(btnId).innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+// 4. PINK NOISE
+function togglePinkNoise(type, btnId, volId) {
+  if (activeSounds[type]) return stopAmbientSound(type, btnId);
+  const ctx = getAmbContext();
+  const src = ctx.createBufferSource();
+  src.buffer = createNoiseBuffer(ctx);
+  src.loop = true;
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(parseFloat(document.getElementById(volId).value) * 0.8, ctx.currentTime);
+
+  src.connect(gain);
+  gain.connect(ctx.destination);
+  src.start();
+
+  activeSounds[type] = { src, gain };
+  document.getElementById(btnId).innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+// 5. COZY CAMPFIRE
+function toggleFireSound(type, btnId, volId) {
+  if (activeSounds[type]) return stopAmbientSound(type, btnId);
+  const ctx = getAmbContext();
+  
+  // Low rumble base
+  const src = ctx.createBufferSource();
+  src.buffer = createNoiseBuffer(ctx);
+  src.loop = true;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 400;
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(parseFloat(document.getElementById(volId).value), ctx.currentTime);
+
+  src.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+  src.start();
+
+  // Crackle pop generator
+  const interval = setInterval(() => {
+    if (Math.random() > 0.3) {
+      const popSrc = ctx.createBufferSource();
+      popSrc.buffer = createNoiseBuffer(ctx);
+      const popFilter = ctx.createBiquadFilter();
+      popFilter.type = 'highpass';
+      popFilter.frequency.value = 2500;
+
+      const popGain = ctx.createGain();
+      popGain.gain.setValueAtTime(0.12 * Math.random(), ctx.currentTime);
+      popGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+
+      popSrc.connect(popFilter);
+      popFilter.connect(popGain);
+      popGain.connect(gain);
+
+      popSrc.start();
+      popSrc.stop(ctx.currentTime + 0.05);
+    }
+  }, 120);
+
+  activeSounds[type] = { src, gain, interval };
+  document.getElementById(btnId).innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+// 6. CLOCK TICKING
+function toggleClockSound(type, btnId, volId) {
+  if (activeSounds[type]) return stopAmbientSound(type, btnId);
+  const ctx = getAmbContext();
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(parseFloat(document.getElementById(volId).value), ctx.currentTime);
+  gain.connect(ctx.destination);
+
+  let highTick = true;
+  const interval = setInterval(() => {
+    const osc = ctx.createOscillator();
+    const tickGain = ctx.createGain();
+    
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(highTick ? 1200 : 800, ctx.currentTime);
+    
+    tickGain.gain.setValueAtTime(0.1, ctx.currentTime);
+    tickGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
+
+    osc.connect(tickGain);
+    tickGain.connect(gain);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.03);
+    highTick = !highTick;
+  }, 1000);
+
+  activeSounds[type] = { gain, interval };
+  document.getElementById(btnId).innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+// 7. RUSTLING LEAVES
+function toggleLeavesSound(type, btnId, volId) {
+  if (activeSounds[type]) return stopAmbientSound(type, btnId);
+  const ctx = getAmbContext();
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(parseFloat(document.getElementById(volId).value), ctx.currentTime);
+  gain.connect(ctx.destination);
+
+  const rustle = () => {
+    if (!activeSounds[type]) return;
+    const src = ctx.createBufferSource();
+    src.buffer = createNoiseBuffer(ctx);
+    
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 1800 + Math.random() * 800;
+    filter.Q.value = 3;
+
+    const rustleGain = ctx.createGain();
+    rustleGain.gain.setValueAtTime(0.01, ctx.currentTime);
+    rustleGain.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.2);
+    rustleGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+
+    src.connect(filter);
+    filter.connect(rustleGain);
+    rustleGain.connect(gain);
+
+    src.start();
+    src.stop(ctx.currentTime + 0.65);
+  };
+
+  const interval = setInterval(() => {
+    if (Math.random() > 0.3) rustle();
+  }, 1400);
+
+  activeSounds[type] = { gain, interval };
+  document.getElementById(btnId).innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+// 8. BLIZZARD WIND
+function toggleWindSound(type, btnId, volId) {
+  if (activeSounds[type]) return stopAmbientSound(type, btnId);
+  const ctx = getAmbContext();
+  const src = ctx.createBufferSource();
+  src.buffer = createNoiseBuffer(ctx);
+  src.loop = true;
+
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 300;
+  filter.Q.value = 4.0;
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(parseFloat(document.getElementById(volId).value), ctx.currentTime);
+
+  src.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+  src.start();
+
+  // Howling wind oscillation
+  const interval = setInterval(() => {
+    if (filter.frequency) {
+      const targetFreq = 200 + Math.random() * 600;
+      filter.frequency.exponentialRampToValueAtTime(targetFreq, ctx.currentTime + 2.5);
+    }
+  }, 3000);
+
+  activeSounds[type] = { src, gain, filter, interval };
+  document.getElementById(btnId).innerHTML = '<i class="fa-solid fa-pause"></i>';
+}
+
+// Attach All Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('btn-sound-rain')?.addEventListener('click', () => toggleRainSound('rain', 'btn-sound-rain', 'rain-vol'));
+  document.getElementById('btn-sound-birds')?.addEventListener('click', () => toggleBirdsSound('birds', 'btn-sound-birds', 'birds-vol'));
+  document.getElementById('btn-sound-waves')?.addEventListener('click', () => toggleWavesSound('waves', 'btn-sound-waves', 'waves-vol'));
+  document.getElementById('btn-sound-pink')?.addEventListener('click', () => togglePinkNoise('pink', 'btn-sound-pink', 'pink-vol'));
+  document.getElementById('btn-sound-fire')?.addEventListener('click', () => toggleFireSound('fire', 'btn-sound-fire', 'fire-vol'));
+  document.getElementById('btn-sound-clock')?.addEventListener('click', () => toggleClockSound('clock', 'btn-sound-clock', 'clock-vol'));
+  document.getElementById('btn-sound-leaves')?.addEventListener('click', () => toggleLeavesSound('leaves', 'btn-sound-leaves', 'leaves-vol'));
+  document.getElementById('btn-sound-wind')?.addEventListener('click', () => toggleWindSound('wind', 'btn-sound-wind', 'wind-vol'));
+
+  // Master Volume sliders listeners
+  const soundKeys = ['rain', 'birds', 'waves', 'pink', 'fire', 'clock', 'leaves', 'wind'];
+  soundKeys.forEach(sound => {
+    document.getElementById(`${sound}-vol`)?.addEventListener('input', (e) => {
+      if (activeSounds[sound] && activeSounds[sound].gain) {
+        const factor = sound === 'pink' ? 0.8 : 1.0;
+        activeSounds[sound].gain.gain.setValueAtTime(parseFloat(e.target.value) * factor, ambAudioCtx.currentTime);
+      }
+    });
+  });
+});
+
+/* ============ OVERRIDE FOCUS TIMER LOGIC ============ */
+(function setupFocusTimer() {
+  let focusTimerInterval = null;
+  let focusIsRunning = false;
+
+  function toggleFocusTimer() {
+    const startBtn = document.getElementById('start-timer-btn');
+    const minEl = document.getElementById('timer-minutes');
+    const secEl = document.getElementById('timer-seconds');
+
+    if (!minEl || !secEl) return;
+
+    if (focusIsRunning) {
+      // --- PAUSE ---
+      clearInterval(focusTimerInterval);
+      focusIsRunning = false;
+      if (startBtn) startBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+      minEl.setAttribute('contenteditable', 'true');
+      secEl.setAttribute('contenteditable', 'true');
+    } else {
+      // --- START ---
+      let minutes = parseInt(minEl.textContent.trim(), 10) || 0;
+      let seconds = parseInt(secEl.textContent.trim(), 10) || 0;
+
+      if (minutes === 0 && seconds === 0) {
+        if (typeof showToast === 'function') showToast('Please set a time greater than 00:00');
+        else alert('Please set a time greater than 00:00');
+        return;
+      }
+
+      focusIsRunning = true;
+      if (startBtn) startBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+
+      // Lock editing while counting down
+      minEl.setAttribute('contenteditable', 'false');
+      secEl.setAttribute('contenteditable', 'false');
+
+      let totalSeconds = (minutes * 60) + seconds;
+
+      clearInterval(focusTimerInterval);
+      focusTimerInterval = setInterval(() => {
+        totalSeconds--;
+
+        if (totalSeconds <= 0) {
+          clearInterval(focusTimerInterval);
+          focusIsRunning = false;
+          minEl.textContent = '00';
+          secEl.textContent = '00';
+          if (startBtn) startBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+          
+          minEl.setAttribute('contenteditable', 'true');
+          secEl.setAttribute('contenteditable', 'true');
+
+          if (typeof showToast === 'function') {
+            showToast('🎉 Focus session complete! Time for a 5-minute break.');
+          } else {
+            alert('🎉 Focus session complete! Time for a 5-minute break.');
+          }
+          return;
+        }
+
+        const m = Math.floor(totalSeconds / 60);
+        const s = totalSeconds % 60;
+        minEl.textContent = m.toString().padStart(2, '0');
+        secEl.textContent = s.toString().padStart(2, '0');
+      }, 1000);
+    }
+  }
+
+  function resetFocusTimer() {
+    clearInterval(focusTimerInterval);
+    focusIsRunning = false;
+
+    const startBtn = document.getElementById('start-timer-btn');
+    const minEl = document.getElementById('timer-minutes');
+    const secEl = document.getElementById('timer-seconds');
+
+    if (startBtn) startBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    if (minEl) {
+      minEl.textContent = '25';
+      minEl.setAttribute('contenteditable', 'true');
+    }
+    if (secEl) {
+      secEl.textContent = '00';
+      secEl.setAttribute('contenteditable', 'true');
+    }
+  }
+
+  function initTimerListeners() {
+    const startBtn = document.getElementById('start-timer-btn');
+    const resetBtn = document.getElementById('reset-timer-btn');
+
+    if (startBtn) {
+      // Replaces old button listeners completely
+      const newStart = startBtn.cloneNode(true);
+      startBtn.parentNode.replaceChild(newStart, startBtn);
+      newStart.addEventListener('click', toggleFocusTimer);
+    }
+
+    if (resetBtn) {
+      const newReset = resetBtn.cloneNode(true);
+      resetBtn.parentNode.replaceChild(newReset, resetBtn);
+      newReset.addEventListener('click', resetFocusTimer);
+    }
+
+    // Input sanitization & formatting
+    ['timer-minutes', 'timer-seconds'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      el.addEventListener('blur', () => {
+        let val = parseInt(el.textContent.replace(/\D/g, ''), 10);
+        if (isNaN(val) || val < 0) val = 0;
+        if (id === 'timer-seconds' && val > 59) val = 59;
+        el.textContent = val.toString().padStart(2, '0');
+      });
+
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          el.blur();
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTimerListeners);
+  } else {
+    initTimerListeners();
+  }
+})();
+
+function setAppTheme(themeName) {
+  // Remove any previously set theme classes
+  document.body.classList.remove('theme-whitecap', 'theme-black-sails', 'theme-ivory-dice', 'theme-cursed-gold');
+  
+  // Add the new selected theme class
+  document.body.classList.add(`theme-${themeName}`);
+
+  // Whitecap & Ivory Dice are light-based, Black Sails & Cursed Gold are dark-based.
+  // Keep data-theme in sync so the starfield / firefly / glow rules react correctly.
+  const isDarkFamily = (themeName === 'black-sails' || themeName === 'cursed-gold');
+  document.documentElement.setAttribute('data-theme', isDarkFamily ? 'dark' : 'light');
+  if (isDarkFamily) {
+    if (typeof spawnFireflies === 'function') spawnFireflies();
+  } else {
+    if (typeof clearFireflies === 'function') clearFireflies();
+  }
+  
+  // Save preference locally
+  localStorage.setItem('preferred-theme', themeName);
+}
+
+// Auto-load saved theme on page startup
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('preferred-theme') || 'whitecap';
+  setAppTheme(savedTheme);
+  
+  // Keep radio button checked state in sync
+  const activeRadio = document.querySelector(`input[name="app-theme"][value="${savedTheme}"]`);
+  if (activeRadio) activeRadio.checked = true;
+});
+
+
+
+
 // ============================================
 // END OF AUTHENTICATION SYSTEM
 // ============================================
-
 </script>
 
 </body>
